@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head><!--th:replace="layout::head"-->
+    <meta charset="UTF-8">
+    <title>Llamada</title>
+
+    <!-- Bootstrap CSS -->
+    <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" th:href="@{/css/web/frontoffice/inicio.css}">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/84f459dd12.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<nav th:replace="layout::menu" class="nav"></nav>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="text-center">Detalles de la Llamada</h4>
+        </div>
+    </div>
+
+    <form class="row g-3" th:object="${llamada}" th:action="@{/llamada/edit}" method="post">
+        <div class="border mb-3 p-3">
+            <h5 class="card-title">Datos auditor</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Dni Auditor</label>
+                    <input type="text" class="form-control" id="dniAuditor" name="auditor.dniAuditor"
+                           th:value="${evaluacion.auditor.dniAuditor}"
+                           readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Nombre Auditor:</label>
+                    <input type="text" class="form-control" id="nombreAuditor"
+                           th:value="${evaluacion.auditor.nombreAuditor}"
+                           readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Apellido Auditor:</label>
+                    <input type="text" class="form-control" id="apellidoAuditor"
+                           th:value="${evaluacion.auditor.apellidoAuditor}" readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="border mb-3 p-3">
+            <h5 class="card-title">Datos Empleado</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Dni Empleado</label>
+                    <input type="text" class="form-control" id="dniEmpleado" name="empleado.dniEmpleado"
+                           th:value="${llamada.empleado.dniEmpleado}" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Nombre y Apellido Empleado:</label>
+                    <input type="text" class="form-control" id="nombreEmpleado"
+                           th:value="${llamada.empleado.nombreEmpleado +' '+llamada.empleado.apellidoEmpleado}"
+                           readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Area Empleado:</label>
+                    <input type="text" class="form-control" id="apellidoEmpleado"
+                           th:value="${llamada.empleado.area}"
+                           readonly>
+                </div>
+            </div>
+        </div>
+
+        <div class="border mb-3 p-3">
+            <h5 class="card-title">Datos de la Llamada</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Numero de Orden:</label>
+                    <input type="text" class="form-control" id="numeroOrden"
+                           name="llamada.numeroOrden"
+                           th:value="${llamada.numeroOrden}" readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Numero de Cliente</label>
+                    <input type="text" class="form-control" id="numeroCliente"
+                           th:value="${llamada.cliente.numeroCliente}"
+                           readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Estado:</label>
+                    <input type="text" class="form-control" id="estadoLllamada"
+                           th:value="${llamada.estado}"
+                           readonly>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label class="form-label">Dni de Cliente:</label>
+                    <input type="text" class="form-control" id="dniCliente"
+                           th:value="${llamada.cliente.dniCliente}"
+                           readonly>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label class="form-label">Apellido de Cliente:</label>
+                    <input type="text" class="form-control" id="apellidoCliente"
+                           th:value="${llamada.cliente.apellidoCliente}"
+                           readonly>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label class="form-label">Nombre de Cliente:</label>
+                    <input type="text" class="form-control" id="nombreCliente"
+                           th:value="${llamada.cliente.nombreCliente}"
+                           readonly>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label class="form-label">Tipo:</label>
+                    <input type="text" class="form-control" id="tipo" th:value="${llamada.tipo}"
+                           readonly>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label class="form-label">Area:</label>
+                    <input type="text" class="form-control" id="area" th:value="${llamada.area}"
+                           readonly>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label class="form-label">Subarea:</label>
+                    <input type="text" class="form-control" id="subarea"
+                           th:value="${llamada.subarea}" readonly>
+                </div>
+                <div class="col-md-4 mt-2">
+                    <label class="form-label">Fecha y Hora Llamada:</label>
+                    <input type="datetime-local" class="form-control"
+                           th:value="${#dates.format(#dates.create(llamada.fechahora.year, llamada.fechahora.monthValue, llamada.fechahora.dayOfMonth, llamada.fechahora.hour, llamada.fechahora.minute, 0, 0), 'yyyy-MM-dd HH:mm:ss')}"
+                           readonly/>
+                </div>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Llamada</label>
+                <audio controls class="form-control">
+                    <source th:src="@{${llamada.url}}" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <div class="border mb-3 p-3">
+            <h5 class="card-title">Datos de la Evaluación</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="form-label">Observaciones:</label>
+                    <input type="text" class="form-control" id="observacionesEvaluacion"
+                           name="observacionesEvaluacion"
+                           th:value="${evaluacion.observacionesEvaluacion}"
+                           readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Nota:</label>
+                    <input type="text" class="form-control" id="nota" name="nota"
+                           th:value="${evaluacion.nota}"
+                           readonly>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Fecha Hora Auditoria:</label>
+                    <input type="datetime-local" class="form-control" name="fechahora"
+                           th:value="${#dates.format(#dates.create(evaluacion.fechahora.year, evaluacion.fechahora.monthValue, evaluacion.fechahora.dayOfMonth, evaluacion.fechahora.hour, evaluacion.fechahora.minute, 0, 0), 'yyyy-MM-dd HH:mm:ss')}"
+                           readonly/>
+                </div>
+            </div>
+        </div>
+
+
+        <input type="hidden" class="form-control" name="numeroOrden"
+               th:value="${llamada.numeroOrden}"
+               readonly>
+
+        <div class="row mb-3">
+            <div class="col-md-12 text-center">
+                <button id="editarBtn" type="button" class="btn btn-primary">Editar</button>
+                <button id="cancelarBtn" type="button" class="btn btn-secondary"
+                        style="display: none;">
+                    Cancelar
+                </button>
+                <button id="guardarBtn" type="submit" class="btn btn-success"
+                        style="display: none;">Guardar
+                </button>
+                <a class="btn btn-info" th:href="@{/llamada/listar}">Regresar</a>
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#editarBtn").click(function () {
+            elementoseditar(true);
+        });
+
+        $("#cancelarBtn").click(function () {
+            elementoseditar(false);
+        });
+
+        function elementoseditar(edicionActivada) {
+            $("#observacionesEvaluacion, #nota").prop("readonly", !edicionActivada);
+            $("#guardarBtn").toggle(edicionActivada);
+            $("#editarBtn").toggle(!edicionActivada);
+            $("#cancelarBtn").toggle(edicionActivada);
+        }
+    });
+</script>
+
+</body>
+</html>

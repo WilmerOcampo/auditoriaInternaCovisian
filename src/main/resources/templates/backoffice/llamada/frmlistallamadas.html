@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="layout::head">
+    <meta charset="UTF-8">
+    <title>Lista de Llamadas</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #007BFF, #B5EAEA, #007BFF);
+            font-family: 'Open Sans', sans-serif;
+            min-height: 100vh;
+            /*display: flex;*/
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .custom-container {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<nav th:replace="layout::menu" class="nav"></nav>
+<div class="container">
+    <div class="container custom-container">
+        <h1 style="color: white;">Lista de Llamadas</h1>
+    </div>
+    <div class="container mt-3">
+        <form th:action="@{/llamada/listar}" method="post">
+            <div class="row">
+                <div class="col">
+                    <label for="dniEmpleado" class="form-label">DNI del Empleado:</label>
+                </div>
+                <div class="col">
+                    <input type="number" class="form-control" id="dniEmpleado" name="dniEmpleado" th:value="${dniEmpleado}">
+                </div>
+                <div class="col">
+                    <button class="btn btn-info" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <br> <!--NO SABIA QUE PONER PARA SEPARARLO XDDDDDDDD (HUGO)-->
+        <!-- Aquí podrías mostrar los resultados si los hubiera -->
+        <table  class="table table-dark table-striped" th:if="${llamadas != null}">
+            <thead>
+            <tr>
+                <th>Número de Orden</th>
+                <th>Numero de Cliente</th>
+                <th>Tipo</th>
+                <th>Área</th>
+                <th>Subárea</th>
+                <th>Estado</th>
+                <th>Observaciones</th>
+                <th>Dni Empleado</th>
+                <th>Nombre Empleado</th>
+                <th>Apellido Empleado</th>
+                <th>Dni Cliente</th>
+                <th>Nombre Cliente</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="llamada : ${llamadas}">
+                <td th:text="${llamada.numeroOrden}"></td>
+                <td th:text="${llamada.cliente.numeroCliente}"></td>
+                <td th:text="${llamada.tipo}"></td>
+                <td th:text="${llamada.area}"></td>
+                <td th:text="${llamada.subarea}"></td>
+                <td th:text="${llamada.estado}"></td>
+                <td th:text="${llamada.observaciones}"></td>
+                <td th:text="${llamada.empleado.dniEmpleado}"></td>
+                <td th:text="${llamada.empleado.nombreEmpleado}"></td>
+                <td th:text="${llamada.empleado.apellidoEmpleado}"></td>
+                <td th:text="${llamada.cliente.dniCliente}"></td>
+                <td th:text="${llamada.cliente.nombreCliente + ' ' + llamada.cliente.apellidoCliente}"></td>
+                <td th:text="${llamada.estadoAuditoria == false ? 'Sin Auditar' : 'Auditado'}"></td>
+                <td>
+                    <div th:if="${llamada.estadoAuditoria == false}">
+                        <a th:href="@{/evaluacion/crear/}+${llamada.numeroOrden}">Evaluar</a>
+                    </div>
+                    <div th:if="${llamada.estadoAuditoria == true}">
+                        <a th:href="@{'/llamada/detail/' + ${llamada.numeroOrden}}">Ver</a>
+                        <a th:href="@{'/llamada/detail/' + ${llamada.numeroOrden}}">Editar</a>
+                        <!--<a href="#">Editar</a>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!-- Manejo de caso en que no se encuentran resultados -->
+        <div th:if="${llamadas == null}">
+            <p>No se encontraron llamadas para el DNI de empleado proporcionado.</p>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+</html>

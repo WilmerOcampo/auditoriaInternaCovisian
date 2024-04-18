@@ -1,0 +1,29 @@
+package pe.cibertec.auditoriaInternaCovisian.services;
+
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
+import pe.cibertec.auditoriaInternaCovisian.repositories.EmpleadoRepository;
+
+import java.util.List;
+
+@AllArgsConstructor
+@Service
+public class EmpleadoService implements IEmpleadoService{
+
+    private EmpleadoRepository empleadoRepository;
+    @Override
+    public Empleado empleadoPorIdEvaluacion(int id) {
+        return empleadoRepository.empleadoPorIdEvaluacion(id);
+    }
+
+    @Override
+    public List<Empleado> listaEmpleados() {
+        return empleadoRepository.findAll();
+    }
+
+    @Override
+    public Empleado findByUsername(String username) {
+        return empleadoRepository.findByUsername(username);
+    }
+}

@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<!--=== Coding by CodingLab | www.codinglabweb.com === -->
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="layoutlider::head">
+</head>
+<body>
+    <nav th:replace="layoutlider::menu"></nav>
+    <section class="dashboard">
+        <div class="top">
+            <i class="uil uil-bars sidebar-toggle"></i>
+            <div class="dropdown">
+                <i class="uil uil-user dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li><a class="dropdown-item active" href="#">Action</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
+            <!--img src="images/profile.jpg" alt=""-->
+        </div>
+        <div class="dash-content">
+            <div class="overview">
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Dashboard</span>
+                </div>
+                <div class="boxes">
+                    <div class="box box1">
+                        <i class="uil uil-thumbs-up"></i>
+                        <span class="text">Empleados</span>
+                        <span class="number">50,120</span>
+                    </div>
+                    <div class="box box2">
+                        <i class="uil uil-comments"></i>
+                        <span class="text">Empleados Auditados</span>
+                        <span class="number">20,120</span>
+                    </div>
+                    <div class="box box3">
+                        <i class="uil uil-comments"></i>
+                        <span class="text">Comments</span>
+                        <span class="number">20,120</span>
+                    </div>
+                </div>
+                <div class="title">
+                    <i class="uil uil-tachometer-fast-alt"></i>
+                    <span class="text">Analisis</span>
+                </div>
+                <div class="data_analatycs">
+                    <div class="caja caj1">
+                        <canvas id="myChart" width="400" height="100"></canvas>
+                    </div>
+                    <div class="caja caja2">
+                        <canvas id="promChart" width="800" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="activity">
+                <div class="title">
+                    <i class="uil uil-clock-three"></i>
+                    <span class="text">Recent Activity</span>
+                </div>
+                <div class="activity-data">
+                    <div class="data names">
+                        <span class="data-title">Name</span>
+                        <span class="data-list">Prem Shahi</span>
+                        <span class="data-list">Deepa Chand</span>
+                        <span class="data-list">Manisha Chand</span>
+                        <span class="data-list">Pratima Shahi</span>
+                        <span class="data-list">Man Shahi</span>
+                        <span class="data-list">Ganesh Chand</span>
+                        <span class="data-list">Bikash Chand</span>
+                    </div>
+                    <div class="data email">
+                        <span class="data-title">Email</span>
+                        <span class="data-list">premshahi@gmail.com</span>
+                        <span class="data-list">deepachand@gmail.com</span>
+                        <span class="data-list">prakashhai@gmail.com</span>
+                        <span class="data-list">manishachand@gmail.com</span>
+                        <span class="data-list">pratimashhai@gmail.com</span>
+                        <span class="data-list">manshahi@gmail.com</span>
+                        <span class="data-list">ganeshchand@gmail.com</span>
+                    </div>
+                    <div class="data joined">
+                        <span class="data-title">Joined</span>
+                        <span class="data-list">2022-02-12</span>
+                        <span class="data-list">2022-02-12</span>
+                        <span class="data-list">2022-02-13</span>
+                        <span class="data-list">2022-02-13</span>
+                        <span class="data-list">2022-02-14</span>
+                        <span class="data-list">2022-02-14</span>
+                        <span class="data-list">2022-02-15</span>
+                    </div>
+                    <div class="data type">
+                        <span class="data-title">Type</span>
+                        <span class="data-list">New</span>
+                        <span class="data-list">Member</span>
+                        <span class="data-list">Member</span>
+                        <span class="data-list">New</span>
+                        <span class="data-list">Member</span>
+                        <span class="data-list">New</span>
+                        <span class="data-list">Member</span>
+                    </div>
+                    <div class="data status">
+                        <span class="data-title">Status</span>
+                        <span class="data-list">Liked</span>
+                        <span class="data-list">Liked</span>
+                        <span class="data-list">Liked</span>
+                        <span class="data-list">Liked</span>
+                        <span class="data-list">Liked</span>
+                        <span class="data-list">Liked</span>
+                        <span class="data-list">Liked</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script th:src="@{/js/web/backoffice/lider/inicio.js}" type="text/javascript"></script>
+    <script th:inline="javascript">
+        var ctx = document.getElementById('myChart').getContext('2d');
+              // Variables para almacenar los valores de cantidadVista y cantidadNoVista
+              var cantidadVista = /*[[${cantidadVista}]]*/ ;
+              var cantidadNoVista = /*[[${cantidadNoVista}]]*/;
+
+              // Crea el gráfico circular
+              var myChart = new Chart(ctx, {
+                  type: 'doughnut', // Tipo de gráfico circular
+                  data: {
+                      labels: ['Evaluaciones vistas', 'Evaluaciones por ver'],
+                      datasets: [{
+                          label: 'Estado de los Datos',
+                          data: [cantidadVista, cantidadNoVista], // Utiliza los valores capturados
+                          backgroundColor: [
+                              'rgba(54, 162, 235, 0.5)', // Color para Datos Revisados
+                              'rgba(255, 99, 132, 0.5)'  // Color para Datos No Revisados
+                          ],
+                          borderColor: [
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 99, 132, 1)'
+                          ],
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      // Personaliza opciones si es necesario
+                  }
+              }); // <-- Llave de cierre de la etiqueta script
+
+
+
+               var notaHogar = /*[[${notaHogar}]]*/;
+               var notaVentas = /*[[${notaVentas}]]*/;
+               var notaATC = /*[[${notaATC}]]*/;
+               var notaCS = /*[[${notaCS}]]*/;
+
+               var cpro = document.getElementById('promChart').getContext('2d');
+
+               var myChart2 = new Chart(cpro, {
+                   type: 'bar',
+                   data: {
+                       labels: ['Hogar', 'Ventas','Atención al Cliente','Cross-selling'],
+                       datasets: [{
+                           label: 'Promedio de Notas por Area',
+                           data: [notaHogar, notaVentas, notaATC, notaCS],
+                           backgroundColor: [
+                               'rgba(75, 192, 192, 1)',
+                               'rgba(255, 206, 86, 1)',
+                               'rgba(255, 99, 132, 1)',
+                               'rgba(54, 162, 235, 1)'
+                               ],
+                           borderColor: [
+                               'rgba(75, 192, 192, 1)',
+                               'rgba(255, 206, 86, 1)',
+                               'rgba(255, 99, 132, 1)',
+                               'rgba(54, 162, 235, 1)'
+                               ],
+                           borderWidth: 1
+                       }]
+                   },
+                   options: {
+                        maintainAspectRatio: false
+                   }
+               });
+    </script>
+</body>
+</html>

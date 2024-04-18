@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet" />
+    <script th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
+    <title>Auditoria Interna</title>
+    <link rel="stylesheet" th:href="@{/css/web/frontoffice/inicio.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/84f459dd12.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="nav" th:fragment="menu">
+    <div class="nav__container">
+        <h1 id="truet" class="nav__title"><a th:href="@{/home/inicio-page}"><img th:src="@{/img/truetech.png}" alt="truetech" id="tt"></a>
+            Auditoria Interna</h1>
+        <a href="#menu" class="nav__menu">
+            <i class="fa-solid fa-bars nav__icon"></i>
+        </a>
+        <a href="#" class="nav__menu nav__menu--second">
+            <i class="fa-solid fa-x nav__icon"></i>
+        </a>
+        <ul class="dropdown" id="menu">
+            <li class="dropdown__list">
+                <a href="#" class="dropdown__link">
+                    <i class="fa-solid fa-user dropdown__icon"></i>
+                    <span class="dropdown__span">[[${user.getUsername()}]]</span>
+                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
+                    <input type="checkbox" class="dropdown__check">
+                </a>
+                <div class="dropdown__content">
+                    <ul class="dropdown__sub">
+                        <li class="dropdown__li">
+                            <a class="dropdown__anchor">[[${user.getRole()}]]</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <!--a-->
+            <li class="dropdown__list">
+                <a href="#" class="dropdown__link">
+                    <i class="fa-solid fa-clipboard dropdown__icon"></i>
+                    <span class="dropdown__span">Auditoria</span>
+                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
+
+                    <input type="checkbox" class="dropdown__check">
+                </a>
+                <div class="dropdown__content">
+                    <ul class="dropdown__sub">
+                        <li class="dropdown__li" sec:authorize="hasAuthority('AUDITOR')">
+                            <a th:href="@{/llamada/listar}" class="dropdown__anchor">Auditar</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="dropdown__content">
+                    <ul class="dropdown__sub">
+                        <li class="dropdown__li" sec:authorize="hasAuthority('EMPLEADO')">
+                            <a th:href="@{/evaluacion/listar}" class="dropdown__anchor">Ver tus auditorias</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="dropdown__list">
+                <a href="#" class="dropdown__link">
+                    <i class="fa-solid fa-city dropdown__icon"></i>
+                    <span class="dropdown__span">Proveedor</span>
+                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
+                    <input type="checkbox" class="dropdown__check">
+                </a>
+                <div class="dropdown__content">
+                    <ul class="dropdown__sub">
+                        <li class="dropdown__li">
+                            <a th:href="@{/areas}" class="dropdown__anchor">Actualizar proveedor</a>
+                        </li>
+                    </ul>
+                </div>
+
+            <li class="dropdown__list" sec:authorize="hasAuthority('ADMIN')">
+                <a href="#" class="dropdown__link">
+                    <i class="fa-solid fa-gear dropdown__icon"></i>
+                    <span class="dropdown__span">Mantenimiento</span>
+                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
+
+                    <input type="checkbox" class="dropdown__check">
+                </a>
+                <div class="dropdown__content">
+                    <ul class="dropdown__sub">
+                        <!--Cuando tenga la autoridad admin se podrar visualizar "Crear Usuario"-->
+                        <li class="dropdown__li" sec:authorize="hasAuthority('ADMIN')">
+                            <!--
+                                Otra forma de hacerlo
+                                th:if="${user.getRole() eq 'ADMIN'}"-->
+                            <a th:href="@{/registration}" class="dropdown__anchor">Crear Usuario</a>
+                        </li>
+                        <li class="dropdown__li">
+                            <a th:href="@{/usuarios}" class="dropdown__anchor">Editar Perfil</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="dropdown__list">
+                <a href="#" class="dropdown__link" id="modoOscuroBtn">
+                    <i class="fa-solid fa-circle-half-stroke dropdown__icon"></i>
+                    <span class="dropdown__span">Modo Oscuro</span>
+                </a>
+            </li>
+            <li class="dropdown__list">
+					<span sec:authorize="isAuthenticated">
+						<a th:href="@{/logout}" class="dropdown__link">
+							<i class="fa-solid fa-sign-out dropdown__icon"></i>Salir</a>
+					</span>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>
