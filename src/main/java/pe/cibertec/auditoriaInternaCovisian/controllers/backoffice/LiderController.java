@@ -20,11 +20,9 @@ import java.util.Map;
 @Controller
 @RequestMapping("/lider")
 public class LiderController {
-
     UserDetailsService userDetailsService;
     private IEvaluacionService iEvaluacionService;
-    private IEmpleadoService iEmpleadoService;
-    private ILlamadasService iLlamadasService;
+
 
     /*LIMPIAR CODIGO AQUI*/
     @GetMapping("/inicio-page")
@@ -37,6 +35,7 @@ public class LiderController {
             String area = customUserDetail.getArea();
             int cantidadVista = iEvaluacionService.cantEvaluacionesVistasPorLider(area);
             int cantidadNoVista = iEvaluacionService.cantEvaluacionesNoVistasPorLider(area);
+            model.addAttribute("evaluaciones", iEvaluacionService.ultimas5Evaluaciones(area));
             model.addAttribute("cantidadVista", cantidadVista);
             model.addAttribute("cantidadNoVista", cantidadNoVista);
         } else {
@@ -58,7 +57,6 @@ public class LiderController {
         model.addAttribute("notaHogar", notaHogarValor);
         model.addAttribute("notaVentas", notaVentasValor);
         model.addAttribute("notaCS", notaCSValor);
-
 
         /*==============================================================================*/
 

@@ -7,7 +7,9 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 import pe.cibertec.auditoriaInternaCovisian.repositories.EvaluacionRepository;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -24,6 +26,18 @@ public class EvaluacionService implements IEvaluacionService {
     public List<Evaluacion> evaluacionesPorArea(String area) {
         return evaluacionRepository.listaEvaluacionesPorArea(area);
     }
+    @Override
+    public List<Evaluacion> ultimas5Evaluaciones(String area) {
+        List<Evaluacion> evaluaciones = evaluacionRepository.listaEvaluacionesPorArea(area);
+
+        List<Evaluacion> evalucionesOrdenadas = evaluaciones.stream().sorted(Comparator.comparing(Evaluacion::getFechahora).reversed()).collect(Collectors.toList());
+        int total = evalucionesOrdenadas.size();
+        int inicio = Math.max(total - 5, 0);
+        int fin = total;
+        List<Evaluacion> ultima5 = evaluaciones.subList(inicio,fin);
+        return ultima5;
+    }
+
     @Override
     public Evaluacion evaluacionPorId(int id) {
         return evaluacionRepository.obtenerEvaluacionPorId(id);

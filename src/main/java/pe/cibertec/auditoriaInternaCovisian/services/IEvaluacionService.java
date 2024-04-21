@@ -10,6 +10,7 @@ public interface IEvaluacionService {
 	//Evaluacion save(Evaluacion e);
     void save(Evaluacion evaluacion);
     List<Evaluacion> evaluacionesPorArea(String area);
+    List<Evaluacion> ultimas5Evaluaciones(String area);
     Evaluacion evaluacionPorId(int id);
     int cantEvaluacionesVistasPorLider(String area);
     int cantEvaluacionesNoVistasPorLider(String area);
