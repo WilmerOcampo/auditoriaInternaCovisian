@@ -17,12 +17,6 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer>{
     Empleado findByIdUser(@Param("iduser") Long iduser);
 
 
-    /*Metodo para obtener UN EMPLEADO por ID_EVALUACION
-        Lo uso en mi AJAX de frmlistaevaluaciones de la vista lider (HUGO)*/
-    @Query(value = "Select e.* from Empleados e inner join Evaluaciones ev on e.dni_empleado=ev.dni_empleado where ev.id_evaluacion= :idEvaluacion",nativeQuery = true)
-    Empleado empleadoPorIdEvaluacion(@Param("idEvaluacion") int idEvaluacion);
-
-
 
     /*PUEDE SERVIR
     @Query(value = "SELECT * FROM Empleados WHERE area = :areaEmpleado", nativeQuery = true)

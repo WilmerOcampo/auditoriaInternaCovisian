@@ -30,8 +30,4 @@ public class LlamadasService implements ILlamadasService {
 		 llamadasRepository.save(llamada);
 	}
 
-	@Override
-	public Llamada llamadaPorIdEvaluacion(int id) {
-		return llamadasRepository.llamadaPorIdEvaluacion(id);
-	}
 }

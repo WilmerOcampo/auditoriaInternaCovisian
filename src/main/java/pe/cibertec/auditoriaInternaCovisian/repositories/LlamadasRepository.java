@@ -16,10 +16,4 @@ public interface LlamadasRepository extends JpaRepository<Llamada, Integer>{
     @Query(value = "SELECT * FROM Llamadas WHERE numero_orden = :numeroOrden", nativeQuery = true)
     Llamada findByOrden(@Param("numeroOrden") int numeroOrden);
 
-
-    /*Metodo para obtener UNA LLAMADA por ID_EVALUACION
-        Lo uso en mi AJAX de frmlistaevaluaciones de la vista lider (HUGO)*/
-    @Query(value = "Select l.* from Llamadas l inner join Evaluaciones ev on l.numero_orden =ev.numero_orden  where ev.id_evaluacion = :idEvaluacion",nativeQuery = true)
-    Llamada llamadaPorIdEvaluacion(@Param("idEvaluacion") int idEvaluacion);
-
 }

@@ -93,19 +93,20 @@ public class LiderController {
         Map<String, Object> datos = new HashMap<>();
         Evaluacion evaluacion = iEvaluacionService.evaluacionPorId(id);
         if (evaluacion != null) {
+            //Datos Evaluacion
             datos.put("nota", evaluacion.getNota());
             datos.put("observacionesEvaluacion", evaluacion.getObservacionesEvaluacion());
-        }
-        Empleado empleado = iEmpleadoService.empleadoPorIdEvaluacion(id);
-        if (empleado != null) {
-            datos.put("nombreEmpleado", empleado.getNombreEmpleado());
-            datos.put("apellidoEmpleado", empleado.getApellidoEmpleado());
-            datos.put("dniEmpleado", empleado.getDniEmpleado());
-            datos.put("nombreCompleto", empleado.getNombreEmpleado() + ' ' + empleado.getApellidoEmpleado());
-        }
-        Llamada llamada = iLlamadasService.llamadaPorIdEvaluacion(id);
-        if (llamada != null) {
-            datos.put("tipoLlamada", llamada.getTipo());
+            //Datos Auditor
+            datos.put("apellidoAuditor", evaluacion.getAuditor().getApellidoAuditor());
+            datos.put("nombreAuditor", evaluacion.getAuditor().getNombreAuditor());
+            datos.put("dniAuditor", evaluacion.getAuditor().getDniAuditor());
+            //Datos Empleado
+            datos.put("nombreEmpleado",evaluacion.getEmpleado().getApellidoEmpleado());
+            datos.put("apellidoEmpleado",evaluacion.getEmpleado().getNombreEmpleado());
+            datos.put("dniEmpleado",evaluacion.getEmpleado().getDniEmpleado());
+            datos.put("nombreCompleto",evaluacion.getEmpleado().getApellidoEmpleado() + " " +evaluacion.getEmpleado().getNombreEmpleado());
+            //Datos Llamada
+            datos.put("tipoLlamada",evaluacion.getLlamada().getTipo());
         }
         return datos;
     }

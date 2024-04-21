@@ -9,6 +9,5 @@ public interface ILlamadasService {
 	public List<Llamada> listarLlamadasPorDni(int dniEmpleado);
 	public Llamada llamadaPorOrden(int orden);
 	void save(Llamada llamada);
-	Llamada llamadaPorIdEvaluacion(int id);
 
 }

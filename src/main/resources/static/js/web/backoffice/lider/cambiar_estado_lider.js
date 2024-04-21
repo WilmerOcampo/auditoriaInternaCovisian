@@ -25,13 +25,20 @@ $(document).ready(function () {
 });
 
 function llenarDatos(datos) {
-     $('#nota').text('Nota: ' + datos.nota);
-     $('#observacion').text('Observacion del Auditor: ' + datos.observacionesEvaluacion);
-     $('#nombre_empleado').text('Nombre Empleado: ' + datos.nombreEmpleado);
-     $('#apellido_empleado').text('Apellido Empleado: ' + datos.apellidoEmpleado);
-     $('#dni_empleado').text('DNI Empleado: ' + datos.dniEmpleado);
+     $('#nota').val(datos.nota);
+     $('#observacion').val(datos.observacionesEvaluacion);
+
+     $('#nombre_empleado').val(datos.nombreEmpleado);
+     $('#apellido_empleado').val(datos.apellidoEmpleado);
+     $('#dni_empleado').val(datos.dniEmpleado);
      $('#nombre_completo').text(datos.nombreCompleto);
+
+     $('#nombre_auditor').val(datos.nombreAuditor);
+     $('#apellido_auditor').val(datos.apellidoAuditor);
+     $('#dni_auditor').val(datos.dniAuditor);
+
      $('#llamada_tipo').text('Tipifacion 1: ' + datos.tipoLlamada);
+     $('#nombre_auditor').val(datos.nombreAuditor);
 }
 
 
