@@ -1,8 +1,10 @@
 package pe.cibertec.auditoriaInternaCovisian.models.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class UserDto {
 	
 	private String username;
@@ -19,9 +21,4 @@ public class UserDto {
 		this.password = password;
 		this.role = role;
 	}
-
-	public UserDto() {
-
-	}
-
 }

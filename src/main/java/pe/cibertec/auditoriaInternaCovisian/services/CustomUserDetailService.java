@@ -1,7 +1,6 @@
 package pe.cibertec.auditoriaInternaCovisian.services;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,16 +15,13 @@ import pe.cibertec.auditoriaInternaCovisian.repositories.LiderRepository;
 import pe.cibertec.auditoriaInternaCovisian.repositories.UserRepository;
 //CAMBIAR
 @Service
+@AllArgsConstructor
 public class CustomUserDetailService implements UserDetailsService{
 
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private AuditorRepository auditorRepository;
-	@Autowired
-	private EmpleadoRepository empleadoRepository;
-	@Autowired
-	private LiderRepository liderRepository;
+	private final UserRepository userRepository;
+	private final AuditorRepository auditorRepository;
+	private final EmpleadoRepository empleadoRepository;
+	private final LiderRepository liderRepository;
 
 
 	@Override

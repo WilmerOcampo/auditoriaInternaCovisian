@@ -2,10 +2,12 @@ package pe.cibertec.auditoriaInternaCovisian.models.bd;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Auditores")
+@NoArgsConstructor
 public class Auditor {
 
     @Id
@@ -22,10 +24,6 @@ public class Auditor {
     @OneToOne
     @JoinColumn(name = "id")
     private User user;
-
-    public Auditor(){
-
-    }
 
     public Auditor(int dniAuditor, String nombreAuditor, String apellidoAuditor) {
         this.dniAuditor = dniAuditor;

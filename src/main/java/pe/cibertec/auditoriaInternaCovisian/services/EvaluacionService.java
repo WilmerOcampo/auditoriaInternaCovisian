@@ -1,6 +1,5 @@
 package pe.cibertec.auditoriaInternaCovisian.services;
 
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
@@ -11,10 +10,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class EvaluacionService implements IEvaluacionService {
-
 
     private EvaluacionRepository evaluacionRepository;
 

@@ -6,10 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "Cliente")
+@NoArgsConstructor
 public class Cliente {
 
     @Id
@@ -21,11 +23,5 @@ public class Cliente {
     private  String apellidoCliente;
     @Column(name = "numero_cliente")
     private int numeroCliente;
-
-    public Cliente(){
-
-    }
-
-
 
 }

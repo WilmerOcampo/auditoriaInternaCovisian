@@ -7,11 +7,11 @@ import pe.cibertec.auditoriaInternaCovisian.repositories.EmpleadoRepository;
 
 import java.util.List;
 
-@AllArgsConstructor
 @Service
+@AllArgsConstructor
 public class EmpleadoService implements IEmpleadoService{
 
-    private EmpleadoRepository empleadoRepository;
+    private final EmpleadoRepository empleadoRepository;
 
     @Override
     public List<Empleado> listaEmpleados() {
