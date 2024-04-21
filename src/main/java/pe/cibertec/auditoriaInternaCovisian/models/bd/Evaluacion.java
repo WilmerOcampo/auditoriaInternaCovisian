@@ -4,12 +4,14 @@ package pe.cibertec.auditoriaInternaCovisian.models.bd;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "Evaluaciones")
+@NoArgsConstructor
 public class Evaluacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,9 +42,6 @@ public class Evaluacion {
     @JoinColumn(name = "numero_orden")
     private Llamada llamada;
 
-    public Evaluacion(){
-
-    }
     public Evaluacion(int idEvaluacion, int nota, Empleado empleado, Auditor auditor) {
         this.idEvaluacion = idEvaluacion;
         this.nota = nota;

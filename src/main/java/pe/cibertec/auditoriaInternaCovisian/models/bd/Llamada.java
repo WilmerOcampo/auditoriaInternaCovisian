@@ -3,12 +3,14 @@ package pe.cibertec.auditoriaInternaCovisian.models.bd;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "Llamadas")
+@NoArgsConstructor
 public class Llamada {
     @Id
     @Column(name = "numero_orden")
@@ -35,11 +37,6 @@ public class Llamada {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dni_cliente")
     private Cliente cliente;
-
-
-    public Llamada(){
-
-    }
 
     public Llamada(int numeroOrden, String tipo, String area, String subarea, String estado , String observaciones, String url, Empleado empleado, Cliente cliente) {
         this.numeroOrden = numeroOrden;

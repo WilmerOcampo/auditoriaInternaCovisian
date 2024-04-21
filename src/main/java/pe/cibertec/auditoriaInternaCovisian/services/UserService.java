@@ -1,8 +1,8 @@
 package pe.cibertec.auditoriaInternaCovisian.services;
 
 
+import lombok.AllArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserDto;
@@ -22,24 +22,15 @@ import java.io.FileNotFoundException;
 import java.util.List;
 // CAMBIARLO
 @Service
+@AllArgsConstructor
 public class UserService implements IUserService{
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private UserRepository userRepository;
-
-	@Autowired
-	private UserReportGenerator userReportGenerator;
-
-	@Autowired
-	private AuditorRepository auditorRepository;
-
-	@Autowired
-	private EmpleadoRepository empleadoRepository;
-	@Autowired
-	private LiderRepository liderRepository;
+	private final PasswordEncoder passwordEncoder;
+	private final UserRepository userRepository;
+	private final UserReportGenerator userReportGenerator;
+	private final AuditorRepository auditorRepository;
+	private final EmpleadoRepository empleadoRepository;
+	private final LiderRepository liderRepository;
 
 	/*@Override
 	public User save(UserDto userDto) {
