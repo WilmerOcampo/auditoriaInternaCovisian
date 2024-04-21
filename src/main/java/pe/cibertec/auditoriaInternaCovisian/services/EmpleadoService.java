@@ -12,10 +12,6 @@ import java.util.List;
 public class EmpleadoService implements IEmpleadoService{
 
     private EmpleadoRepository empleadoRepository;
-    @Override
-    public Empleado empleadoPorIdEvaluacion(int id) {
-        return empleadoRepository.empleadoPorIdEvaluacion(id);
-    }
 
     @Override
     public List<Empleado> listaEmpleados() {

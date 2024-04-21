@@ -36,7 +36,7 @@ public class Evaluacion {
     private Auditor auditor;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "numero_orden")
     private Llamada llamada;
 
