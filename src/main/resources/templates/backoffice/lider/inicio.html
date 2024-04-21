@@ -6,20 +6,7 @@
 <body>
     <nav th:replace="layoutlider::menu"></nav>
     <section class="dashboard">
-        <div class="top">
-            <i class="uil uil-bars sidebar-toggle"></i>
-            <div class="dropdown">
-                <i class="uil uil-user dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                <ul class="dropdown-menu dropdown-menu-dark">
-                    <li><a class="dropdown-item active" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Separated link</a></li>
-                </ul>
-            </div>
-            <!--img src="images/profile.jpg" alt=""-->
-        </div>
+        <div th:replace="layoutlider::top"></div>
         <div class="dash-content">
             <div class="overview">
                 <div class="title">
