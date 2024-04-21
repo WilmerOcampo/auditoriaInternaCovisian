@@ -146,6 +146,12 @@ public class UserService implements IUserService{
 	    userRepository.save(user);
 	}
 	@Override
+	public void cambiarContraseña(String username, String password){
+		User user = userRepository.findByUsername(username);
+		user.setPassword(passwordEncoder.encode(password));
+		userRepository.save(user);
+	}
+	@Override
 	public void deleteUser(Long id) {
 		userRepository.deleteById(id);
 		
