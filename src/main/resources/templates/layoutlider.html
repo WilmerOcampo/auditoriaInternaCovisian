@@ -27,7 +27,7 @@
                 <i class="uil uil-estate"></i>
                 <span class="link-name">Dahsboard</span>
             </a></li>
-            <li><a href="#">
+            <li><a th:href="@{/lider/empleados/}+${user.area}">
                 <i class="uil uil-files-landscapes"></i>
                 <span class="link-name">Empleados</span>
             </a></li>
@@ -72,7 +72,7 @@
     <div class="dropdown">
         <i class="uil uil-user dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"></i>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Perfil</a></li>
+            <li><a class="dropdown-item" th:href="@{/user/detail}">Perfil</a></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
             <li><hr class="dropdown-divider"></li>

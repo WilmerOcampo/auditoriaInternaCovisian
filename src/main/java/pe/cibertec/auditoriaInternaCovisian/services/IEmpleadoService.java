@@ -8,4 +8,5 @@ public interface IEmpleadoService {
 
     List<Empleado> listaEmpleados();
     Empleado findByUsername(String username);
+    List<Empleado> findByArea(String area);
 }

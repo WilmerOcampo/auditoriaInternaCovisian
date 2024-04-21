@@ -22,4 +22,9 @@ public class EmpleadoService implements IEmpleadoService{
     public Empleado findByUsername(String username) {
         return empleadoRepository.findByUsername(username);
     }
+
+    @Override
+    public List<Empleado> findByArea(String area) {
+        return empleadoRepository.findByArea(area);
+    }
 }

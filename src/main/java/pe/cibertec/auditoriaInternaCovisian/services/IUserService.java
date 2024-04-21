@@ -17,6 +17,7 @@ public interface IUserService {
 	User getUserById(Long id);
     void saveUser(User user);
     void deleteUser(Long id);
+	void cambiarContraseña(String username, String password);
 	void saveUserAndEmpleado(UserEmpleado userEmpleado);
 	void saveUserAndAuditor(UserDto userDto);
 	void saveUserAndLider(UserLider userLider);

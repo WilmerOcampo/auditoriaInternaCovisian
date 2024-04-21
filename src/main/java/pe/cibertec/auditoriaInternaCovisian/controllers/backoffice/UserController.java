@@ -2,17 +2,19 @@ package pe.cibertec.auditoriaInternaCovisian.controllers.backoffice;
 
 import lombok.AllArgsConstructor;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.User;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserDto;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserEmpleado;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserLider;
 import pe.cibertec.auditoriaInternaCovisian.services.IUserService;
+
+import java.security.Principal;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -60,6 +62,24 @@ public class UserController {
         iUserService.saveUserAndLider(userAndLiderDto);
         model.addAttribute("message", "Registro Correcto");
         return "backoffice/user/frmregistrolider";
+    }
+
+    @GetMapping("/detail")
+    public String verUsuario(Model model, Principal principal){
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("user", userDetails);
+        return "backoffice/user/frmusuario";
+    }
+    @PostMapping("/cambiarContrasenia")
+    @ResponseBody
+    public String cambiarContraseña(@RequestParam("username") String username, @RequestParam("password") String password){
+        iUserService.cambiarContraseña(username,password);
+        return null;
+    }
+    @GetMapping("/prueba")
+    @ResponseBody
+    UserDetails nose(Model model, Principal principal){
+        return userDetailsService.loadUserByUsername(principal.getName());
     }
 
     //METODOS PARA EXPOTAR USUARIOS EN FORMATO PDF - XLS (POR MOTIVOS DE NEGOCIO NO SE USAN - PERO GUARDO PARA REUTILIZARLO)

@@ -22,6 +22,7 @@ import java.util.Map;
 public class LiderController {
     UserDetailsService userDetailsService;
     private IEvaluacionService iEvaluacionService;
+    private IEmpleadoService iEmpleadoService;
 
 
     /*LIMPIAR CODIGO AQUI*/
@@ -68,13 +69,18 @@ public class LiderController {
     public String listarEvaluacionesPorAreaLider(@PathVariable String area, Model model, Principal principal) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("user", userDetails);
-
-        List<Evaluacion> listaEvaluaciones=iEvaluacionService.evaluacionesPorArea(area);
-        model.addAttribute("evaluaciones", listaEvaluaciones);
+        model.addAttribute("evaluaciones", iEvaluacionService.evaluacionesPorArea(area));
 
         return "backoffice/lider/frmlistaevaluaciones";
     }
+    @GetMapping("/empleados/{area}")
+    public String listarEmpleadosPorAreaLider(@PathVariable String area, Model model, Principal principal) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        model.addAttribute("user", userDetails);
+        model.addAttribute("empleados", iEmpleadoService.findByArea(area));
 
+        return "backoffice/lider/frmlistaempleados";
+    }
 
     /* GET y POST en formatos JSON para manipular en mi AJAX (Vista lider) */
     @PostMapping("/actualizarCampo")
