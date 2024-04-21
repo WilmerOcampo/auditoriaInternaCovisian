@@ -27,13 +27,10 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>
     @Query("SELECT e FROM Evaluacion e JOIN e.empleado em WHERE em.area = :areaEmpleado")
     List<Evaluacion> listaEvaluacionesPorArea(@Param("areaEmpleado") String area);
 
-
     /*Metodo para obtener UNA Evaluacion por ID_EVALUACION
         Lo uso en mi AJAX de frmlistaevaluaciones de la carpeta lider*/
     @Query(value="SELECT * FROM Evaluaciones WHERE id_evaluacion = :idEvaluacion",nativeQuery = true)
     Evaluacion obtenerEvaluacionPorId(@Param("idEvaluacion") int id);
-
-
 
     //METODOS PARA CHART JS (ANALISIS DE DATOS MEDIANTE JS) HUGO
     //VER AMBOS 2 PRIMEROS
