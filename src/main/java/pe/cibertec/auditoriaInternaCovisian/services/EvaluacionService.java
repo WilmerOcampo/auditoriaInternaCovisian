@@ -68,4 +68,9 @@ public class EvaluacionService implements IEvaluacionService {
     public Evaluacion evalaucionPorOrden(int orden) {
         return evaluacionRepository.findByNumeroOrden(orden);
     }
+
+    @Override
+    public Evaluacion findEvaluacionAndLlamadaByIdAndNumeroOrden(Long idEvaluacion, int numeroOrden) {
+        return evaluacionRepository.findEvaluacionAndLlamadaByIdAndNumeroOrden(idEvaluacion, numeroOrden);
+    }
 }

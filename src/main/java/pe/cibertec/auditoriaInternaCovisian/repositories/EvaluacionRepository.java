@@ -10,14 +10,19 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 import java.util.List;
 
 @Repository
-public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>{
-
+public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer> {
 
 
     //METODOS GENESIS DESPOUX
     List<Evaluacion> findByEmpleado(Empleado empleado);
+
     @Query("SELECT e FROM Evaluacion e WHERE e.llamada.numeroOrden = ?1")
     Evaluacion findByNumeroOrden(int numeroOrden);
+
+    /*Metodo para obtener los detalles evaluación relacionada a una llamada( es para llamar los datos de una evaluacion especifica relacionada al numero_orden en relacion) para la vista del empleado*/
+    @Query("SELECT e FROM Evaluacion e JOIN FETCH e.llamada WHERE e.idEvaluacion = :idEvaluacion AND e.llamada.numeroOrden = :numeroOrden")
+    Evaluacion findEvaluacionAndLlamadaByIdAndNumeroOrden(@Param("idEvaluacion") Long idEvaluacion, @Param("numeroOrden") int numeroOrden);
+
 
     //METODO WILMER
     @Query(value = "SELECT * FROM Evaluaciones WHERE numero_orden = :numeroOrden", nativeQuery = true)
@@ -29,18 +34,18 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>
 
     /*Metodo para obtener UNA Evaluacion por ID_EVALUACION
         Lo uso en mi AJAX de frmlistaevaluaciones de la carpeta lider*/
-    @Query(value="SELECT * FROM Evaluaciones WHERE id_evaluacion = :idEvaluacion",nativeQuery = true)
+    @Query(value = "SELECT * FROM Evaluaciones WHERE id_evaluacion = :idEvaluacion", nativeQuery = true)
     Evaluacion obtenerEvaluacionPorId(@Param("idEvaluacion") int id);
 
     //METODOS PARA CHART JS (ANALISIS DE DATOS MEDIANTE JS) HUGO
     //VER AMBOS 2 PRIMEROS
-    @Query(value = "select count(*) from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area AND e.estado_lider= 1" ,nativeQuery = true)
+    @Query(value = "select count(*) from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area AND e.estado_lider= 1", nativeQuery = true)
     int cantidadEvaluacionesVistasPorLider(@Param("area") String area);
 
-    @Query(value = "select count(*) from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area AND e.estado_lider= 0" ,nativeQuery = true)
+    @Query(value = "select count(*) from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area AND e.estado_lider= 0", nativeQuery = true)
     int cantidadEvaluacionesNoVistasPorLider(@Param("area") String area);
 
-    @Query(value = "select cast(avg(e.nota) as decimal(10,2)) from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area",nativeQuery = true)
+    @Query(value = "select cast(avg(e.nota) as decimal(10,2)) from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area", nativeQuery = true)
     public Double promedioNotasPorArea(@Param("area") String area);
 
 }

@@ -18,6 +18,5 @@ public interface IEvaluacionService {
     List<Evaluacion> obtenerEvaluacionesPorEmpleado(Empleado empleado);
     Evaluacion obtenerEvaluacionPorNumeroOrden(int numeroOrden);
     public Evaluacion evalaucionPorOrden(int orden);
-
-
+    Evaluacion findEvaluacionAndLlamadaByIdAndNumeroOrden(Long idEvaluacion, int numeroOrden);
 }
