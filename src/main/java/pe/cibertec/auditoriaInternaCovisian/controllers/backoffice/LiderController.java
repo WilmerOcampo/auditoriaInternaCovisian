@@ -29,38 +29,15 @@ public class LiderController {
     @GetMapping("/inicio-page")
     public String inicioLider(Model model, Principal principal) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-
-        /*DATOS PARA CHART.JS (INTENTARE INYECTARLO PARA AJAX Y REDUCIR CODIGO JAVA)*/
         if (userDetails instanceof CustomUserDatail) {
             CustomUserDatail customUserDetail = (CustomUserDatail) userDetails;
             String area = customUserDetail.getArea();
-            int cantidadVista = iEvaluacionService.cantEvaluacionesVistasPorLider(area);
-            int cantidadNoVista = iEvaluacionService.cantEvaluacionesNoVistasPorLider(area);
             model.addAttribute("evaluaciones", iEvaluacionService.ultimas5Evaluaciones(area));
-            model.addAttribute("cantidadVista", cantidadVista);
-            model.addAttribute("cantidadNoVista", cantidadNoVista);
-        } else {
-
+            model.addAttribute("cantidadVista", iEvaluacionService.cantEvaluacionesVistasPorLider(area));
+            model.addAttribute("cantidadNoVista", iEvaluacionService.cantEvaluacionesNoVistasPorLider(area));
         }
-        Double notaATC = iEvaluacionService.promedioNotasPorArea("Atencion al Cliente");
-        Double notaHogar = iEvaluacionService.promedioNotasPorArea("Hogar");
-        Double notaVentas = iEvaluacionService.promedioNotasPorArea("Ventas");
-        Double notaCS = iEvaluacionService.promedioNotasPorArea("Cross-selling");
-
-        // Manejar el caso en el que el valor es null
-        double notaATCValor = notaATC != null ? notaATC : 0.0;
-        double notaHogarValor = notaHogar != null ? notaHogar : 0.0;
-        double notaVentasValor = notaVentas != null ? notaVentas : 0.0;
-        double notaCSValor = notaCS != null ? notaCS : 0.0;
-
-        // Agregar los valores al modelo
-        model.addAttribute("notaATC", notaATCValor);
-        model.addAttribute("notaHogar", notaHogarValor);
-        model.addAttribute("notaVentas", notaVentasValor);
-        model.addAttribute("notaCS", notaCSValor);
-
-        /*==============================================================================*/
-
+        Map<String, Double> promediosPorArea = iEvaluacionService.obtenerPromediosNotasPorAreas();
+        model.addAttribute("promediosPorArea", promediosPorArea);
         model.addAttribute("user", userDetails);
         return "backoffice/lider/inicio";
     }

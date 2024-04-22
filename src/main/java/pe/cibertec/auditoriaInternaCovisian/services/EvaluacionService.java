@@ -7,7 +7,9 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 import pe.cibertec.auditoriaInternaCovisian.repositories.EvaluacionRepository;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -15,6 +17,24 @@ import java.util.stream.Collectors;
 public class EvaluacionService implements IEvaluacionService {
 
     private EvaluacionRepository evaluacionRepository;
+
+    @Override
+    public Map<String, Double> obtenerPromediosNotasPorAreas() {
+        Map<String, Double> promediosPorArea = new HashMap<>();
+
+        // Obtener promedio de notas por área
+        promediosPorArea.put("Atencion al Cliente", promedioNotasPorArea("Atencion al Cliente"));
+        promediosPorArea.put("Hogar", promedioNotasPorArea("Hogar"));
+        promediosPorArea.put("Ventas", promedioNotasPorArea("Ventas"));
+        promediosPorArea.put("Cross-selling", promedioNotasPorArea("Cross-selling"));
+
+        // Manejar el caso en el que el valor es null y convertirlo a Double
+        for (Map.Entry<String, Double> entry : promediosPorArea.entrySet()) {
+            entry.setValue(entry.getValue() != null ? entry.getValue() : 0.0);
+        }
+
+        return promediosPorArea;
+    }
 
     @Override
     public void save(Evaluacion evaluacion) {

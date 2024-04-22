@@ -5,8 +5,10 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IEvaluacionService {
+    Map<String, Double> obtenerPromediosNotasPorAreas();
 	//Evaluacion save(Evaluacion e);
     void save(Evaluacion evaluacion);
     List<Evaluacion> evaluacionesPorArea(String area);
