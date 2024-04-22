@@ -16,7 +16,9 @@ import pe.cibertec.auditoriaInternaCovisian.services.ILlamadasService;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @AllArgsConstructor
 @Controller
@@ -75,6 +77,20 @@ public class EvaluacionController {
         evaluacion.setEstadoFirma(true);
         iEvaluacionService.save(evaluacion);
         return "redirect:/evaluacion/listar";
+    }
+    @GetMapping("/{id}/detalles")
+    @ResponseBody
+    public Map<String, Object> getEvaluacionDetailsPage(@PathVariable("id") Long idEvaluacion, @RequestParam("numeroOrden") int numeroOrden) {
+        Map<String, Object> datos = new HashMap<>();
+        Evaluacion evaluacion = iEvaluacionService.findEvaluacionAndLlamadaByIdAndNumeroOrden(idEvaluacion, numeroOrden);
+        if (evaluacion != null) {
+            //Datos de la Llamada
+            datos.put("numeroOrden", evaluacion.getLlamada().getNumeroOrden());
+            datos.put("area", evaluacion.getLlamada().getArea());
+            datos.put("tipo", evaluacion.getLlamada().getTipo());
+            datos.put("subarea", evaluacion.getLlamada().getSubarea());
+        }
+        return datos;
     }
 
 }
