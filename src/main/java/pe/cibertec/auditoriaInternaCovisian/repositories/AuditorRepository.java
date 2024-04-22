@@ -15,5 +15,5 @@ public interface AuditorRepository extends JpaRepository<Auditor, Integer> {
 
     @Query(value = "SELECT * FROM Auditores WHERE id = :iduser", nativeQuery = true)
     Auditor findByIdUser(@Param("iduser") Long iduser);
-
+    Auditor findByDniAuditor(int dni);
 }

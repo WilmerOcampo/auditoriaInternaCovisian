@@ -19,6 +19,7 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer>{
     Empleado findByIdUser(@Param("iduser") Long iduser);
 
     List<Empleado> findByArea(String area);
+    Empleado findByDniEmpleado(int dni);
 
     /*PUEDE SERVIR
     @Query(value = "SELECT * FROM Empleados WHERE area = :areaEmpleado", nativeQuery = true)

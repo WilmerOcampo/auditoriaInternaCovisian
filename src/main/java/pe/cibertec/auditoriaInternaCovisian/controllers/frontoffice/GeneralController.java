@@ -11,10 +11,10 @@ import java.security.Principal;
 @Controller
 public class GeneralController {
     UserDetailsService userDetailsService;
-    @GetMapping("/error")
+    /*@GetMapping("/error")
     public String error(Model model, Principal principal) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         model.addAttribute("user", userDetails);
         return "error";
-    }
+    }*/
 }

@@ -27,4 +27,9 @@ public class EmpleadoService implements IEmpleadoService{
     public List<Empleado> findByArea(String area) {
         return empleadoRepository.findByArea(area);
     }
+
+    @Override
+    public Empleado findByDni(int dni) {
+        return empleadoRepository.findByDniEmpleado(dni);
+    }
 }
