@@ -105,7 +105,11 @@
             <td th:text="${evaluacion.auditor.nombreAuditor + ' ' + evaluacion.auditor.apellidoAuditor}"></td>
             <td th:text="${evaluacion.llamada.cliente.nombreCliente + ' ' + evaluacion.llamada.cliente.apellidoCliente}"></td>
             <td th:text="${evaluacion.llamada.cliente.numeroCliente}"></td>
-            <td><button onclick="abrirModal()" class="btn btn-info btn-sm"><i class="fas fa-eye"></i></button></td>
+            <td><button class="btn btn-info btn-sm ver-detalle"
+                        th:onclick="'abrirModal(\'' + ${evaluacion.idEvaluacion} + '\', \'' + ${evaluacion.llamada.numeroOrden} + '\')'">
+                <i class="fas fa-eye"></i>
+            </button></td>
+
             <td class="checkbox-column">
                 <form action="/evaluacion/firmar" method="post">
                     <input type="hidden" name="numeroOrden" th:value="${evaluacion.llamada.numeroOrden}" />
@@ -137,6 +141,7 @@
 </div>
 
 <!-- Modal -->
+<!-- Modal -->
 <div id="verModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="verModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -147,26 +152,27 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Detalles de la llamada...</p>
+                <p>Detalles de la llamada:</p>
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>CS°</th>
+                        <th>Número de Orden</th>
                         <th>Tipo</th>
                         <th>Área</th>
-                        <th>Subarea</th>
+                        <th>Subárea</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="evaluacion : ${evaluaciones}">
-                        <td th:text="${evaluacion.llamada.numeroOrden}"></td>
-                        <td th:text="${evaluacion.llamada.tipo}"></td>
-                        <td th:text="${evaluacion.llamada.area}"></td>
-                        <td th:text="${evaluacion.llamada.subarea}"></td>
+                    <tr>
+                        <td id="numeroOrdenModal"></td>
+                        <td id="tipoModal"></td>
+                        <td id="areaModal"></td>
+                        <td id="subareaModal"></td>
                     </tr>
                     </tbody>
                 </table>
             </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cerrar</button>
             </div>
