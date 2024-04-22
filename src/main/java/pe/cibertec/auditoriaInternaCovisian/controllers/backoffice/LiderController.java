@@ -24,8 +24,6 @@ public class LiderController {
     private IEvaluacionService iEvaluacionService;
     private IEmpleadoService iEmpleadoService;
 
-
-    /*LIMPIAR CODIGO AQUI*/
     @GetMapping("/inicio-page")
     public String inicioLider(Model model, Principal principal) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());

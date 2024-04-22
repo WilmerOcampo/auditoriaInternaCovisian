@@ -8,4 +8,5 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Lider;
 public interface LiderRepository extends JpaRepository<Lider,Integer> {
     @Query(value = "SELECT * FROM Lider WHERE id = :iduser", nativeQuery = true)
     Lider findByIdUser(@Param("iduser") Long iduser);
+    Lider findByDniLider(int dni);
 }

@@ -12,7 +12,7 @@ public class AuditorService implements IAuditorService {
     private final AuditorRepository auditorRepository;
 
     @Override
-    public Auditor auditorPorDni(int dni) {
-        return auditorRepository.findByDni(dni);
+    public Auditor findByDni(int dni) {
+        return auditorRepository.findByDniAuditor(dni);
     }
 }

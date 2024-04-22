@@ -7,10 +7,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.User;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserDto;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserEmpleado;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserLider;
+import pe.cibertec.auditoriaInternaCovisian.repositories.AuditorRepository;
+import pe.cibertec.auditoriaInternaCovisian.repositories.EmpleadoRepository;
+import pe.cibertec.auditoriaInternaCovisian.repositories.LiderRepository;
+import pe.cibertec.auditoriaInternaCovisian.services.IAuditorService;
+import pe.cibertec.auditoriaInternaCovisian.services.IEmpleadoService;
+import pe.cibertec.auditoriaInternaCovisian.services.ILiderService;
 import pe.cibertec.auditoriaInternaCovisian.services.IUserService;
 
 import java.security.Principal;
@@ -24,6 +30,12 @@ public class UserController {
 
      UserDetailsService userDetailsService;
      private IUserService iUserService;
+     private ILiderService iLiderService;
+     private IEmpleadoService iEmpleadoService;
+     private IAuditorService iAuditorService;
+     private  AuditorRepository auditorRepository;
+     private  EmpleadoRepository empleadoRepository;
+     private  LiderRepository liderRepository;
 
     @GetMapping("/registroAuditor")
     public String registroAuditorInicio(Model model) {
@@ -50,7 +62,6 @@ public class UserController {
         return "backoffice/user/frmregistroempleado";
     }
 
-
     @GetMapping("/registroLider")
     public String registroLiderInicio(Model model){
         model.addAttribute("userAndLiderDto", new UserLider());
@@ -70,12 +81,37 @@ public class UserController {
         model.addAttribute("user", userDetails);
         return "backoffice/user/frmusuario";
     }
+    @PostMapping("/actualizar")
+    @ResponseBody
+    public String actualizarUsuario(@RequestParam("dni") int dni, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido){
+        Empleado empleado= iEmpleadoService.findByDni(dni);
+        Auditor auditor = iAuditorService.findByDni(dni);
+        Lider lider = iLiderService.findByDni(dni);
+
+        if(empleado != null){
+            empleado.setNombreEmpleado(nombre);
+            empleado.setApellidoEmpleado(apellido);
+            empleadoRepository.save(empleado);
+        }else if(auditor != null){
+            auditor.setNombreAuditor(nombre);
+            auditor.setApellidoAuditor(apellido);
+            auditorRepository.save(auditor);
+        }else if (lider != null){
+            lider.setNombreLider(nombre);
+            lider.setApellidoLider(apellido);
+            liderRepository.save(lider);
+        }
+        return null;
+    }
+
     @PostMapping("/cambiarContrasenia")
     @ResponseBody
     public String cambiarContraseña(@RequestParam("username") String username, @RequestParam("password") String password){
         iUserService.cambiarContraseña(username,password);
         return null;
     }
+
+
     @GetMapping("/prueba")
     @ResponseBody
     UserDetails nose(Model model, Principal principal){
