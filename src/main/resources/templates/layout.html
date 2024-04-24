@@ -26,14 +26,14 @@
             <li class="dropdown__list">
                 <a href="#" class="dropdown__link">
                     <i class="fa-solid fa-user dropdown__icon"></i>
-                    <span class="dropdown__span">[[${user.getUsername()}]]</span>
+                    <span class="dropdown__span">[[${session.user.getUsername()}]]</span>
                     <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
                     <input type="checkbox" class="dropdown__check">
                 </a>
                 <div class="dropdown__content">
                     <ul class="dropdown__sub">
                         <li class="dropdown__li">
-                            <a class="dropdown__anchor">[[${user.getRole()}]]</a>
+                            <a class="dropdown__anchor">[[${session.user.getRole()}]]</a>
                         </li>
                     </ul>
                 </div>

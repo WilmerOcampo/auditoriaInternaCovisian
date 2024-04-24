@@ -28,14 +28,10 @@ public class LlamadaController {
 
     @GetMapping("/listar")
     public String auditarGet(Model model, Principal principal){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
         return "backoffice/llamada/frmlistallamadas";
     }
     @PostMapping("/listar")
-    public String auditarPost(Model model, Principal principal, @RequestParam(name = "dniEmpleado", required = false) Integer dniEmpleado){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
+    public String auditarPost(Model model, @RequestParam(name = "dniEmpleado", required = false) Integer dniEmpleado){
         if (dniEmpleado != null) {
             List<Llamada> llamadas = iLlamadasService.listarLlamadasPorDni(dniEmpleado);
             model.addAttribute("llamadas", llamadas);
@@ -44,12 +40,8 @@ public class LlamadaController {
     }
     @GetMapping("/detail/{id}")
     public String detailLibro(@PathVariable Integer id, Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
-
         Llamada llamada = iLlamadasService.llamadaPorOrden(id);
         model.addAttribute("llamada", llamada);
-
         Evaluacion evaluacion = iEvaluacionService.evalaucionPorOrden(llamada.getNumeroOrden());
         model.addAttribute("evaluacion",evaluacion);
         return "backoffice/llamada/llamada";

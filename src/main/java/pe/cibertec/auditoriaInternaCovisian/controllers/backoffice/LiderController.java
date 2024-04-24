@@ -1,6 +1,9 @@
 package pe.cibertec.auditoriaInternaCovisian.controllers.backoffice;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -25,35 +28,30 @@ public class LiderController {
     private IEmpleadoService iEmpleadoService;
 
     @GetMapping("/inicio-page")
-    public String inicioLider(Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        if (userDetails instanceof CustomUserDatail) {
-            CustomUserDatail customUserDetail = (CustomUserDatail) userDetails;
-            String area = customUserDetail.getArea();
-            model.addAttribute("evaluaciones", iEvaluacionService.ultimas5Evaluaciones(area));
-            model.addAttribute("cantidadVista", iEvaluacionService.cantEvaluacionesVistasPorLider(area));
-            model.addAttribute("cantidadNoVista", iEvaluacionService.cantEvaluacionesNoVistasPorLider(area));
-        }
+    public String inicioLider(HttpServletRequest request, Model model) {
+        HttpSession session = request.getSession();
+        UserDetails userDetailss = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUserDatail customUserDatail = (CustomUserDatail) userDetailss;
+        session.setAttribute("user", customUserDatail);
+
+        model.addAttribute("evaluaciones", iEvaluacionService.ultimas5Evaluaciones(customUserDatail.getArea()));
+        model.addAttribute("cantidadVista", iEvaluacionService.cantEvaluacionesVistasPorLider(customUserDatail.getArea()));
+        model.addAttribute("cantidadNoVista", iEvaluacionService.cantEvaluacionesNoVistasPorLider(customUserDatail.getArea()));
+
         Map<String, Double> promediosPorArea = iEvaluacionService.obtenerPromediosNotasPorAreas();
         model.addAttribute("promediosPorArea", promediosPorArea);
-        model.addAttribute("user", userDetails);
+
         return "backoffice/lider/inicio";
     }
 
     @GetMapping("/evaluaciones/{area}")
-    public String listarEvaluacionesPorAreaLider(@PathVariable String area, Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
+    public String listarEvaluacionesPorAreaLider(@PathVariable String area, Model model) {
         model.addAttribute("evaluaciones", iEvaluacionService.evaluacionesPorArea(area));
-
         return "backoffice/lider/frmlistaevaluaciones";
     }
     @GetMapping("/empleados/{area}")
-    public String listarEmpleadosPorAreaLider(@PathVariable String area, Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
+    public String listarEmpleadosPorAreaLider(@PathVariable String area, Model model) {
         model.addAttribute("empleados", iEmpleadoService.findByArea(area));
-
         return "backoffice/lider/frmlistaempleados";
     }
 
