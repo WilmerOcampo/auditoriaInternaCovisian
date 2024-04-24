@@ -4,6 +4,8 @@ package pe.cibertec.auditoriaInternaCovisian.configurations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,6 +25,7 @@ public class SecurityConfig {
 
 	@Autowired
 	CustomUserDetailService customUserDetailService;
+
 	
 	@Bean
 	public static PasswordEncoder passwordEncoder() {
@@ -40,14 +43,21 @@ public class SecurityConfig {
 		.formLogin(form -> form.loginPage("/home/login").loginProcessingUrl("/login")
 				.successHandler(customSuccessHandler).permitAll())
 		
-		.logout(form -> form.invalidateHttpSession(true).clearAuthentication(true)
+		.logout(form -> form.logoutSuccessUrl("/home/login").invalidateHttpSession(true)).authenticationProvider(authenticationProvider());
+		/*invalidateHttpSession(true).clearAuthentication(true)
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-				.logoutSuccessUrl("/login?logout").permitAll());
-		
+				.logoutSuccessUrl("/login?logout").permitAll()*/
 		return http.build();
-		
 	}
-	
+
+	@Bean
+	public AuthenticationProvider authenticationProvider(){
+		DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+		daoAuthenticationProvider.setUserDetailsService(customUserDetailService);
+		daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
+		return daoAuthenticationProvider;
+	}
+
 	@Autowired
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(customUserDetailService).passwordEncoder(passwordEncoder());

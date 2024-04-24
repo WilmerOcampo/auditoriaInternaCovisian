@@ -32,11 +32,11 @@
                 <i class="uil uil-estate"></i>
                 <span class="link-name">Dahsboard</span>
             </a></li>
-            <li><a th:href="@{/lider/empleados/}+${user.area}">
+            <li><a th:href="@{/lider/empleados/}+${session.user.area}">
                 <i class="uil uil-files-landscapes"></i>
                 <span class="link-name">Empleados</span>
             </a></li>
-            <li><a th:href="@{/lider/evaluaciones/}+${user.area}">
+            <li><a th:href="@{/lider/evaluaciones/}+${session.user.area}">
                 <i class="uil uil-chart"></i>
                 <span class="link-name">Evaluaciones</span>
             </a></li>
