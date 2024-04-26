@@ -21,7 +21,6 @@ import java.security.Principal;
 public class HomeController {
 
     UserDetailsService userDetailsService;
-    private IUserService iUserService;
     @GetMapping("/login")
     public String login() {
         return "frontoffice/login";

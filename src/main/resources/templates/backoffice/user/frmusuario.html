@@ -17,64 +17,90 @@
         <div class="overview">
             <form class="row g-3">
                 <div class="border mb-3 p-3">
-                    <h5 class="card-title"><span id="nombreCompleto">Bienvenido, [[${session.apellido}]]</span></h5>
+                    <h5 class="card-title"><span id="nombreCompleto">Bienvenido, [[${session.user.nombreCompleto}]]</span></h5>
                     <div class="row">
                         <div class="col-md-4">
-                            <div class="form-floating mb-3 mt-3">
-                                <input type="number" class="form-control" name="dni" id="dni"
-                                       th:value="${user.dni}" readonly>
-                                <label for="dni">Documento Nacional de Identidad</label>
+                            <div class="mb-3 mt-3">
+                                <span id="spdni" th:text="${session.user.dni}"></span>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="nombre" id="nombre"
-                                       th:value="${user.nombre}" readonly>
-                                <label for="nombre">Nombre</label>
+                            <div class="mb-3">
+                                <span id="spnombre" th:text="${session.user.nombre}"></span>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="apellido" id="apellido"
-                                       th:value="${user.apellido}" readonly>
-                                <label for="apellido">Apellido</label>
+                            <div class="mb-3">
+                                <span id="spapellido" th:text="${session.user.apellido}"></span>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="area"
-                                       th:value="${user.area}" readonly>
-                                <label for="area">Area</label>
+                            <div class="mb-3">
+                                <span id="sparea" th:text="${session.user.area}"></span>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="username"
-                                       th:value="${user.username}" readonly>
-                                <label for="username">Username</label>
+                            <div class="mb-3">
+                                <span id="spusername" th:text="${session.user.username}"></span>
                             </div>
-                            <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-floating mb-3">
-                                        <input type="password" value="password" class="form-control"  readonly>
-                                        <label for="username">Contraseña</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <a class="btn btn-info" id="cambiarContraseña">Cambiar Contraseña</a>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-4 text-center">
                             <button id="editarBtn" type="button" class="btn btn-primary">Editar</button>
-                            <button id="cancelarBtn" type="button" class="btn btn-secondary"
-                                    style="display: none;">
-                                Cancelar
-                            </button>
-                            <button id="guardarBtn" type="buttons" class="btn btn-success"
-                                    style="display: none;">Guardar
-                            </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
+    <div class="modal fade modal-xl" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ejemplo">Datos de Cuenta</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-4">
+                        <div class="form-floating mb-3 mt-3">
+                            <input type="number" class="form-control" name="dni" id="dni"
+                                   th:value="${session.user.dni}" readonly>
+                            <label for="dni">Documento Nacional de Identidad</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="nombre" id="nombre"
+                                   th:value="${session.user.nombre}">
+                            <label for="nombre">Nombre</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" name="apellido" id="apellido"
+                                   th:value="${session.user.apellido}">
+                            <label for="apellido">Apellido</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="area"
+                                   th:value="${session.user.area}" readonly>
+                            <label for="area">Area</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="username"
+                                   th:value="${session.user.username}" readonly>
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-floating mb-3">
+                                    <input type="password" value="password" class="form-control"  readonly>
+                                    <label for="username">Contraseña</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <a class="btn btn-info" id="cambiarContraseña">Cambiar Contraseña</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="guardarBtn" type="button" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade modal-xl" id="miModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -91,7 +117,7 @@
                                Porfavor colocar tu nueva contraseña.
                            </div>
                        </div>
-                       <input type="hidden" th:value="${user.username}" id="usernameid" name="username">
+                       <input type="hidden" th:value="${session.user.username}" id="usernameid" name="username">
                        <button type="submit" id="actionPassword" class="btn btn-primary">Cambiar</button>
                    </form>
                 </div>
@@ -105,17 +131,12 @@
     <script>
         $(document).ready(function () {
             $("#editarBtn").click(function () {
-                elementoseditar(true);
+                $('#modalUsuario').modal('show');
                 $("#nombre, #apellido").addClass("border-blue");
-            });
-            $("#cancelarBtn").click(function () {
-                elementoseditar(false);
-                $("#nombre, #apellido").removeClass("border-blue");
             });
             $("#cambiarContraseña").click(function (event) {
                 $('#miModal').modal('show');
             });
-
 
             $("#actionPassword").click(function (event) {
                 event.preventDefault();
@@ -139,6 +160,7 @@
                 $('#miModal').modal('hide');
             });
             $("#guardarBtn").click(function (event) {
+                var modalUsuario = $('#modalUsuario');
                 var dni = $('#dni').val();
                 var nombre = $('#nombre').val();
                 var apellido = $('#apellido').val();
@@ -152,30 +174,10 @@
                     },
                     dataType: 'json',
                     success: function(response){
-                        $.ajax({
-                            url: '/user/prueba',
-                            type: 'GET',
-                            dataType: 'json',
-                            success: function (datos){
-                                $('#dni').val(datos.dni);
-                                $('#nombre').val(datos.nombre);
-                                $('#apellido').val(datos.apellido);
-                                $('#area').val(datos.area);
-                                $('#username').val(datos.username);
-                                $('#nombreCompleto').text(datos.nombre + " " + datos.apellido);
-                                elementoseditar(false);
-                                $("#nombre, #apellido").removeClass("border-blue");
-                            }
-                        });
+                        modalUsuario.modal('hide');
                     }
                 });
             });
-            function elementoseditar(edicionActivada) {
-                $("#nombre, #apellido").prop("readonly", !edicionActivada);
-                $("#guardarBtn").toggle(edicionActivada);
-                $("#editarBtn").toggle(!edicionActivada);
-                $("#cancelarBtn").toggle(edicionActivada);
-            }
 
         });
     </script>
