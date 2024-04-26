@@ -36,17 +36,17 @@
                         <a class="nav-link mx-lg-2 active" aria-current="page" th:href="@{/lider/inicio-page}">Dashboard</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-lg-2" th:href="@{/lider/empleados/}+${user.area}">Empleados</a>
+                        <a class="nav-link mx-lg-2" th:href="@{/lider/empleados/}+${session.user.area}">Empleados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-lg-2" th:href="@{/lider/evaluaciones/}+${user.area}">Evaluaciones</a>
+                        <a class="nav-link mx-lg-2" th:href="@{/lider/evaluaciones/}+${session.user.area}">Evaluaciones</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Usuario
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" th:href="@{/user/detail}">Perfil</a></li>
                             <li><a class="dropdown-item" href="#">Another action</a></li>
                             <li>
                                 <hr class="dropdown-divider">
