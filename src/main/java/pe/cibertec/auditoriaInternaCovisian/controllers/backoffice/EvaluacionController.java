@@ -33,9 +33,6 @@ public class EvaluacionController {
 
     @GetMapping("/crear/{numeroOrden}")
     public String llamada(@PathVariable int numeroOrden, Model model, Principal principal){
-        /*Estas dos primeras lineas. Tienen los datos de tu usuarios y de tu empleado/auditor */
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
 
         Llamada llamada = iLlamadasService.llamadaPorOrden(numeroOrden);
         model.addAttribute("llamada", llamada);
@@ -51,8 +48,6 @@ public class EvaluacionController {
 
     @PostMapping("/guardarEvaluacion")
     public String guardarEvaluacion(@ModelAttribute("evaluacion") Evaluacion evaluacion, @RequestParam("numeroOrden") int numeroOrden, Model model, Principal principal){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
         iEvaluacionService.save(evaluacion);
         Llamada llamada = iLlamadasService.llamadaPorOrden(numeroOrden);
         llamada.setEstadoAuditoria(true);
@@ -62,8 +57,6 @@ public class EvaluacionController {
 
     @GetMapping("/listar")
     public String listarEvaluaciones(Model model, Principal principal) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
         String username = principal.getName();
         Empleado empleado = iEmpleadoService.findByUsername(username);
         List<Evaluacion> evaluaciones = iEvaluacionService.obtenerEvaluacionesPorEmpleado(empleado);

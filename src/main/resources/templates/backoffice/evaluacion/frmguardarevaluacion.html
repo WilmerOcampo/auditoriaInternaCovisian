@@ -15,15 +15,15 @@
         <!--field o name se usan para enviar datos-->
         <div class="col-md-4">
             <label class="form-label">Dni Auditor</label>
-            <input type="text" class="form-control" id="dniAuditor" name="auditor.dniAuditor" th:value="${user.dni}" readonly>
+            <input type="text" class="form-control" id="dniAuditor" name="auditor.dniAuditor" th:value="${session.user.dni}" readonly>
         </div>
         <div class="col-md-4">
             <label class="form-label">Nombre Auditor:</label>
-            <input type="text" class="form-control" id="nombreAuditor" th:value="${user.nombre}" readonly>
+            <input type="text" class="form-control" id="nombreAuditor" th:value="${session.user.nombre}" readonly>
         </div>
         <div class="col-md-4">
             <label class="form-label">Apellido Auditor:</label>
-            <input type="text" class="form-control" id="apellidoAuditor" th:value="${user.apellido}" readonly>
+            <input type="text" class="form-control" id="apellidoAuditor" th:value="${session.user.apellido}" readonly>
         </div>
     </div>
     <br>
