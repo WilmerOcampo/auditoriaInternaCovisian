@@ -10,8 +10,23 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
+
+        .login-button {
+            background-color: #2d9596;
+            color: #fff;
+            font-size: 19px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: 0.3s background-color;
+        }
+
+        .login-button:hover {
+            background-color: #00b383;
+        }
+
         body {
-            background: linear-gradient(135deg, #b4d2f2, #8ac6f1, #fff);
+            background-color: #ECF4D6;
             font-family: 'Arial', sans-serif; /* Cambiar a una fuente bonita */
             display: flex;
             justify-content: center;
@@ -66,14 +81,14 @@
         <h2 class="login-header">Iniciar sesión</h2>
         <form th:action="@{/login}" method="post">
             <div class="input-icon">
-                <i class="fas fa-user" style="color: #8ac6f1;"></i>
+                <i class="fas fa-user" style="color: #265073;"></i>
                 <input type="text" id="username" name="username" placeholder="Usuario" required>
             </div>
             <div class="input-icon">
-                <i class="fas fa-lock" style="color: #8ac6f1;"></i>
+                <i class="fas fa-lock" style="color: #265073;"></i>
                 <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
             </div>
-            <button class="mb-3" type="submit">Ingresar</button>
+            <button class="mb-3, login-button" type="submit">Ingresar</button>
         </form>
         <div class="message alert alert-danger" th:if="${param.error}">
             Contraseña o Usuario incorrecto

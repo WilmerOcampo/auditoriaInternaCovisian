@@ -7,114 +7,66 @@
     <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet" />
     <script th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
     <title>Auditoria Interna</title>
-    <link rel="stylesheet" th:href="@{/css/web/frontoffice/inicio.css}">
+    <link th:href="@{/css/web/frontoffice/inicio.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/84f459dd12.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="nav" th:fragment="menu">
-    <div class="nav__container">
-        <h1 id="truet" class="nav__title"><a th:href="@{/home/inicio-page}"><img th:src="@{/img/truetech.png}" alt="truetech" id="tt"></a>
-            Auditoria Interna</h1>
-        <a href="#menu" class="nav__menu">
-            <i class="fa-solid fa-bars nav__icon"></i>
-        </a>
-        <a href="#" class="nav__menu nav__menu--second">
-            <i class="fa-solid fa-x nav__icon"></i>
-        </a>
-        <ul class="dropdown" id="menu">
-            <li class="dropdown__list">
-                <a href="#" class="dropdown__link">
-                    <i class="fa-solid fa-user dropdown__icon"></i>
-                    <span class="dropdown__span">[[${session.user.getUsername()}]]</span>
-                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
-                    <input type="checkbox" class="dropdown__check">
-                </a>
-                <div class="dropdown__content">
-                    <ul class="dropdown__sub">
-                        <li class="dropdown__li">
-                            <a class="dropdown__anchor">[[${session.user.getRole()}]]</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-
-            <!--a-->
-            <li class="dropdown__list">
-                <a href="#" class="dropdown__link">
-                    <i class="fa-solid fa-clipboard dropdown__icon"></i>
-                    <span class="dropdown__span">Auditoria</span>
-                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
-
-                    <input type="checkbox" class="dropdown__check">
-                </a>
-                <div class="dropdown__content">
-                    <ul class="dropdown__sub">
-                        <li class="dropdown__li" sec:authorize="hasAuthority('AUDITOR')">
-                            <a th:href="@{/llamada/listar}" class="dropdown__anchor">Auditar</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="dropdown__content">
-                    <ul class="dropdown__sub">
-                        <li class="dropdown__li" sec:authorize="hasAuthority('EMPLEADO')">
-                            <a th:href="@{/evaluacion/listar}" class="dropdown__anchor">Ver tus auditorias</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="dropdown__list">
-                <a href="#" class="dropdown__link">
-                    <i class="fa-solid fa-city dropdown__icon"></i>
-                    <span class="dropdown__span">Proveedor</span>
-                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
-                    <input type="checkbox" class="dropdown__check">
-                </a>
-                <div class="dropdown__content">
-                    <ul class="dropdown__sub">
-                        <li class="dropdown__li">
-                            <a th:href="@{/areas}" class="dropdown__anchor">Actualizar proveedor</a>
-                        </li>
-                    </ul>
-                </div>
-
-            <li class="dropdown__list" sec:authorize="hasAuthority('ADMIN')">
-                <a href="#" class="dropdown__link">
-                    <i class="fa-solid fa-gear dropdown__icon"></i>
-                    <span class="dropdown__span">Mantenimiento</span>
-                    <i class="fa-solid fa-arrow-down dropdown__arrow"></i>
-
-                    <input type="checkbox" class="dropdown__check">
-                </a>
-                <div class="dropdown__content">
-                    <ul class="dropdown__sub">
-                        <!--Cuando tenga la autoridad admin se podrar visualizar "Crear Usuario"-->
-                        <li class="dropdown__li" sec:authorize="hasAuthority('ADMIN')">
-                            <!--
-                                Otra forma de hacerlo
-                                th:if="${user.getRole() eq 'ADMIN'}"-->
-                            <a th:href="@{/registration}" class="dropdown__anchor">Crear Usuario</a>
-                        </li>
-                        <li class="dropdown__li">
-                            <a th:href="@{/usuarios}" class="dropdown__anchor">Editar Perfil</a>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li class="dropdown__list">
-                <a href="#" class="dropdown__link" id="modoOscuroBtn">
-                    <i class="fa-solid fa-circle-half-stroke dropdown__icon"></i>
-                    <span class="dropdown__span">Modo Oscuro</span>
-                </a>
-            </li>
-            <li class="dropdown__list">
-					<span sec:authorize="isAuthenticated">
-						<a th:href="@{/logout}" class="dropdown__link">
-							<i class="fa-solid fa-sign-out dropdown__icon"></i>Salir</a>
-					</span>
-            </li>
-        </ul>
+<nav class="navbar navbar-expand-lg fixed-top" th:fragment="menu">
+    <div class="container-fluid">
+        <a class="navbar-brand me-auto" href="#">Covisian</a>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title"
+                    id="offcanvasNavbarLabel">Covisian</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2 active" aria-current="page"><b>[[${user.getUsername()}]]</b></a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAuthority('AUDITOR')">
+                        <a class="nav-link mx-lg-2" th:href="@{/llamada/listar}">Auditar</a>
+                    </li>
+                    <li class="nav-item" sec:authorize="hasAuthority('EMPLEADO')">
+                        <a class="nav-link mx-lg-2" th:href="@{/evaluacion/listar}">Ver tus auditorias</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" th:href="@{/areas}">Actualizar Proveedor</a>
+                    </li>
+                    <li class="nav-item dropdown" sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mantenimiento
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!--Cuando tenga la autoridad admin se podrar visualizar "Crear Usuario"-->
+                            <li sec:authorize="hasAuthority('ADMIN')"><a class="dropdown-item" href="#">Action</a>
+                                <!--
+                                    Otra forma de hacerlo
+                                    th:if="${user.getRole() eq 'ADMIN'}"-->
+                                <a th:href="@{/registration}"> Crear Usuario </a>
+                            </li>
+                            <li><a th:href="@{/usuarios}"> Editar Perfil </a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li class="nav-item, mode">
+                                <a class="nav-link mx-lg-2"><i class="uil uil-moon"></i>Modo Oscuro<div class="mode-toggle">
+                                    <span class="switch"></span>
+                                </div></a>
+                            </li>
+                        </ul>
+                </ul>
+            </div>
+        </div>
+        <span sec:authorize="isAuthenticated">
+        <a th:href="@{/logout}" class="logout-button">Logout</a>
+        </span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
     </div>
 </nav>
 </body>
-</html>

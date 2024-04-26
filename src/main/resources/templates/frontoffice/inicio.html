@@ -4,8 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Auditoria Interna</title>
 </head>
-<nav th:replace="layout::menu"></nav>
 <body>
+	<nav th:replace="layout::menu"></nav>
 	<h2 id="bienvenida">Bienvenido, [[${session.user.nombreCompleto}]]</h2>
 	<div class="container-clock">
 		<h1 id="time">00:00:00</h1>
@@ -14,5 +14,4 @@
 	<!--input type="text" id="nombreCompleto" name="nombreCompleto" th:value="${user.nombreAuditor}" readonly /-->
 	<script th:src="@{/js/web/frontoffice/inicio.js}" type="text/javascript"></script>
 </body>
-
 </html>
