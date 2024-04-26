@@ -77,8 +77,7 @@ public class UserController {
 
     @GetMapping("/detail")
     public String verUsuario(Model model, Principal principal){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
-        model.addAttribute("user", userDetails);
+        //Ver si aca si usar UserDetails
         return "backoffice/user/frmusuario";
     }
     @PostMapping("/actualizar")
