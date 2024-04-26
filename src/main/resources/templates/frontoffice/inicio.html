@@ -4,15 +4,13 @@
 	<meta charset="UTF-8">
 	<title>Auditoria Interna</title>
 </head>
-<nav th:replace="layout::menu"></nav>
 <body>
-	<h2 id="bienvenida">Bienvenido, [[${user.getNombreCompleto()}]]</h2>
-	<div class="container-clock">
-		<h1 id="time">00:00:00</h1>
-		<p id="date">date</p>
-	</div>
-	<!--input type="text" id="nombreCompleto" name="nombreCompleto" th:value="${user.nombreAuditor}" readonly /-->
+	<nav th:replace="layout::menu"></nav>
+		<h2 id="bienvenida">Bienvenido, [[${user.getNombreCompleto()}]]</h2>
+			<div class="container-clock">
+				<h1 id="time">00:00:00</h1>
+				<p id="date">date</p>
+			</div>
 	<script th:src="@{/js/web/frontoffice/inicio.js}" type="text/javascript"></script>
 </body>
-
 </html>

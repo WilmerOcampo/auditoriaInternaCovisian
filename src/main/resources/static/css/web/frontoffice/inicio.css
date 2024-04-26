@@ -364,3 +364,62 @@ body.dark .nav-links li a:hover .link-name{
     width: 90%; /* Establecer el ancho al 90% */
     margin: 0 auto; /* Centrar la sección horizontalmente */
 }
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+    padding: 0;
+}
+
+body{
+    font-family: Candara;
+}
+
+/*para modo oscuro*/
+body{
+    background-color: #fff;
+    color: #000;
+    transition: 0.5s;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Estilos para el modo oscuro */
+.modo-oscuro {
+    background-color: #313131;
+    color: #fff;
+}
+
+#tt {
+    position: relative;
+    width: 47px;
+    height: 47px;
+    margin-left: 3px;
+}
+
+#truet{
+    transition: 0.5s;
+}
+
+/*codigo css para reloj pag inicio*/
+.container-clock {
+    text-align: center;
+;
+}
+
+.container-clock h1 {
+    font-size: 10rem;
+    font-weight: 100;
+    margin-top: 1rem;
+}
+
+.container-clock p {
+    font-size: 2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#bienvenida{
+    text-align: center;
+    margin-top: 5cm;
+    font-size: 80px;
+    font-family: 'Open Sans', sans-serif;
+}
