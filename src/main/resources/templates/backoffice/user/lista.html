@@ -16,6 +16,7 @@
                     <th>Id</th>
                     <th>Usuario</th>
                     <th>Rol</th>
+                    <th>Change Password</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -23,15 +24,77 @@
                     <td th:text="${usuario.id}"></td>
                     <td th:text="${usuario.username}"></td>
                     <td th:text="${usuario.role}"></td>
+                    <td>
+                        <a href="#" class="actualizar-password">
+                            <i class="uil uil-eye campo-verde"></i>
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
 </section>
+
+
+<div class="modal fade modal-xl" id="modalContraseña" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Restauracion de Contraseña</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="was-validated">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" required id="usernameid" name="username">
+                        <label for="contraseñaactualizar">Username</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" required id="contraseñaactualizar" name="password">
+                        <label for="contraseñaactualizar">Password</label>
+                        <div class="invalid-feedback">
+                            Porfavor colocar la nueva contraseña.
+                        </div>
+                    </div>
+                    <button type="submit" id="actionPassword" class="btn btn-primary">Cambiar</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     $(document).ready(function () {
         $('#tablausuarios').DataTable();
+
+        $('.actualizar-password').click(function (event){
+            $('#modalContraseña').modal("show")
+        });
+
+        $('#actionPassword').click(function (event){
+            event.preventDefault();
+                var username = $('#usernameid').val();
+                var password = $('#contraseñaactualizar').val();
+                $.ajax({
+                   url: '/user/cambiarContrasenia',
+                   type: 'POST',
+                   data: {
+                        username: username,
+                        password: password
+                   },
+                   dataType: 'json',
+                   success: function(response){
+                        $('#modalContraseña').modal('hide');
+                   },
+                   error: function(){
+                    console.log('Error al actualizar la contraseña');
+                   }
+                });
+                $('#modalContraseña').modal('hide');
+        });
     });
 </script>
 </body>
