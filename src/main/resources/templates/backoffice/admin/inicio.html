@@ -10,6 +10,9 @@
             justify-content: space-around;
             flex-wrap: wrap;
         }
+        .dash-content .boxes .carta{
+
+        }
         .dash-content .boxes .box{
             display: flex;
             flex-direction: column;
@@ -19,6 +22,7 @@
             padding: 15px 20px;
             background-color: #4DA3FF;
             transition: var(--tran-05);
+            text-decoration: none;
         }
         .dash-content .boxes .box:hover{
             transform: translateY(-5px);
@@ -63,18 +67,18 @@
         <div class="modal-body">
             <div class="dash-content">
                 <div class="boxes">
-                    <div class="box box1" th:attr="onclick='|window.location.href=${@{/user/registroEmpleado}}|'">
+                    <a class="box box1" th:href="@{/user/registroEmpleado}">
                         <i class="uil uil-thumbs-up"></i>
                         <span class="text">Empleado</span>
-                    </div>
-                    <div class="box box2" th:onclick="'@{/ruta-del-empleado}'">
+                    </a>
+                    <a class="box box2" th:href="@{/user/registroAuditor}">
                         <i class="uil uil-comments"></i>
                         <span class="text">Auditor</span>
-                    </div>
-                    <div class="box box3">
-                        <i class="uil uil-comments"></i>
-                        <span class="text">Lider</span>
-                    </div>
+                    </a>
+                    <a class="box box3" th:href="@{/user/registroLider}">
+                            <i class="uil uil-comments"></i>
+                            <span class="text">Supervisor</span>
+                    </a>
                 </div>
             </div>
         </div>

@@ -110,6 +110,11 @@ public class UserController {
         return null;
     }
 
+    @GetMapping("/list")
+    public String listaUsuarios(Model model){
+        model.addAttribute("usuarios",iUserService.listarUsers());
+        return "backoffice/user/lista";
+    }
 
     @GetMapping("/prueba")
     @ResponseBody
