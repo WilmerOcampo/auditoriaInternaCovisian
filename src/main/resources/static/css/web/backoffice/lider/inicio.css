@@ -303,7 +303,7 @@ body.dark .nav-links li a:hover .link-name{
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 12px;
+    border-radius: 15px;
     width: calc(100% / 4 - 15px);
     padding: 15px 20px;
     background-color: #4DA3FF;
@@ -326,12 +326,15 @@ body.dark .nav-links li a:hover .link-name{
 }
 .boxes .box.box1{
     background-color: #ecf4d6;
+    text-decoration: none;
 }
 .boxes .box.box2{
     background-color: #9ad0c2;
+    text-decoration: none;
 }
 .boxes .box.box3{
     background-color: #2d9596;
+    text-decoration: none;
 }
 .dash-content .activity .activity-data{
     display: flex;
