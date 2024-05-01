@@ -25,7 +25,7 @@
                     <td th:text="${usuario.username}"></td>
                     <td th:text="${usuario.role}"></td>
                     <td>
-                        <a href="#" class="actualizar-password">
+                        <a href="#" th:data-username="${usuario.username}" class="actualizar-password">
                             <i class="uil uil-eye campo-verde"></i>
                         </a>
                     </td>
@@ -47,7 +47,7 @@
             <div class="modal-body">
                 <form class="was-validated">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" required id="usernameid" name="username">
+                        <input type="text" class="form-control" readonly required id="usernameid" name="username">
                         <label for="contraseñaactualizar">Username</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -71,6 +71,7 @@
         $('#tablausuarios').DataTable();
 
         $('.actualizar-password').click(function (event){
+            $('#usernameid').val($(this).attr("data-username"))
             $('#modalContraseña').modal("show")
         });
 
