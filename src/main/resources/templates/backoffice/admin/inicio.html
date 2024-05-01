@@ -10,6 +10,9 @@
             justify-content: space-around;
             flex-wrap: wrap;
         }
+        .dash-content .boxes .carta{
+
+        }
         .dash-content .boxes .box{
             display: flex;
             flex-direction: column;
@@ -19,6 +22,7 @@
             padding: 15px 20px;
             background-color: #4DA3FF;
             transition: var(--tran-05);
+            text-decoration: none;
         }
         .dash-content .boxes .box:hover{
             transform: translateY(-5px);
@@ -52,35 +56,6 @@
 </head>
 <body>
 <nav th:replace="layoutadmin::menu"></nav>
-<!--Modal Registrar Usuario-->
-<div class="modal fade" id="modalUsuarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class="dash-content">
-                <div class="boxes">
-                    <div class="box box1" th:attr="onclick='|window.location.href=${@{/user/registroEmpleado}}|'">
-                        <i class="uil uil-thumbs-up"></i>
-                        <span class="text">Empleado</span>
-                    </div>
-                    <div class="box box2" th:onclick="'@{/ruta-del-empleado}'">
-                        <i class="uil uil-comments"></i>
-                        <span class="text">Auditor</span>
-                    </div>
-                    <div class="box box3">
-                        <i class="uil uil-comments"></i>
-                        <span class="text">Lider</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-</div>
-<script th:src="@{/js/web/backoffice/admin/admin.js}" type="text/javascript"></script>
+<div th:replace="layoutadmin::modaluser"></div>
 </body>
 </html>

@@ -42,4 +42,9 @@ public class HomeController {
         session.setAttribute("user", customUserDatail);
         return "backoffice/admin/inicio";
     }
+
+    @GetMapping("/solicitud-cambiar-password")
+    public String solicitudCambiarPassword(){
+        return "frontoffice/frmcambiarpassword";
+    }
 }

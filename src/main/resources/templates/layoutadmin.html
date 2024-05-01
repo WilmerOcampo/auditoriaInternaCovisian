@@ -12,6 +12,8 @@
     <script th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery/jquery.js}" type="text/javascript"></script>
     <script th:src="@{/js/datatable/datatables.js}" type="text/javascript"></script>
+    <script th:src="@{/js/web/backoffice/admin/admin.js}" type="text/javascript"></script>
+
     <!--No quitar por el MOMENTO (HUGO)-->
     <!--link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"-->
     <!--script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script-->
@@ -39,7 +41,7 @@
                         <a class="nav-link mx-lg-2 btnUsuario" href="#">Registrar Usuario</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link mx-lg-2">Ver Usuarios</a>
+                        <a class="nav-link mx-lg-2" th:href="@{/user/list}">Ver Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link mx-lg-2">Cambiar Contraseñas</a>
@@ -53,4 +55,33 @@
         </button>
     </div>
 </nav>
+<!--Modal Registrar Usuario-->
+<div th:fragment="modaluser" class="modal fade" id="modalUsuarios" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="dash-content">
+                    <div class="boxes">
+                        <a class="box box1" th:href="@{/user/registroEmpleado}">
+                            <i class="uil uil-thumbs-up"></i>
+                            <span class="text">Empleado</span>
+                        </a>
+                        <a class="box box2" th:href="@{/user/registroAuditor}">
+                            <i class="uil uil-comments"></i>
+                            <span class="text">Auditor</span>
+                        </a>
+                        <a class="box box3" th:href="@{/user/registroLider}">
+                            <i class="uil uil-comments"></i>
+                            <span class="text">Supervisor</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>

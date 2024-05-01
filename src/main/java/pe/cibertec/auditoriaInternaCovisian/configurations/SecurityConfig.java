@@ -36,8 +36,8 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(c -> c.disable())
 		.authorizeHttpRequests(request -> request.requestMatchers("/auditar") //Permisos solo para admin (manipular a sus gustos)
-				.hasAuthority("AUDITOR").requestMatchers("/home/inicio-page").hasAnyAuthority("EMPLEADO","LIDER","AUDITOR")
-				.requestMatchers("/user/registroAuditor","/user/registroEmpleado","/user/registroLider","/css/******").permitAll() //Colocado MOMENTANEAMENTE AQUI
+				.hasAuthority("AUDITOR").requestMatchers("/home/inicio-page").hasAnyAuthority("EMPLEADO","AUDITOR")
+				.requestMatchers("/css/******").permitAll()
 				.anyRequest().authenticated())
 		
 		.formLogin(form -> form.loginPage("/home/login").loginProcessingUrl("/login")
