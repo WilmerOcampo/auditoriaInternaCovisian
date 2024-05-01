@@ -34,4 +34,12 @@ public class HomeController {
         session.setAttribute("user", customUserDatail);
         return "frontoffice/inicio";
     }
+    @GetMapping("/admin-inicio-page")
+    public String admin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        UserDetails userDetailss = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        CustomUserDatail customUserDatail = (CustomUserDatail) userDetailss;
+        session.setAttribute("user", customUserDatail);
+        return "backoffice/admin/inicio";
+    }
 }
