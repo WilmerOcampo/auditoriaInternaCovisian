@@ -8,14 +8,10 @@
             background: linear-gradient(135deg, #007BFF, #B5EAEA, #007BFF);
             font-family: 'Open Sans', sans-serif;
             min-height: 100vh;
-            /*display: flex;*/
+            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-        }
-
-        .custom-container {
-            text-align: center;
         }
     </style>
 </head>
@@ -26,7 +22,7 @@
         <h1 style="color: white;">Lista de Llamadas</h1>
     </div>
     <div class="container mt-3">
-        <form th:action="@{/llamada/listar}" method="post">
+        <form style="margin-top: 120px" th:action="@{/llamada/listar}" method="post">
             <div class="row">
                 <div class="col">
                     <label for="dniEmpleado" class="form-label">DNI del Empleado:</label>

@@ -55,7 +55,7 @@ body.dark{
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0b3cc1;
+    background: #a0bbf3;
 }
 
 body.dark::-webkit-scrollbar-thumb:hover,
@@ -224,10 +224,10 @@ body.dark .nav-links li a:hover .link-name{
 }
 
 .dashboard {
-    position: fixed; /* Cambiado a fixed para mantenerlo fijo en la pantalla */
+    position: relative; /* Cambiado a fixed para mantenerlo fijo en la pantalla */
     top: 0;
     left: 0;
-    width: 100vw; /* Ancho del 100% de la ventana */
+    width: 100%; /* Ancho del 100% de la ventana */
     height: 100vh; /* Altura del 100% de la ventana */
     background-color: #fff;
     transition: var(--tran-05);
@@ -339,8 +339,14 @@ body.dark .nav-links li a:hover .link-name{
     align-items: center;
     width: 100%;
 }
+.activity {
+    width: 90%; /* Ancho del 90% del dashboard */
+    max-width: 1700px; /* Ancho máximo de la sección de actividad */
+    margin: 0 auto; /* Centrar la sección horizontalmente */
+}
 .activity .activity-data{
     display: flex;
+    align-items: center;
 }
 .activity-data .data{
     display: flex;
@@ -364,3 +370,4 @@ body.dark .nav-links li a:hover .link-name{
     width: 90%; /* Establecer el ancho al 90% */
     margin: 0 auto; /* Centrar la sección horizontalmente */
 }
+
