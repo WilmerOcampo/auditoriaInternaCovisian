@@ -8,37 +8,56 @@
     .border-blue {
         border: 1px solid blue !important; /* !important asegura que esta regla tenga prioridad */
     }
+
+    .dash-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        height: calc(100vh - 80px); /* Altura igual al 100% del viewport menos el margen superior */
+        text-align: center;
+        max-width: 40%; /* Definir el ancho máximo */
+        margin: 0 auto; /* Centrar horizontalmente */
+    }
+    .col-md-4 span {
+        text-align: center; /* Centrar el texto horizontalmente */
+    }
 </style>
 <body>
 <nav th:replace="layoutlider::menu"></nav>
 <section class="dashboard">
     <div class="dash-content">
         <div class="overview">
-            <form class="row g-3">
-                <div class="border mb-3 p-3">
-                    <h5 class="card-title"><span id="nombreCompleto">Bienvenido, [[${session.user.nombreCompleto}]]</span></h5>
-                    <div class="row">
+            <form class="row g-3" style="align-items: center">
+                <div class="border mb-3 p-3" style="align-items: center">
+                    <h5 class="card-title"><span id="nombreCompleto">Bienvenido!!!, [[${session.user.nombreCompleto}]]</span></h5>
+                    <div class="row" style="justify-content: center">
                         <div class="col-md-4">
-                            <div class="mb-3 mt-3">
+                            <div class="mb-3 mt-3" >
+                                <h6>DNI</h6>
                                 <span id="spdni" th:text="${session.user.dni}"></span>
                             </div>
                             <div class="mb-3">
+                                <h6>Nombre</h6>
                                 <span id="spnombre" th:text="${session.user.nombre}"></span>
                             </div>
                             <div class="mb-3">
+                                <h6>Apellido</h6>
                                 <span id="spapellido" th:text="${session.user.apellido}"></span>
                             </div>
                             <div class="mb-3">
+                                <h6>Area</h6>
                                 <span id="sparea" th:text="${session.user.area}"></span>
                             </div>
                             <div class="mb-3">
+                                <h6>Usuario</h6>
                                 <span id="spusername" th:text="${session.user.username}"></span>
                             </div>
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-md-4 text-center">
-                            <button id="editarBtn" type="button" class="btn btn-primary">Editar</button>
+                    <div class="row mb-3 justify-content-center align-items-center">
+                        <div class="col-md-4 text-center justify-content-center align-items-center">
+                            <button id="editarBtn" type="button" class="btn btn-success mx-auto align-items-center justify-content-center">Editar</button>
                         </div>
                     </div>
                 </div>
@@ -47,7 +66,7 @@
     </div>
     <div class="modal fade modal-xl" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content" style="margin: 0">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="ejemplo">Datos de Cuenta</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
