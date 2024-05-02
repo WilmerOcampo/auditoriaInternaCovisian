@@ -5,18 +5,53 @@
 	<title>Registro</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+	<link th:href="@{/css/web/frontoffice/inicio.css}" rel="stylesheet" />
 	<style>
 		body {
-			background: linear-gradient(135deg, #007BFF, #B5EAEA, #007BFF);
-			font-family: 'Open Sans', sans-serif;
-			min-height: 100vh;
+			background-color: #f8f9fa;
+		}
+		.container {
 			display: flex;
 			justify-content: center;
 			align-items: center;
+			height: 100vh;
 		}
-
 		.card {
+			max-width: 400px;
+			background-color: #ffffff;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			padding: 20px;
+		}
+		.card img {
+			width: 72px;
+			height: 72px;
 			margin: auto;
+			display: block;
+		}
+		.card h2 {
+			color: #007bff;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		.form-label {
+			font-weight: bold;
+		}
+		.form-control {
+			border-radius: 5px;
+			border: 1px solid #ced4da;
+		}
+		.btn-primary {
+			background-color: #007bff;
+			border-color: #007bff;
+			width: 100%;
+		}
+		.btn-primary:hover {
+			background-color: #0056b3;
+			border-color: #0056b3;
+		}
+		.form-check-label {
+			margin-left: 5px;
 		}
 	</style>
 </head>
@@ -27,14 +62,14 @@
 			<div class="text-center mb-4">
 				<img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon" width="72" height="72">
 			</div>
-			<h2 class="text-center mb-4" style="color: #007bff;">Formulario de Registro Lider</h2>
+			<h2 class="text-center mb-4" style="color: #009970;">Formulario de Registro Lider</h2>
 			<form th:action="@{/user/registroLider}" th:object="${userAndLiderDto}" method="post">
 				<div class="mb-3">
 					<label class="form-label">Username:</label>
 					<input type="text" class="form-control" th:field="*{username}" required/><br>
 				</div>
 				<div class="mb-3">
-					<label class="form-label">Contraseña:</label>
+					<label class="form-label">Password:</label>
 					<input type="password" class="form-control" th:field="*{password}" required/><br>
 				</div>
 				<input type="hidden" class="form-check-input" value="LIDER" id="superadminRadio" name="role" required>
@@ -70,7 +105,7 @@
 					</div>
 				</div>
 				<button type="submit" class="btn btn-primary d-block mx-auto"
-					style="background-color: #007bff; border-color: #007bff;">Registrar</button>
+					style="background-color: #009970; border-color: #009970;">Registrar</button>
 			</form>
 
 			<div class="message alert alert-info" th:if="${message != null}">
@@ -78,7 +113,7 @@
 					[[${message}]]
 				</div>
 				<div class="text-center">
-					<a th:href="@{/home/admin-inicio-page}" class="text-decoration-none" style="color: #6c757d;">Regresar</a>
+					<a th:href="@{/home/admin-inicio-page}" class="text-decoration-none" style="color: #265073;">Regresar</a>
 				</div>
 				<!--
 				<div th:if="${user.getUsername() !=null}">
