@@ -1,15 +1,15 @@
 package pe.cibertec.auditoriaInternaCovisian.models.bd;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "feedbacks")
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class Feedback {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
