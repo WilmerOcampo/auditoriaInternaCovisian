@@ -68,6 +68,7 @@
             background-color: #555;
             color: #b4d2f2;
         }
+
     </style>
 </head>
 
@@ -77,14 +78,20 @@
         Deslogeo satisfactorio!
     </div>
     <h2 class="login-header">Iniciar sesión</h2>
-    <form th:action="@{/login}" method="post">
-        <div class="input-icon">
-            <i class="fas fa-user" style="color: #265073;"></i>
-            <input type="text" id="username" name="username" placeholder="Usuario" required>
+    <form th:action="@{/login}" method="post" class="form-group">
+        <div class="input-icon row mb-3">
+            <div class="col d-flex">
+                <input type="text" class="form-control me-4" id="username" name="username" placeholder="Usuario"
+                       required>
+                <i class="fas fa-user col-form-label" style="color: #265073;"></i>
+            </div>
         </div>
-        <div class="input-icon">
-            <i class="fas fa-lock" style="color: #265073;"></i>
-            <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+        <div class="input-icon row mb-3">
+            <div class="col d-flex">
+                <input type="password" class="form-control me-4" id="password" name="password"
+                       placeholder="Ingresa tu contraseña" required>
+                <i class="fas fa-lock col-form-label" style="color: #265073;"></i>
+            </div>
         </div>
         <button class="mb-3, login-button" type="submit">Ingresar</button>
     </form>
