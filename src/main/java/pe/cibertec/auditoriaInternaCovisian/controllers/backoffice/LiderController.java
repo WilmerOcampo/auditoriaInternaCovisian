@@ -21,10 +21,10 @@ public class LiderController {
     UserDetailsService userDetailsService;
     private IEvaluacionService iEvaluacionService;
     private IEmpleadoService iEmpleadoService;
-
     private final IFeedbackService iFeedbackService;
     private final ILiderService iLiderService;
     private final ISalaService iSalaService;
+    private final ICapacitacionService iCapacitacionService;
 
     @GetMapping("/inicio-page")
     public String inicioLider(HttpServletRequest request, Model model) {
@@ -78,6 +78,8 @@ public class LiderController {
             response.put("nombreempleado", nombreEmpleado);
             response.put("dnilider", dniLider);
             response.put("cuerpo", cuerpoMemorandum);
+
+            response.put("area", empleado.getArea());
             return ResponseEntity.ok(response);
         } else {
             return ResponseEntity.notFound().build();
@@ -155,6 +157,30 @@ public class LiderController {
     @ResponseBody
     public List<Sala> salas() {
         return iSalaService.findAll();
+    }
+    @PostMapping("/capac-asis/save")
+    public ResponseEntity<?> saveTrainingAndAssistance(@RequestBody Map<String, Object> data) {
+        Empleado empleado = iEmpleadoService.findByDni(Integer.parseInt((String) data.get("dniEmpleado")));
+        Lider lider = iLiderService.findByDni(Integer.parseInt((String) data.get("dniLider")));
+        Optional<Sala> optionalSala = iSalaService.findById(Integer.parseInt((String) data.get("idSala")));
+        Sala sala = optionalSala.get();
+
+        if (empleado == null || lider == null) {
+            return ResponseEntity.badRequest().body("Empleado o Lider no encontrado");
+        }
+
+        Capacitacion capacitacion = new Capacitacion();
+        capacitacion.setTema((String) data.get("tema"));
+        capacitacion.setDetalle((String) data.get("detalle"));
+        capacitacion.setLider(lider);
+        capacitacion.setSala(sala);
+
+        Asistencia asistencia = new Asistencia();
+        asistencia.setEmpleado(empleado);
+        asistencia.setModalidad((String) data.get("modalidad"));
+        asistencia.setFecha(LocalDateTime.parse((String) data.get("fecha")));
+        iCapacitacionService.saveTrainingAndAssistance(capacitacion, asistencia);
+        return ResponseEntity.ok().build();
     }
 
 }

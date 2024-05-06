@@ -57,6 +57,92 @@
             <div th:replace="~{backoffice/lider/modal/modal-new-feedback :: modal-new-feedback}">
             </div>
             <!--Fin Modal-->
+
+
+            <div class="modal fade modal-xl" id="modalNewTraining" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--<span class="" id=""></span>-->
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="card-body">
+                                <form class="form-horizontal mt-4" id="formTraining">
+
+                                    <div class="row mb-3">
+                                        <label for="temat" class="col-sm-2 col-form-label">Tema: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="temat"
+                                                   placeholder="Tema de la capacitación">
+                                            <div class="invalid-feedback d-block"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="detallet" class="col-sm-2 col-form-label">Detalle: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="detallet"
+                                                   placeholder="Detalle de la capacitación">
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="nombreEmpleadot" class="col-sm-2 col-form-label">Nombre
+                                            Empleado: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="nombreEmpleadot"
+                                                   placeholder="Nombre del empleado" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label for="areat" class="col-sm-2 col-form-label">Area: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="areat"
+                                                   placeholder="Area de la capacitación" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="cboSala" class="col-sm-2 col-form-label">Seleccione Sala</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" id="cboSala"></select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="modalidadt" class="col-sm-2 col-form-label">Modalidad: </label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="modalidadt"
+                                                   placeholder="Modalidad de la capacitación" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="fechat" class="col-sm-2 col-form-label">Fecha: </label>
+                                        <div class="col-sm-10">
+                                            <input type="datetime-local" class="form-control" id="fechat"
+                                                   placeholder="fecha de la capacitación">
+                                            <div class="invalid-feedback d-block"></div>
+                                        </div>
+                                    </div>
+
+                                    <input id="dniLidert" name="id" type="text" hidden="hidden">
+                                    <input id="dniEmpleadot" name="id" type="text" hidden="hidden">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary btn-save">Guardar</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 
@@ -103,25 +189,29 @@
                             `</tr>`);
                         $("#tableFeedback > tbody").append(row);
 
-                        /*row.find('.btn-new-capacitacion').on('click', function () {
+                        row.find('.btn-new-capacitacion').on('click', function () {
                             var idEvaluacion = $(this).data('id');
                             $.ajax({
                                 type: "GET",
                                 url: "/lider/evaluacion/" + idEvaluacion,
                                 dataType: "json",
                                 success: function (evaluacion) {
-                                    $('#dniEmpleado').val(evaluacion.dniempleado);
-                                    $('#nombreEmpleado').val(evaluacion.nombreempleado);
-                                    $('#cuerpo').val(evaluacion.cuerpo);
-                                    $('#fecha').val(fechaHora());
-                                    $('#dniLider').val(evaluacion.dnilider);
-                                    $('#modalNewFeedback').modal('show');
+                                    //$('#temat').val(evaluacion.tema);
+                                    //$('#detallet').val(evaluacion.detalle);
+                                    $('#nombreEmpleadot').val(evaluacion.nombreempleado);//
+                                    $('#areat').val(evaluacion.area);
+                                    findAllSala();
+                                    $('#modalidadt').val('Presencial');
+                                    $('#fechat').val(fechaHora());
+                                    $('#dniLidert').val(evaluacion.dnilider);//
+                                    $('#dniEmpleadot').val(evaluacion.dniempleado);//
+                                    $('#modalNewTraining').modal('show');
                                 },
                                 error: function (jqXHR, textStatus, errorThrown) {
                                     console.log(textStatus, errorThrown);
                                 }
                             });
-                        });*/
+                        });
                     });
                 }
                 callback(data);
@@ -131,6 +221,69 @@
             }
         });
     }
+    function findAllSala() {
+        $.ajax({
+            type: "GET",
+            url: "/lider/sala/list",
+            dataType: "json",
+            success: function (result) {
+                $("#cboSala").append(`<option>Seleccione</option>`);
+                $.each(result, function (index, value) {
+                    $("#cboSala").append(`<option value="${value.idSala}">${value.nroSala}</option>`)
+                });
+
+                /*if (idSala > 0) {
+                    $("#cboSala").val(idSala);
+                }*/
+            }
+        })
+    }
+    $('#formTraining').on('submit', function (e) {
+        e.preventDefault();
+
+        var data = {
+            tema: $('#temat').val(),
+            detalle: $('#detallet').val(),
+            dniLider: $('#dniLidert').val(),
+            idSala: $('#cboSala').val(),
+            dniEmpleado: $('#dniEmpleadot').val(),
+            modalidad: $('#modalidadt').val(),
+            fecha: $('#fechat').val()
+        };
+
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "Estás a punto de enviar la capacitación",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirmar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "/lider/capac-asis/save",
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    success: function (response) {
+                        console.log(response);
+                        Swal.fire(
+                            '¡Registrado!',
+                            'La capacitación ha sido registrado con éxito.',
+                            'success'
+                        );
+                        $('#modalNewTraining').modal('hide');
+                        $('#modalDataParams').modal('hide');
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log(textStatus, errorThrown);
+                    }
+                });
+            }
+        });
+    });
+
 
 
     $('#formFeedback').on('submit', function (e) {

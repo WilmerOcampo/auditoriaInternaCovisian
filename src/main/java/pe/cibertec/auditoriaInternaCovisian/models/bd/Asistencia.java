@@ -4,10 +4,10 @@ import jakarta.persistence.*;
 import lombok.*;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.pk.AsistenciaId;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "capacitaciones")
+@Table(name = "asistencias")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,7 +15,7 @@ public class Asistencia {
     @EmbeddedId
     private AsistenciaId idAsistencia;
     private String modalidad;
-    private LocalDate fecha;
+    private LocalDateTime fecha;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_capacitacion", insertable = false, updatable = false)

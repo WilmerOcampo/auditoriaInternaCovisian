@@ -13,4 +13,6 @@ public class Sala {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_sala")
     private Integer idSala;
+    @Column(name = "nro_sala")
+    private String nroSala;
 }
