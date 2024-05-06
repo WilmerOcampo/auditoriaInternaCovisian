@@ -6,10 +6,7 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 import pe.cibertec.auditoriaInternaCovisian.repositories.EvaluacionRepository;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -93,4 +90,21 @@ public class EvaluacionService implements IEvaluacionService {
     public Evaluacion findEvaluacionAndLlamadaByIdAndNumeroOrden(Long idEvaluacion, int numeroOrden) {
         return evaluacionRepository.findEvaluacionAndLlamadaByIdAndNumeroOrden(idEvaluacion, numeroOrden);
     }
+
+    @Override
+    public Optional<List<Evaluacion>> findEvaluacionByNotaBetween(Integer from, Integer to) {
+        return evaluacionRepository.findEvaluacionByNotaBetween(from, to);
+    }
+
+    @Override
+    public List<Evaluacion> findAll() {
+        return evaluacionRepository.findAll();
+    }
+
+    @Override
+    public Optional<List<Object[]>> findEvaluacionByNotaBetweenn(Integer from, Integer to) {
+        return evaluacionRepository.findEvaluacionByNotaBetweenn(from, to);
+    }
+
+
 }
