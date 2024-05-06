@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutlider::head">
+    <meta charset="UTF-8">
+    <title>FeedBack</title>
+</head>
+<body>
+<nav th:replace="layoutlider::menu"></nav>
+<!-- Container -->
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center m-1">
+        <h1 class="mt-4 mb-3">Feedback</h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <div>
+            <div class="card border-0 mt-4">
+                <div class="card-body">
+                    <form class="form-horizontal mt-4" id="formFeedback" th:action="@{/lider/feedback/save}" method="post">
+
+                        <div class="row mb-3">
+                            <label for="motivo" class="col-sm-2 col-form-label">Motivo: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="motivo" placeholder="Motivo del feedback"
+                                       th:field="*{feedback.motivo}">
+                                <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('motivo')}"
+                                     th:errors="*{feedback.motivo}"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="dniEmpleado" class="col-sm-2 col-form-label">DNI Empleado: </label>
+                            <div class="col-sm-10">
+                                <input th:value="${empleado.dniEmpleado}" type="text" class="form-control"
+                                       id="dniEmpleado" placeholder="DNI del empleado">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="nombreEmpleado" class="col-sm-2 col-form-label">Nombre Empleado: </label>
+                            <div class="col-sm-10">
+                                <input th:value="${empleado.nombreEmpleado} + ' ' + ${empleado.apellidoEmpleado}"
+                                       type="text" class="form-control" id="nombreEmpleado"
+                                       placeholder="Nombre del empleado">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="asunto" class="col-sm-2 col-form-label">Asunto: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="asunto" placeholder="Asunto del memorandum"
+                                       th:field="*{memorandum.asunto}">
+                                <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('asunto')}"
+                                     th:errors="*{memorandum.asunto}"></div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="cuerpo" class="col-sm-2 col-form-label">Cuerpo Memorandum: </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="cuerpo" placeholder="Cuerpo del memorandum"
+                                       th:field="*{memorandum.cuerpo}">
+                                <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('cuerpo')}"
+                                     th:errors="*{memorandum.cuerpo}"></div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="fecha" class="col-sm-2 col-form-label">Fecha Memorandum: </label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="fecha" placeholder="fecha del memorandum"
+                                       th:field="*{memorandum.fecha}">
+                                <div class="invalid-feedback d-block" th:if="${#fields.hasErrors('fecha')}"
+                                     th:errors="*{memorandum.fecha}"></div>
+                            </div>
+                        </div>
+
+                        <input id="id" name="id" type="text" hidden="hidden">
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                            <a th:href="@{/lider/evaluacines/}" class="btn btn-dark">Cancelar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

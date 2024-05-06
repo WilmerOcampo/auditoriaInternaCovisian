@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal feedback</title>
+</head>
+<body>
+
+<!--Modal feedback-->
+<div th:fragment="feedbackModal" class="modal fade modal-xl" id="modalFeedback" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!--<span class="" id=""></span>-->
+            </div>
+            <div class="modal-body">
+
+                <table class="table" id="tableFeedback" th:if="${evaluaciones != null}">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre Empleado</th>
+                        <th>Nombre Cliente</th>
+                        <th>Observaciones</th>
+                        <th>Nota</th>
+                        <th>Accion</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--Fin Modal-->
+
+</body>
+</html>

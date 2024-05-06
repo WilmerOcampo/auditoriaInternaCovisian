@@ -1,6 +1,5 @@
 package pe.cibertec.auditoriaInternaCovisian.models.bd;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -57,5 +56,4 @@ public class Evaluacion {
         this.auditor = auditor;
         this.llamada = llamada;
     }
-
 }

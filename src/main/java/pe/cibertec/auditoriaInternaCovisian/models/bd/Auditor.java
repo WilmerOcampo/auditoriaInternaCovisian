@@ -30,6 +30,4 @@ public class Auditor {
         this.nombreAuditor = nombreAuditor;
         this.apellidoAuditor = apellidoAuditor;
     }
-
-
 }

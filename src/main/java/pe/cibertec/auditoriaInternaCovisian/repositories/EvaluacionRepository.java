@@ -8,10 +8,10 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer> {
-
 
     //METODOS GENESIS DESPOUX
     List<Evaluacion> findByEmpleado(Empleado empleado);
@@ -48,9 +48,17 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>
     @Query(value = "select cast(avg(e.nota) as decimal(10,2)) from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area", nativeQuery = true)
     public Double promedioNotasPorArea(@Param("area") String area);
 
+    Optional<List<Evaluacion>> findEvaluacionByNotaBetween(Integer from, Integer to);
+
+    @Query(value = "SELECT e.id_evaluacion, emp.nombre_empleado, cli.nombre_cliente, e.observaciones_evaluacion, e.nota, l.numero_orden FROM Evaluaciones e JOIN Empleados emp ON e.dni_empleado = emp.dni_empleado JOIN Llamadas l ON e.numero_orden = l.numero_orden JOIN Cliente cli ON l.dni_cliente = cli.dni_cliente WHERE e.nota BETWEEN :from AND :to", nativeQuery = true)
+    Optional<List<Object[]>> findEvaluacionByNotaBetweenn(@Param("from") Integer from, @Param("to") Integer to);
+
+
     @Query(value = "select count(*) from evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area", nativeQuery = true)
     int cantidadEvaluaciones(@Param("area") String area);
 
     @Query(value = "select count(*) from evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area and e.nota >30", nativeQuery = true)
     int cantidadEvaluacionesAprobadas(@Param("area") String area);
+
 }
+

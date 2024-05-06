@@ -1,14 +1,11 @@
 package pe.cibertec.auditoriaInternaCovisian.services;
 
-
-
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Llamada;
 import pe.cibertec.auditoriaInternaCovisian.repositories.LlamadasRepository;
 
 import java.util.List;
-
 
 @Service
 @AllArgsConstructor

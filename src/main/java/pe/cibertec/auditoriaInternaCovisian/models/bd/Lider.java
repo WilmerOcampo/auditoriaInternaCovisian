@@ -23,5 +23,4 @@ public class Lider {
     @OneToOne
     @JoinColumn(name = "id")
     private User user;
-
 }

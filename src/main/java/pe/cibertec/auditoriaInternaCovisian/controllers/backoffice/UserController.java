@@ -8,40 +8,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
-import pe.cibertec.auditoriaInternaCovisian.models.dto.UserDto;
-import pe.cibertec.auditoriaInternaCovisian.models.dto.UserEmpleado;
-import pe.cibertec.auditoriaInternaCovisian.models.dto.UserLider;
-import pe.cibertec.auditoriaInternaCovisian.repositories.AuditorRepository;
-import pe.cibertec.auditoriaInternaCovisian.repositories.EmpleadoRepository;
-import pe.cibertec.auditoriaInternaCovisian.repositories.LiderRepository;
-import pe.cibertec.auditoriaInternaCovisian.services.IAuditorService;
-import pe.cibertec.auditoriaInternaCovisian.services.IEmpleadoService;
-import pe.cibertec.auditoriaInternaCovisian.services.ILiderService;
-import pe.cibertec.auditoriaInternaCovisian.services.IUserService;
+import pe.cibertec.auditoriaInternaCovisian.models.dto.*;
+import pe.cibertec.auditoriaInternaCovisian.repositories.*;
+import pe.cibertec.auditoriaInternaCovisian.services.*;
 
 import java.security.Principal;
-import java.util.List;
-
 
 @AllArgsConstructor
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
-     UserDetailsService userDetailsService;
-     private IUserService iUserService;
-     private ILiderService iLiderService;
-     private IEmpleadoService iEmpleadoService;
-     private IAuditorService iAuditorService;
-     private  AuditorRepository auditorRepository;
-     private  EmpleadoRepository empleadoRepository;
-     private  LiderRepository liderRepository;
+    UserDetailsService userDetailsService;
+    private IUserService iUserService;
+    private ILiderService iLiderService;
+    private IEmpleadoService iEmpleadoService;
+    private IAuditorService iAuditorService;
+    private AuditorRepository auditorRepository;
+    private EmpleadoRepository empleadoRepository;
+    private LiderRepository liderRepository;
 
     @GetMapping("/registroAuditor")
     public String registroAuditorInicio(Model model) {
         model.addAttribute("userAndAuditorDto", new UserDto());
         return "backoffice/user/frmregistroauditor";
     }
+
     @PostMapping("/registroAuditor")
     public String registroAuditorPost(@ModelAttribute("userAndAuditorDto") UserDto userAndAuditorDto, Model model) {
         iUserService.saveUserAndAuditor(userAndAuditorDto);
@@ -50,52 +42,53 @@ public class UserController {
     }
 
     @GetMapping("/registroEmpleado")
-    public String registroEmpleadoInicio(Model model){
+    public String registroEmpleadoInicio(Model model) {
         model.addAttribute("userAndEmpleadoDto", new UserEmpleado());
         return "backoffice/user/frmregistroempleado";
     }
 
     @PostMapping("/registroEmpleado")
-    public  String registroEmpleadoPost(@ModelAttribute("userAndEmpleadoDto") UserEmpleado userAndEmpleadoDto, Model model){
+    public String registroEmpleadoPost(@ModelAttribute("userAndEmpleadoDto") UserEmpleado userAndEmpleadoDto, Model model) {
         iUserService.saveUserAndEmpleado(userAndEmpleadoDto);
         model.addAttribute("message", "Registro Correcto");
         return "backoffice/user/frmregistroempleado";
     }
 
     @GetMapping("/registroLider")
-    public String registroLiderInicio(Model model){
+    public String registroLiderInicio(Model model) {
         model.addAttribute("userAndLiderDto", new UserLider());
         return "backoffice/user/frmregistrolider";
     }
 
     @PostMapping("/registroLider")
-    public  String registroLiderPost(@ModelAttribute("userAndLiderDto") UserLider userAndLiderDto, Model model){
+    public String registroLiderPost(@ModelAttribute("userAndLiderDto") UserLider userAndLiderDto, Model model) {
         iUserService.saveUserAndLider(userAndLiderDto);
         model.addAttribute("message", "Registro Correcto");
         return "backoffice/user/frmregistrolider";
     }
 
     @GetMapping("/detail")
-    public String verUsuario(Model model, Principal principal){
+    public String verUsuario(Model model, Principal principal) {
         //Ver si aca si usar UserDetails
         return "backoffice/user/frmusuario";
     }
+
     @PostMapping("/actualizar")
     @ResponseBody
-    public String actualizarUsuario(@RequestParam("dni") int dni, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido){
-        Empleado empleado= iEmpleadoService.findByDni(dni);
+    public String actualizarUsuario(@RequestParam("dni") int dni, @RequestParam("nombre") String nombre, @RequestParam("apellido") String apellido) {
+        Empleado empleado = iEmpleadoService.findByDni(dni);
         Auditor auditor = iAuditorService.findByDni(dni);
         Lider lider = iLiderService.findByDni(dni);
 
-        if(empleado != null){
+        if (empleado != null) {
             empleado.setNombreEmpleado(nombre);
             empleado.setApellidoEmpleado(apellido);
             empleadoRepository.save(empleado);
-        }else if(auditor != null){
+        } else if (auditor != null) {
             auditor.setNombreAuditor(nombre);
             auditor.setApellidoAuditor(apellido);
             auditorRepository.save(auditor);
-        }else if (lider != null){
+        } else if (lider != null) {
             lider.setNombreLider(nombre);
             lider.setApellidoLider(apellido);
             liderRepository.save(lider);
@@ -105,20 +98,20 @@ public class UserController {
 
     @PostMapping("/cambiarContrasenia")
     @ResponseBody
-    public String cambiarContraseña(@RequestParam("username") String username, @RequestParam("password") String password){
-        iUserService.cambiarContraseña(username,password);
+    public String cambiarContraseña(@RequestParam("username") String username, @RequestParam("password") String password) {
+        iUserService.cambiarContraseña(username, password);
         return null;
     }
 
     @GetMapping("/list")
-    public String listaUsuarios(Model model){
-        model.addAttribute("usuarios",iUserService.listarUsers());
+    public String listaUsuarios(Model model) {
+        model.addAttribute("usuarios", iUserService.listarUsers());
         return "backoffice/user/lista";
     }
 
     @GetMapping("/prueba")
     @ResponseBody
-    UserDetails nose(Model model, Principal principal){
+    UserDetails nose(Model model, Principal principal) {
         return userDetailsService.loadUserByUsername(principal.getName());
     }
 

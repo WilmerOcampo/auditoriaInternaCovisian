@@ -6,17 +6,9 @@ import net.sf.jasperreports.engine.JRException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pe.cibertec.auditoriaInternaCovisian.models.dto.UserDto;
-import pe.cibertec.auditoriaInternaCovisian.models.dto.UserEmpleado;
-import pe.cibertec.auditoriaInternaCovisian.models.dto.UserLider;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Auditor;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Lider;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.User;
-import pe.cibertec.auditoriaInternaCovisian.repositories.AuditorRepository;
-import pe.cibertec.auditoriaInternaCovisian.repositories.EmpleadoRepository;
-import pe.cibertec.auditoriaInternaCovisian.repositories.LiderRepository;
-import pe.cibertec.auditoriaInternaCovisian.repositories.UserRepository;
+import pe.cibertec.auditoriaInternaCovisian.models.dto.*;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
+import pe.cibertec.auditoriaInternaCovisian.repositories.*;
 import pe.cibertec.auditoriaInternaCovisian.util.reportes.UserReportGenerator;
 
 import java.io.FileNotFoundException;
@@ -117,13 +109,6 @@ public class UserService implements IUserService{
 		 return userRepository.findById(id).orElse(null);
 	}
 
-	/*@Override
-	public void saveUser(User user) {
-		User u=new User(user.getId(),user.getUsername(),user.getPassword(),user.getRole(),user.getFullname());
-		userRepository.save(u);
-		
-	}*/
-
 	@Override
 	public void saveUser(User user) {
 	    // Recupera el usuario existente de la base de datos
@@ -151,7 +136,4 @@ public class UserService implements IUserService{
 		userRepository.deleteById(id);
 		
 	}
-
-
-
 }
