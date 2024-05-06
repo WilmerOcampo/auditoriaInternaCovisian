@@ -22,4 +22,9 @@ public interface IEvaluacionService {
     Evaluacion evalaucionPorOrden(int orden);
     Evaluacion findEvaluacionAndLlamadaByIdAndNumeroOrden(Long idEvaluacion, int numeroOrden);
     Optional<List<Object[]>> findEvaluacionByNotaBetweenn(Integer from, Integer to);
+    Evaluacion obtenerEvaluacionesNoVistas(String area);
+    //Metodos para CHART JS
+    int cantEvaluacionesVistasPorLider(String area);
+    int cantEvaluacionesNoVistasPorLider(String area);
+    public Double promedioNotasPorArea(String area);
 }

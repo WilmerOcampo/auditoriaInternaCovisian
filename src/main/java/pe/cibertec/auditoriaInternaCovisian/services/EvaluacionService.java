@@ -95,6 +95,8 @@ public class EvaluacionService implements IEvaluacionService {
     public Optional<List<Object[]>> findEvaluacionByNotaBetweenn(Integer from, Integer to) {
         return evaluacionRepository.findEvaluacionByNotaBetweenn(from, to);
     }
-
-
+  
+    public Evaluacion obtenerEvaluacionesNoVistas(String area) {
+        return null;
+    }
 }

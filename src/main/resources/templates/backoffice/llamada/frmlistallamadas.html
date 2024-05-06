@@ -37,7 +37,52 @@
         </form>
         <br> <!--NO SABIA QUE PONER PARA SEPARARLO XDDDDDDDD (HUGO)-->
         <!-- Aquí podrías mostrar los resultados si los hubiera -->
-        <table  class="table table-dark table-striped" th:if="${llamadas != null}">
+        <table id="tablaLlamadas" class="table table-hover" th:if="${llamadas != null}">
+            <thead>
+            <tr>
+                <th>Número de Orden</th>
+                <th>Numero de Cliente</th>
+                <th>Tipo</th>
+                <th>Área</th>
+                <th>Subárea</th>
+                <th>Estado</th>
+                <th>Dni Empleado</th>
+                <th>Nombre Empleado</th>
+                <th>Apellido Empleado</th>
+                <th>Dni Cliente</th>
+                <th>Nombre Cliente</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="llamada : ${llamadas}">
+                <td th:text="${llamada.numeroOrden}"></td>
+                <td th:text="${llamada.cliente.numeroCliente}"></td>
+                <td th:text="${llamada.tipo}"></td>
+                <td th:text="${llamada.area}"></td>
+                <td th:text="${llamada.subarea}"></td>
+                <td th:text="${llamada.estado}"></td>
+                <td th:text="${llamada.empleado.dniEmpleado}"></td>
+                <td th:text="${llamada.empleado.nombreEmpleado}"></td>
+                <td th:text="${llamada.empleado.apellidoEmpleado}"></td>
+                <td th:text="${llamada.cliente.dniCliente}"></td>
+                <td th:text="${llamada.cliente.nombreCliente + ' ' + llamada.cliente.apellidoCliente}"></td>
+                <td th:text="${llamada.estadoAuditoria == false ? 'Sin Auditar' : 'Auditado'}"></td>
+                <td>
+                    <div th:if="${llamada.estadoAuditoria == false}">
+                        <a th:href="@{/evaluacion/crear/}+${llamada.numeroOrden}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </div>
+                    <div th:if="${llamada.estadoAuditoria == true}">
+                        <a th:href="@{'/llamada/detail/' + ${llamada.numeroOrden}}"><i class="fa-solid fa-eye"></i></a>
+                        <a th:href="@{'/llamada/detail/' + ${llamada.numeroOrden}}"><i class="fa-solid fa-file-pen"></i></a>
+                        <!--<a href="#">Editar</a>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <table id="tablaLlamadas1" class="table table-hover" th:if="${llamadas == null}">
             <thead>
             <tr>
                 <th>Número de Orden</th>
@@ -57,34 +102,24 @@
             </tr>
             </thead>
             <tbody>
-            <tr th:each="llamada : ${llamadas}">
-                <td th:text="${llamada.numeroOrden}"></td>
-                <td th:text="${llamada.cliente.numeroCliente}"></td>
-                <td th:text="${llamada.tipo}"></td>
-                <td th:text="${llamada.area}"></td>
-                <td th:text="${llamada.subarea}"></td>
-                <td th:text="${llamada.estado}"></td>
-                <td th:text="${llamada.observaciones}"></td>
-                <td th:text="${llamada.empleado.dniEmpleado}"></td>
-                <td th:text="${llamada.empleado.nombreEmpleado}"></td>
-                <td th:text="${llamada.empleado.apellidoEmpleado}"></td>
-                <td th:text="${llamada.cliente.dniCliente}"></td>
-                <td th:text="${llamada.cliente.nombreCliente + ' ' + llamada.cliente.apellidoCliente}"></td>
-                <td th:text="${llamada.estadoAuditoria == false ? 'Sin Auditar' : 'Auditado'}"></td>
-                <td>
-                    <div th:if="${llamada.estadoAuditoria == false}">
-                        <a th:href="@{/evaluacion/crear/}+${llamada.numeroOrden}">Evaluar</a>
-                    </div>
-                    <div th:if="${llamada.estadoAuditoria == true}">
-                        <a th:href="@{'/llamada/detail/' + ${llamada.numeroOrden}}">Ver</a>
-                        <a th:href="@{'/llamada/detail/' + ${llamada.numeroOrden}}">Editar</a>
-                        <!--<a href="#">Editar</a>-->
-                    </div>
-                </td>
+            <tr >
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             </tbody>
         </table>
-
         <!-- Manejo de caso en que no se encuentran resultados -->
         <div th:if="${llamadas == null}">
             <p>No se encontraron llamadas para el DNI de empleado proporcionado.</p>
