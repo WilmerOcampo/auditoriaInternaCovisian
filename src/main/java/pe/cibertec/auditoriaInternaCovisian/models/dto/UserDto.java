@@ -1,7 +1,6 @@
 package pe.cibertec.auditoriaInternaCovisian.models.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @NoArgsConstructor

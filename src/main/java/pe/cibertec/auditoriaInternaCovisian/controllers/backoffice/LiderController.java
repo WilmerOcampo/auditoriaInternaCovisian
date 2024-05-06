@@ -53,6 +53,47 @@ public class LiderController {
         return "backoffice/lider/frmlistaevaluaciones";
     }
 
+    @GetMapping("/empleados/{area}")
+    public String listarEmpleadosPorAreaLider(@PathVariable String area, Model model) {
+        model.addAttribute("empleados", iEmpleadoService.findByArea(area));
+        return "backoffice/lider/frmlistaempleados";
+    }
+
+    /* GET y POST en formatos JSON para manipular en mi AJAX (Vista lider) */
+    @PostMapping("/actualizarCampo")
+    @ResponseBody
+    public String actualizarCampoEstadoLider(@RequestParam("id") int id) {
+        Evaluacion evaluacion = iEvaluacionService.evaluacionPorId(id);
+        evaluacion.setEstadoLider(true);
+        iEvaluacionService.save(evaluacion);
+        return null;
+    }
+
+    @GetMapping("/obtenerEvaluacion")
+    @ResponseBody
+    public Map<String, Object> obtenerDatosEvaluacion(@RequestParam("id") int id) {
+        Map<String, Object> datos = new HashMap<>();
+        Evaluacion evaluacion = iEvaluacionService.evaluacionPorId(id);
+        if (evaluacion != null) {
+            //Datos Evaluacion
+            datos.put("nota", evaluacion.getNota());
+            datos.put("observacionesEvaluacion", evaluacion.getObservacionesEvaluacion());
+            //Datos Auditor
+            datos.put("apellidoAuditor", evaluacion.getAuditor().getApellidoAuditor());
+            datos.put("nombreAuditor", evaluacion.getAuditor().getNombreAuditor());
+            datos.put("dniAuditor", evaluacion.getAuditor().getDniAuditor());
+            //Datos Empleado
+            datos.put("nombreEmpleado", evaluacion.getEmpleado().getApellidoEmpleado());
+            datos.put("apellidoEmpleado", evaluacion.getEmpleado().getNombreEmpleado());
+            datos.put("dniEmpleado", evaluacion.getEmpleado().getDniEmpleado());
+            datos.put("nombreCompleto", evaluacion.getEmpleado().getApellidoEmpleado() + " " + evaluacion.getEmpleado().getNombreEmpleado());
+            //Datos Llamada
+            datos.put("tipoLlamada", evaluacion.getLlamada().getTipo());
+        }
+        return datos;
+    }
+
+
     @GetMapping("/evaluacion/list")
     @ResponseBody
     public Optional<List<Object[]>> feedbacksList() {
@@ -108,56 +149,18 @@ public class LiderController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/empleados/{area}")
-    public String listarEmpleadosPorAreaLider(@PathVariable String area, Model model) {
-        model.addAttribute("empleados", iEmpleadoService.findByArea(area));
-        return "backoffice/lider/frmlistaempleados";
-    }
-
-    /* GET y POST en formatos JSON para manipular en mi AJAX (Vista lider) */
-    @PostMapping("/actualizarCampo")
-    @ResponseBody
-    public String actualizarCampoEstadoLider(@RequestParam("id") int id) {
-        Evaluacion evaluacion = iEvaluacionService.evaluacionPorId(id);
-        evaluacion.setEstadoLider(true);
-        iEvaluacionService.save(evaluacion);
-        return null;
-    }
-
-    @GetMapping("/obtenerEvaluacion")
-    @ResponseBody
-    public Map<String, Object> obtenerDatosEvaluacion(@RequestParam("id") int id) {
-        Map<String, Object> datos = new HashMap<>();
-        Evaluacion evaluacion = iEvaluacionService.evaluacionPorId(id);
-        if (evaluacion != null) {
-            //Datos Evaluacion
-            datos.put("nota", evaluacion.getNota());
-            datos.put("observacionesEvaluacion", evaluacion.getObservacionesEvaluacion());
-            //Datos Auditor
-            datos.put("apellidoAuditor", evaluacion.getAuditor().getApellidoAuditor());
-            datos.put("nombreAuditor", evaluacion.getAuditor().getNombreAuditor());
-            datos.put("dniAuditor", evaluacion.getAuditor().getDniAuditor());
-            //Datos Empleado
-            datos.put("nombreEmpleado", evaluacion.getEmpleado().getApellidoEmpleado());
-            datos.put("apellidoEmpleado", evaluacion.getEmpleado().getNombreEmpleado());
-            datos.put("dniEmpleado", evaluacion.getEmpleado().getDniEmpleado());
-            datos.put("nombreCompleto", evaluacion.getEmpleado().getApellidoEmpleado() + " " + evaluacion.getEmpleado().getNombreEmpleado());
-            //Datos Llamada
-            datos.put("tipoLlamada", evaluacion.getLlamada().getTipo());
-        }
-        return datos;
-    }
-
     @GetMapping("/evaluacion/list-capacitacion")
     @ResponseBody
     public Optional<List<Object[]>> listCapacitaciones() {
         return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(11, 30).orElse(new ArrayList<>()));
     }
+
     @GetMapping("/sala/list")
     @ResponseBody
     public List<Sala> salas() {
         return iSalaService.findAll();
     }
+
     @PostMapping("/capac-asis/save")
     public ResponseEntity<?> saveTrainingAndAssistance(@RequestBody Map<String, Object> data) {
         Empleado empleado = iEmpleadoService.findByDni(Integer.parseInt((String) data.get("dniEmpleado")));

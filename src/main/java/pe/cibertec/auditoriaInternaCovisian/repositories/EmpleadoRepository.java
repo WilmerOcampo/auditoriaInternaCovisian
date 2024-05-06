@@ -21,7 +21,6 @@ public interface EmpleadoRepository extends JpaRepository<Empleado, Integer>{
     List<Empleado> findByArea(String area);
     Empleado findByDniEmpleado(int dni);
 
-
     //METODOS PARA BOX DE DASHBOARD
     @Query(value = "select count(*) from empleados where area =:area", nativeQuery = true)
     int cantidadEmpleadosArea(@Param("area") String area);

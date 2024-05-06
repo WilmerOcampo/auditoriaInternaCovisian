@@ -1,8 +1,7 @@
 package pe.cibertec.auditoriaInternaCovisian.models.bd;
 
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name="users",uniqueConstraints = @UniqueConstraint(columnNames = "username"))
