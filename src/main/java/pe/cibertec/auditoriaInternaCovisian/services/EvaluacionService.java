@@ -6,10 +6,7 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 import pe.cibertec.auditoriaInternaCovisian.repositories.EvaluacionRepository;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -95,6 +92,10 @@ public class EvaluacionService implements IEvaluacionService {
     }
 
     @Override
+    public Optional<List<Object[]>> findEvaluacionByNotaBetweenn(Integer from, Integer to) {
+        return evaluacionRepository.findEvaluacionByNotaBetweenn(from, to);
+    }
+  
     public Evaluacion obtenerEvaluacionesNoVistas(String area) {
         return null;
     }
