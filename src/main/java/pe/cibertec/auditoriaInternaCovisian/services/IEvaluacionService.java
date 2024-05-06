@@ -22,5 +22,7 @@ public interface IEvaluacionService {
     //Metodos para CHART JS
     int cantEvaluacionesVistasPorLider(String area);
     int cantEvaluacionesNoVistasPorLider(String area);
+    int evaluacionesAuditadasArea(String area);
+    int evaluacionesAprobadasArea(String area);
     public Double promedioNotasPorArea(String area);
 }

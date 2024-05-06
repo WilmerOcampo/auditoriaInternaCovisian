@@ -69,6 +69,17 @@ public class EvaluacionService implements IEvaluacionService {
     public int cantEvaluacionesNoVistasPorLider(String area) {
         return evaluacionRepository.cantidadEvaluacionesNoVistasPorLider(area);
     }
+
+    @Override
+    public int evaluacionesAuditadasArea(String area) {
+        return evaluacionRepository.cantidadEvaluaciones(area);
+    }
+
+    @Override
+    public int evaluacionesAprobadasArea(String area) {
+        return evaluacionRepository.cantidadEvaluacionesAprobadas(area);
+    }
+
     @Override
     public Double promedioNotasPorArea(String area) {
         return evaluacionRepository.promedioNotasPorArea(area);

@@ -10,4 +10,5 @@ public interface IEmpleadoService {
     Empleado findByUsername(String username);
     List<Empleado> findByArea(String area);
     Empleado findByDni(int dni);
+    int EmpleadosArea(String area);
 }
