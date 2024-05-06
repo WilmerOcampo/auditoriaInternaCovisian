@@ -24,6 +24,7 @@ public class LiderController {
 
     private final IFeedbackService iFeedbackService;
     private final ILiderService iLiderService;
+    private final ISalaService iSalaService;
 
     @GetMapping("/inicio-page")
     public String inicioLider(HttpServletRequest request, Model model) {
@@ -143,6 +144,17 @@ public class LiderController {
             datos.put("tipoLlamada", evaluacion.getLlamada().getTipo());
         }
         return datos;
+    }
+
+    @GetMapping("/evaluacion/list-capacitacion")
+    @ResponseBody
+    public Optional<List<Object[]>> listCapacitaciones() {
+        return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(20, 100).orElse(new ArrayList<>()));
+    }
+    @GetMapping("/sala/list")
+    @ResponseBody
+    public List<Sala> salas() {
+        return iSalaService.findAll();
     }
 
 }
