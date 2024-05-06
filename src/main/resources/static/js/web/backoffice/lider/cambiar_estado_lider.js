@@ -13,7 +13,7 @@ $(document).ready(function () {
                     dataType: 'json',
                     success: function (datos) {
                         llenarDatos(datos);
-                        $('#miModal').modal('show');
+                        $('#modalEvaluacion').modal('show');
                     },
                     error: function () {
                     console.log('Error al obtener los datos de la evaluación');

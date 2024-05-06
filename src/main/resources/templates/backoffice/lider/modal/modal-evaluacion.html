@@ -7,7 +7,7 @@
 <body>
 
 <!--Modal-->
-<div th:fragment="viewModal" class="modal fade modal-xl" id="miModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div th:fragment="modal-evaluacion" class="modal fade modal-xl" id="modalEvaluacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -60,7 +60,8 @@
                 <div class="row mt-2">
                     <div class="col-md-4">
                         <div class="form-floating mb-3">
-                            <textarea class="form-control" id="observacion" style="height: 100px" disabled></textarea>
+                                        <textarea class="form-control" id="observacion" style="height: 100px"
+                                                  disabled></textarea>
                             <label for="observacion">Observaciones Auditor</label>
                         </div>
                     </div>
@@ -68,12 +69,6 @@
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="nota" disabled>
                             <label for="nota">Nota de Evaluacion</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="estado" disabled>
-                            <label for="dni_auditor">DNI Auditor</label>
                         </div>
                     </div>
                 </div>
