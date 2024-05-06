@@ -22,10 +22,6 @@ public class Memorandum {
     private LocalDateTime fecha;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dni_empleado")
-    private Empleado empleado;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dni_lider")
-    private Lider lider;
+    @JoinColumn(name = "id_feedback")
+    private Feedback feedback;
 }

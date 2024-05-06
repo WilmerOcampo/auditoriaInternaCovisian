@@ -92,16 +92,6 @@ public class EvaluacionService implements IEvaluacionService {
     }
 
     @Override
-    public Optional<List<Evaluacion>> findEvaluacionByNotaBetween(Integer from, Integer to) {
-        return evaluacionRepository.findEvaluacionByNotaBetween(from, to);
-    }
-
-    @Override
-    public List<Evaluacion> findAll() {
-        return evaluacionRepository.findAll();
-    }
-
-    @Override
     public Optional<List<Object[]>> findEvaluacionByNotaBetweenn(Integer from, Integer to) {
         return evaluacionRepository.findEvaluacionByNotaBetweenn(from, to);
     }

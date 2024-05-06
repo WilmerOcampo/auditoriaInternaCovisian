@@ -240,20 +240,53 @@
     <!--Fin Modal-->
 
 </section>
+<script th:src="@{/js/sweetalert2/sweetalert2.all.min.js}" type="text/javascript"></script>
 <script th:src="@{/js/web/backoffice/lider/inicio.js}" type="text/javascript"></script>
 <script th:src="@{/js/web/backoffice/lider/cambiar_estado_lider.js}" type="text/javascript"></script>
+
 <script>
+    $('#formFeedback').on('submit', function(e) {
+        e.preventDefault();
+
+        var data = {
+            motivo: $('#motivo').val(),
+            dniEmpleado: $('#dniEmpleado').val(),
+            dniLider: $('#dniLider').val(),
+            asunto: $('#asunto').val(),
+            cuerpo: $('#cuerpo').val(),
+            fecha: $('#fecha').val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/lider/fb-memo/save",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            success: function(response) {
+                console.log(response);
+                $('#modalNewFeedback').modal('hide');
+                $('#modalFeedback').modal('hide');
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    });
+
     $(document).ready(function () {
         $('#tablaEvaluaciones').DataTable();
     });
 
     $('#feedback-link').on('click', function () {
-        // Abre el modal
-        $('#modalFeedback').modal('show');
-        forFeedabacks()
+        // Llama a forFeedabacks y abre el modal solo si hay empleados que requieran feedback
+        forFeedabacks(function(data) {
+            if (data.length > 0) {
+                $('#modalFeedback').modal('show');
+            }
+        });
     });
 
-    function forFeedabacks() {
+    function forFeedabacks(callback) {
         $.ajax({
             type: "GET",
             url: "/lider/evaluacion/list",
@@ -261,45 +294,51 @@
             success: function (data) {
                 console.log(data);
                 $("#tableFeedback > tbody").empty();
-                $.each(data, function (index, value) {
-                    var row = $(`<tr>` +
-                        `<td>${value[0]}</td>` + // idEvaluacion
-                        `<td>${value[1]}</td>` + // nombreEmpleado
-                        `<td>${value[2]}</td>` + // nombreCliente
-                        `<td>${value[3]}</td>` + // observacionesEvaluacion
-                        `<td>${value[4]}</td>` + // nota
-                        `<td><button type="button" class="btn btn-primary btn-new-feedback" data-id="${value[0]}"> Generar Feedback` +
-                        `</button></td>` +
-                        `</tr>`);
-                    $("#tableFeedback > tbody").append(row);
+                if (data.length === 0) {
+                    alert('No existen empleados que requieran feedback');
+                } else {
+                    $.each(data, function (index, value) {
+                        var row = $(`<tr>` +
+                            `<td>${value[0]}</td>` + // idEvaluacion
+                            `<td>${value[1]}</td>` + // nombreEmpleado
+                            `<td>${value[2]}</td>` + // nombreCliente
+                            `<td>${value[3]}</td>` + // observacionesEvaluacion
+                            `<td>${value[4]}</td>` + // nota
+                            `<td><button type="button" class="btn btn-primary btn-new-feedback" data-id="${value[0]}"> Generar Feedback` +
+                            `</button></td>` +
+                            `</tr>`);
+                        $("#tableFeedback > tbody").append(row);
 
-                    row.find('.btn-new-feedback').on('click', function () {
-                        var idEvaluacion = $(this).data('id');
-                        $.ajax({
-                            type: "GET",
-                            url: "/lider/evaluacion/" + idEvaluacion,
-                            dataType: "json",
-                            success: function (evaluacion) {
-                                // Llena los campos del formulario con los datos de la evaluación
-                                $('#dniEmpleado').val(evaluacion.dniempleado);
-                                $('#nombreEmpleado').val(evaluacion.nombreempleado);
-                                $('#cuerpo').val(evaluacion.cuerpo);
-                                $('#fecha').val(fechaHora());
-                                $('#dniLider').val(evaluacion.dnilider);
-                                $('#modalNewFeedback').modal('show');
-                            },
-                            error: function (jqXHR, textStatus, errorThrown) {
-                                console.log(textStatus, errorThrown);
-                            }
+                        row.find('.btn-new-feedback').on('click', function () {
+                            var idEvaluacion = $(this).data('id');
+                            $.ajax({
+                                type: "GET",
+                                url: "/lider/evaluacion/" + idEvaluacion,
+                                dataType: "json",
+                                success: function (evaluacion) {
+                                    $('#dniEmpleado').val(evaluacion.dniempleado);
+                                    $('#nombreEmpleado').val(evaluacion.nombreempleado);
+                                    $('#cuerpo').val(evaluacion.cuerpo);
+                                    $('#fecha').val(fechaHora());
+                                    $('#dniLider').val(evaluacion.dnilider);
+                                    $('#modalNewFeedback').modal('show');
+                                },
+                                error: function (jqXHR, textStatus, errorThrown) {
+                                    console.log(textStatus, errorThrown);
+                                }
+                            });
                         });
                     });
-                });
+                }
+                callback(data);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 console.log(textStatus, errorThrown);
             }
         });
     }
+
+
 
     function fechaHora() {
         var now = new Date();

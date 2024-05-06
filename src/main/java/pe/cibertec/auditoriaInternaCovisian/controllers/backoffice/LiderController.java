@@ -1,18 +1,17 @@
 package pe.cibertec.auditoriaInternaCovisian.controllers.backoffice;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
 import pe.cibertec.auditoriaInternaCovisian.services.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @AllArgsConstructor
@@ -52,7 +51,7 @@ public class LiderController {
     @GetMapping("/evaluacion/list")
     @ResponseBody
     public Optional<List<Object[]>> feedbacksList() {
-        return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(0, 80).orElse(new ArrayList<>()));
+        return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(0, 10).orElse(new ArrayList<>()));
     }
 
     @GetMapping("/evaluacion/{id}")
@@ -78,6 +77,30 @@ public class LiderController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/fb-memo/save")
+    public ResponseEntity<?> saveFeedbackAndMemorandum(@RequestBody Map<String, Object> data) {
+        Empleado empleado = iEmpleadoService.findByDni(Integer.parseInt((String) data.get("dniEmpleado")));
+        Lider lider = iLiderService.findByDni(Integer.parseInt((String) data.get("dniLider")));
+
+        if (empleado == null || lider == null) {
+            return ResponseEntity.badRequest().body("Empleado o Lider no encontrado");
+        }
+
+        Feedback feedback = new Feedback();
+        feedback.setMotivo((String) data.get("motivo"));
+        feedback.setEmpleado(empleado);
+        feedback.setLider(lider);
+
+        Memorandum memorandum = new Memorandum();
+        memorandum.setAsunto((String) data.get("asunto"));
+        memorandum.setCuerpo((String) data.get("cuerpo"));
+        memorandum.setFecha(LocalDateTime.parse((String) data.get("fecha"))); // Asegúrate de que la fecha esté en el formato correcto
+
+        iFeedbackService.saveFeedbackAndMemorandum(feedback, memorandum);
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/empleados/{area}")

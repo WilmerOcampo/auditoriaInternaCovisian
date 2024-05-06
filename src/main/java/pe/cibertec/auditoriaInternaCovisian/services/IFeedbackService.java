@@ -1,10 +1,8 @@
 package pe.cibertec.auditoriaInternaCovisian.services;
 
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Feedback;
-
-import java.util.Optional;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.Memorandum;
 
 public interface IFeedbackService {
-    void save(Feedback feedback);
-    Optional<Feedback> findById(Integer id);
+    void saveFeedbackAndMemorandum(Feedback feedback, Memorandum memorandum);
 }
