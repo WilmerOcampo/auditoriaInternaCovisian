@@ -151,7 +151,7 @@ public class LiderController {
     @GetMapping("/evaluacion/list-capacitacion")
     @ResponseBody
     public Optional<List<Object[]>> listCapacitaciones() {
-        return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(20, 100).orElse(new ArrayList<>()));
+        return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(11, 30).orElse(new ArrayList<>()));
     }
     @GetMapping("/sala/list")
     @ResponseBody
