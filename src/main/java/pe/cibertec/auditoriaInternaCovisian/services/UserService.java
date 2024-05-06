@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserDto;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserEmpleado;
 import pe.cibertec.auditoriaInternaCovisian.models.dto.UserLider;
@@ -39,6 +40,7 @@ public class UserService implements IUserService{
 	}*/
 
 	@Override
+	@Transactional
 	public void saveUserAndAuditor(UserDto userAndAuditorDto) {
 		User user = new User();
 		user.setUsername(userAndAuditorDto.getUsername());
@@ -55,6 +57,7 @@ public class UserService implements IUserService{
 	}
 
 	@Override
+	@Transactional
 	public void saveUserAndLider(UserLider userLider) {
 		User user = new User();
 		user.setUsername(userLider.getUsername());
@@ -72,6 +75,7 @@ public class UserService implements IUserService{
 	}
 
 	@Override
+	@Transactional
 	public void saveUserAndEmpleado(UserEmpleado userEmpleado) {
 		User user = new User();
 		user.setUsername(userEmpleado.getUsername());

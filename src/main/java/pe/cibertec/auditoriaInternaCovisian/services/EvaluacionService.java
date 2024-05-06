@@ -93,4 +93,9 @@ public class EvaluacionService implements IEvaluacionService {
     public Evaluacion findEvaluacionAndLlamadaByIdAndNumeroOrden(Long idEvaluacion, int numeroOrden) {
         return evaluacionRepository.findEvaluacionAndLlamadaByIdAndNumeroOrden(idEvaluacion, numeroOrden);
     }
+
+    @Override
+    public Evaluacion obtenerEvaluacionesNoVistas(String area) {
+        return null;
+    }
 }

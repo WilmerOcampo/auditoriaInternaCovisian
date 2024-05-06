@@ -120,8 +120,14 @@
 <script th:src="@{/js/web/backoffice/lider/inicio.js}" type="text/javascript"></script>
 <script th:src="@{/js/web/backoffice/lider/cambiar_estado_lider.js}" type="text/javascript"></script>
 <script>
+    var tabla
     $(document).ready(function () {
-        $('#tablaEvaluaciones').DataTable();
+        tabla = $('#tablaEvaluaciones').DataTable({
+             responsive: true,
+             "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+             }
+        });
     });
 </script>
 </body>
