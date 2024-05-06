@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Training</title>
+</head>
+<body>
+
+<div th:fragment="modal-training" class="modal fade modal-xl" id="modalNewTraining" tabindex="-1" role="dialog"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!--<span class="" id=""></span>-->
+      </div>
+      <div class="modal-body">
+
+        <div class="card-body">
+          <form class="form-horizontal mt-4" id="formTraining">
+
+            <div class="row mb-3">
+              <label for="temat" class="col-sm-2 col-form-label">Tema: </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="temat"
+                       placeholder="Tema de la capacitación">
+                <div class="invalid-feedback d-block"></div>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="detallet" class="col-sm-2 col-form-label">Detalle: </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="detallet"
+                       placeholder="Detalle de la capacitación">
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="nombreEmpleadot" class="col-sm-2 col-form-label">Nombre
+                Empleado: </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="nombreEmpleadot"
+                       placeholder="Nombre del empleado" readonly>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <label for="areat" class="col-sm-2 col-form-label">Area: </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="areat"
+                       placeholder="Area de la capacitación" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="cboSala" class="col-sm-2 col-form-label">Seleccione Sala</label>
+              <div class="col-sm-10">
+                <select class="form-control" id="cboSala"></select>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="modalidadt" class="col-sm-2 col-form-label">Modalidad: </label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="modalidadt"
+                       placeholder="Modalidad de la capacitación" readonly>
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="fechat" class="col-sm-2 col-form-label">Fecha: </label>
+              <div class="col-sm-10">
+                <input type="datetime-local" class="form-control" id="fechat"
+                       placeholder="fecha de la capacitación">
+                <div class="invalid-feedback d-block"></div>
+              </div>
+            </div>
+
+            <input id="dniLidert" name="id" type="text" hidden="hidden">
+            <input id="dniEmpleadot" name="id" type="text" hidden="hidden">
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-save">Guardar</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
