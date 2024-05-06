@@ -54,4 +54,11 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>
     Optional<List<Object[]>> findEvaluacionByNotaBetweenn(@Param("from") Integer from, @Param("to") Integer to);
 
 
+    @Query(value = "select count(*) from evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area", nativeQuery = true)
+    int cantidadEvaluaciones(@Param("area") String area);
+
+    @Query(value = "select count(*) from evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area and e.nota >30", nativeQuery = true)
+    int cantidadEvaluacionesAprobadas(@Param("area") String area);
+
 }
+

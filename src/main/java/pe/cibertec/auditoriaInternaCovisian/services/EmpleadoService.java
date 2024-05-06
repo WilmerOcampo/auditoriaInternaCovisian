@@ -32,4 +32,9 @@ public class EmpleadoService implements IEmpleadoService{
     public Empleado findByDni(int dni) {
         return empleadoRepository.findByDniEmpleado(dni);
     }
+
+    @Override
+    public int EmpleadosArea(String area) {
+        return  empleadoRepository.cantidadEmpleadosArea(area);
+    }
 }

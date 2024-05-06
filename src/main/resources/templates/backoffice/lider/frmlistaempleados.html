@@ -12,13 +12,13 @@
                 <i class="uil uil-tachometer-fast-alt"></i>
                 <span class="text">Lista de Empleados</span>
             </div>
-            <table class="table" id="tablaEvaluaciones" th:if="${empleados != null}">
+            <table class="table table-hover" id="tablaEvaluaciones" th:if="${empleados != null}">
                 <thead>
                 <tr>
                     <th>DNI</th>
                     <th>Nombre Empleado</th>
                     <th>Apellido Empleado</th>
-                    <th>Ver</th>
+                    <!--th>Ver</th-->
                 </tr>
                 </thead>
                 <tbody>
@@ -26,12 +26,12 @@
                     <td th:text="${empleado.dniEmpleado}"></td>
                     <td th:text="${empleado.nombreEmpleado}"></td>
                     <td th:text="${empleado.apellidoEmpleado}"></td>
-                    <td>
+                    <!--td>
                         <i class="uil uil-eye campo-verde"></i>
-                        <!--a  th:href="@{'/lider/actualizarCampo?id=' + ${evaluacion.idEvaluacion}}" class="enlace-actualizar">
+                        <a  th:href="@{'/lider/actualizarCampo?id=' + ${evaluacion.idEvaluacion}}" class="enlace-actualizar">
                             <i th:class="${evaluacion.estadoLider} ? 'uil uil-eye campo-verde' : 'uil uil-eye campo-amarillo'" ></i>
-                        </a-->
-                    </td>
+                        </a>
+                    </td-->
                 </tr>
                 </tbody>
             </table>

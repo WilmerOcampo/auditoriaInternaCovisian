@@ -36,6 +36,10 @@ public class LiderController {
         model.addAttribute("cantidadVista", iEvaluacionService.cantEvaluacionesVistasPorLider(customUserDatail.getArea()));
         model.addAttribute("cantidadNoVista", iEvaluacionService.cantEvaluacionesNoVistasPorLider(customUserDatail.getArea()));
 
+        model.addAttribute("cantempleados", iEmpleadoService.EmpleadosArea(customUserDatail.getArea()));
+        model.addAttribute("evaluacionesAuditadas", iEvaluacionService.evaluacionesAuditadasArea(customUserDatail.getArea()));
+        model.addAttribute("evaluacionesaprobadas", iEvaluacionService.evaluacionesAprobadasArea(customUserDatail.getArea()));
+
         Map<String, Double> promediosPorArea = iEvaluacionService.obtenerPromediosNotasPorAreas();
         model.addAttribute("promediosPorArea", promediosPorArea);
 
