@@ -93,7 +93,9 @@ public class LiderController {
         return datos;
     }
 
-
+    /**
+    * FEEDBACK Y MEMORANDUM
+    * **/
     @GetMapping("/evaluacion/list")
     @ResponseBody
     public Optional<List<Object[]>> feedbacksList() {
@@ -149,6 +151,9 @@ public class LiderController {
         return ResponseEntity.ok().build();
     }
 
+    /**
+     * CAPACITACION Y ASISTENCIA
+     * **/
     @GetMapping("/evaluacion/list-capacitacion")
     @ResponseBody
     public Optional<List<Object[]>> listCapacitaciones() {
