@@ -245,33 +245,6 @@
 <script th:src="@{/js/web/backoffice/lider/cambiar_estado_lider.js}" type="text/javascript"></script>
 
 <script>
-    /*$('#formFeedback').on('submit', function (e) {
-        e.preventDefault();
-
-        var data = {
-            motivo: $('#motivo').val(),
-            dniEmpleado: $('#dniEmpleado').val(),
-            dniLider: $('#dniLider').val(),
-            asunto: $('#asunto').val(),
-            cuerpo: $('#cuerpo').val(),
-            fecha: $('#fecha').val()
-        };
-
-        $.ajax({
-            type: "POST",
-            url: "/lider/fb-memo/save",
-            data: JSON.stringify(data),
-            contentType: "application/json",
-            success: function (response) {
-                console.log(response);
-                $('#modalNewFeedback').modal('hide');
-                $('#modalFeedback').modal('hide');
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
-            }
-        });
-    });*/
     $('#formFeedback').on('submit', function (e) {
         e.preventDefault();
 
