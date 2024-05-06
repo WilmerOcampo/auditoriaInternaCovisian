@@ -4,16 +4,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pe.cibertec.auditoriaInternaCovisian.services.CustomUserDatail;
-import pe.cibertec.auditoriaInternaCovisian.services.IUserService;
-
-import java.security.Principal;
 
 @AllArgsConstructor
 @Controller
@@ -21,6 +16,7 @@ import java.security.Principal;
 public class HomeController {
 
     UserDetailsService userDetailsService;
+
     @GetMapping("/login")
     public String login() {
         return "frontoffice/login";
@@ -34,6 +30,7 @@ public class HomeController {
         session.setAttribute("user", customUserDatail);
         return "frontoffice/inicio";
     }
+
     @GetMapping("/admin-inicio-page")
     public String admin(HttpServletRequest request) {
         HttpSession session = request.getSession();
@@ -44,7 +41,7 @@ public class HomeController {
     }
 
     @GetMapping("/solicitud-cambiar-password")
-    public String solicitudCambiarPassword(){
+    public String solicitudCambiarPassword() {
         return "frontoffice/frmcambiarpassword";
     }
 }

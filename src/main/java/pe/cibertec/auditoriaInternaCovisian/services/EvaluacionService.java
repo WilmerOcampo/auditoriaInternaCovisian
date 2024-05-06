@@ -2,8 +2,7 @@ package pe.cibertec.auditoriaInternaCovisian.services;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
 import pe.cibertec.auditoriaInternaCovisian.repositories.EvaluacionRepository;
 
 import java.util.*;

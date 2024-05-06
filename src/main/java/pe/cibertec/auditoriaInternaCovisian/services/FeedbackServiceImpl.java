@@ -3,10 +3,8 @@ package pe.cibertec.auditoriaInternaCovisian.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Feedback;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Memorandum;
-import pe.cibertec.auditoriaInternaCovisian.repositories.IFeedbackRepository;
-import pe.cibertec.auditoriaInternaCovisian.repositories.IMemorandumRepository;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
+import pe.cibertec.auditoriaInternaCovisian.repositories.*;
 
 @Service
 @RequiredArgsConstructor

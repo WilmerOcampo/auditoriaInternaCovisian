@@ -1,16 +1,12 @@
 package pe.cibertec.auditoriaInternaCovisian.controllers.backoffice;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Llamada;
-import pe.cibertec.auditoriaInternaCovisian.services.IAuditorService;
-import pe.cibertec.auditoriaInternaCovisian.services.IEvaluacionService;
-import pe.cibertec.auditoriaInternaCovisian.services.ILlamadasService;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
+import pe.cibertec.auditoriaInternaCovisian.services.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -24,26 +20,27 @@ public class LlamadaController {
     UserDetailsService userDetailsService;
     private ILlamadasService iLlamadasService;
     private IEvaluacionService iEvaluacionService;
-    private IAuditorService iAuditorService;
 
     @GetMapping("/listar")
-    public String auditarGet(Model model, Principal principal){
+    public String auditarGet(Model model, Principal principal) {
         return "backoffice/llamada/frmlistallamadas";
     }
+
     @PostMapping("/listar")
-    public String auditarPost(Model model, @RequestParam(name = "dniEmpleado", required = false) Integer dniEmpleado){
+    public String auditarPost(Model model, @RequestParam(name = "dniEmpleado", required = false) Integer dniEmpleado) {
         if (dniEmpleado != null) {
             List<Llamada> llamadas = iLlamadasService.listarLlamadasPorDni(dniEmpleado);
             model.addAttribute("llamadas", llamadas);
         }
         return "backoffice/llamada/frmlistallamadas";
     }
+
     @GetMapping("/detail/{id}")
-    public String detailLibro(@PathVariable Integer id, Model model, Principal principal) {
+    public String detailLibro(@PathVariable Integer id, Model model) {
         Llamada llamada = iLlamadasService.llamadaPorOrden(id);
         model.addAttribute("llamada", llamada);
         Evaluacion evaluacion = iEvaluacionService.evalaucionPorOrden(llamada.getNumeroOrden());
-        model.addAttribute("evaluacion",evaluacion);
+        model.addAttribute("evaluacion", evaluacion);
         return "backoffice/llamada/llamada";
     }
 
@@ -58,7 +55,4 @@ public class LlamadaController {
 
         return "redirect:/llamada/detail/" + numeroOrden;
     }
-
-
-
 }

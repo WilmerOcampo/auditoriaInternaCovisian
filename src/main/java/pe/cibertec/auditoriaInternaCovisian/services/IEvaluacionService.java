@@ -14,9 +14,6 @@ public interface IEvaluacionService {
     List<Evaluacion> evaluacionesPorArea(String area);
     List<Evaluacion> ultimas5Evaluaciones(String area);
     Evaluacion evaluacionPorId(int id);
-    int cantEvaluacionesVistasPorLider(String area);
-    int cantEvaluacionesNoVistasPorLider(String area);
-    Double promedioNotasPorArea(String area);
     List<Evaluacion> obtenerEvaluacionesPorEmpleado(Empleado empleado);
     Evaluacion obtenerEvaluacionPorNumeroOrden(int numeroOrden);
     Evaluacion evalaucionPorOrden(int orden);
@@ -26,5 +23,5 @@ public interface IEvaluacionService {
     //Metodos para CHART JS
     int cantEvaluacionesVistasPorLider(String area);
     int cantEvaluacionesNoVistasPorLider(String area);
-    public Double promedioNotasPorArea(String area);
+    Double promedioNotasPorArea(String area);
 }

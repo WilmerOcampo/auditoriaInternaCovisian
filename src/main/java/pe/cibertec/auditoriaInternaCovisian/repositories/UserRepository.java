@@ -7,7 +7,6 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{
-
 	User findByUsername(String username);
 	@Query(value = "SELECT MAX(id) FROM usuarios", nativeQuery = true) //Solo pq no hay inserciones concurrentes
 	int ultimoCodigo();

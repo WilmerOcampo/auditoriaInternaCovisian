@@ -96,10 +96,8 @@ public class LiderController {
         Memorandum memorandum = new Memorandum();
         memorandum.setAsunto((String) data.get("asunto"));
         memorandum.setCuerpo((String) data.get("cuerpo"));
-        memorandum.setFecha(LocalDateTime.parse((String) data.get("fecha"))); // Asegúrate de que la fecha esté en el formato correcto
-
+        memorandum.setFecha(LocalDateTime.parse((String) data.get("fecha")));
         iFeedbackService.saveFeedbackAndMemorandum(feedback, memorandum);
-
         return ResponseEntity.ok().build();
     }
 

@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer> {
 
-
     //METODOS GENESIS DESPOUX
     List<Evaluacion> findByEmpleado(Empleado empleado);
 
