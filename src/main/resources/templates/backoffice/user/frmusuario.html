@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="layoutlider::head">
     <meta charset="UTF-8">
     <title>Title</title>
@@ -24,7 +24,7 @@
     }
 </style>
 <body>
-<nav th:replace="layoutlider::menu"></nav>
+<nav th:replace="layout::menu" ></nav>
 <section class="dashboard">
     <div class="dash-content">
         <div class="overview">
