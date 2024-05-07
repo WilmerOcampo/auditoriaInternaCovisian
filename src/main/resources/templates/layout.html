@@ -49,6 +49,10 @@
                     <li class="nav-item" sec:authorize="hasAuthority('EMPLEADO')">
                         <a class="nav-link mx-lg-2" th:href="@{/feedback/}+${session.user.dni}">Ver feedbacks</a>
                     </li>
+                    <li class="nav-item" sec:authorize="hasAuthority('EMPLEADO')">
+                        <a class="nav-link mx-lg-2" th:href="@{/capacitacion/}+${session.user.dni}">Ver capacitaciones</a>
+                    </li>
+
 
                     <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                         <a class="nav-link mx-lg-2 active" aria-current="page" th:href="@{/home/admin-inicio-page}">Dashboard</a>

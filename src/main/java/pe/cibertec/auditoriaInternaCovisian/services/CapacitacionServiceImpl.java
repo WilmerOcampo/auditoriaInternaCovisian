@@ -7,6 +7,8 @@ import pe.cibertec.auditoriaInternaCovisian.models.bd.*;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.pk.AsistenciaId;
 import pe.cibertec.auditoriaInternaCovisian.repositories.*;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CapacitacionServiceImpl implements ICapacitacionService {
@@ -20,5 +22,10 @@ public class CapacitacionServiceImpl implements ICapacitacionService {
         AsistenciaId idAsistencia = new AsistenciaId(savedCapacitacion.getIdCapacitacion(), asistencia.getEmpleado().getDniEmpleado());
         asistencia.setIdAsistencia(idAsistencia);
         asistenciaRepository.save(asistencia);
+    }
+
+    @Override
+    public List<Asistencia> findByEmpleado(Integer dni) {
+        return asistenciaRepository.findByEmpleado(dni);
     }
 }

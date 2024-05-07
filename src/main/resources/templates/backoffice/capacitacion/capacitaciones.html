@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{layout :: head}">
+    <meta charset="UTF-8">
+    <title>Capacitaciones</title>
+</head>
+<body>
+<nav th:replace="~{layout :: menu}"></nav>
+
+<section class="dashboard">
+    <div class="dash-content">
+        <div class="overview">
+            <div class="title">
+                <i class="uil uil-tachometer-fast-alt"></i>
+                <span class="text">Mis capacitaciones</span>
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tema</th>
+                    <th scope="col">Detalle</th>
+                    <th scope="col">Empleado</th>
+                    <th scope="col">Fecha y hora</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="asistencia : ${asistencias}">
+                    <th th:text="${asistencia.capacitacion.idCapacitacion}" scope="row"></th>
+                    <td th:text="${asistencia.capacitacion.tema}"></td>
+                    <td th:text="${asistencia.capacitacion.detalle}"></td>
+                    <td th:text="${asistencia.empleado.nombreEmpleado} + ' ' + ${asistencia.empleado.apellidoEmpleado}"></td>
+                    <td th:text="${#dates.format(#dates.create(asistencia.fecha.year, asistencia.fecha.monthValue, asistencia.fecha.dayOfMonth, asistencia.fecha.hour, asistencia.fecha.minute, 0, 0), 'yyyy-MM-dd HH:mm:ss')}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</section>
+
+</body>
+</html>
