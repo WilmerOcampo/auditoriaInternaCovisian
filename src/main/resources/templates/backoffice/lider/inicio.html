@@ -60,8 +60,8 @@
                     </thead>
                     <tbody>
                     <tr th:each="evaluacion : ${evaluaciones}">
-                        <td th:text="${evaluacion.empleado.nombreEmpleado}"></td>
-                        <td th:text="${evaluacion.llamada.cliente.nombreCliente}"></td>
+                        <td th:text="${evaluacion.empleado.nombreEmpleado} + ' ' + ${evaluacion.empleado.apellidoEmpleado}"></td>
+                        <td th:text="${evaluacion.llamada.cliente.nombreCliente} + ' ' + ${evaluacion.llamada.cliente.apellidoCliente}"></td>
                         <td th:text="${evaluacion.observacionesEvaluacion}"></td>
                         <td th:text="${#dates.format(#dates.create(evaluacion.fechahora.year, evaluacion.fechahora.monthValue, evaluacion.fechahora.dayOfMonth, evaluacion.fechahora.hour, evaluacion.fechahora.minute, 0, 0), 'yyyy-MM-dd HH:mm:ss')}"></td>
                         <td th:text="${evaluacion.nota}"></td>

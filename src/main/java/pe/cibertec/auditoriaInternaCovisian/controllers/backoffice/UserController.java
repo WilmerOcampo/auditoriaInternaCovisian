@@ -70,7 +70,7 @@ public class UserController {
     @GetMapping("/detail")
     public String verUsuario(Model model, Principal principal) {
         //Ver si aca si usar UserDetails
-        return "backoffice/user/frmusuario";
+        return "backoffice/user/user";
     }
 
     @PostMapping("/actualizar")
