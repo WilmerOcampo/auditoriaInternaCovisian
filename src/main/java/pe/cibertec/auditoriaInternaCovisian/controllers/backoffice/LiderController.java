@@ -99,7 +99,7 @@ public class LiderController {
     @GetMapping("/evaluacion/list")
     @ResponseBody
     public Optional<List<Object[]>> feedbacksList() {
-        return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(0, 10).orElse(new ArrayList<>()));
+        return Optional.of(iEvaluacionService.findEvaluacionByNotaBetweenn(0, 0).orElse(new ArrayList<>()));
     }
 
     @GetMapping("/evaluacion/{id}")
