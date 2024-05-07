@@ -17,6 +17,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
+    <link rel="stylesheet" th:href="@{/css/feedback/feedback.css}">
+
     <title>Auditoria Interna</title>
 </head>
 <body>
@@ -43,6 +45,11 @@
                     <li class="nav-item" sec:authorize="hasAuthority('EMPLEADO')">
                         <a class="nav-link mx-lg-2" th:href="@{/evaluacion/listar}">Ver tus auditorias</a>
                     </li>
+
+                    <li class="nav-item" sec:authorize="hasAuthority('EMPLEADO')">
+                        <a class="nav-link mx-lg-2" th:href="@{/feedback/}+${session.user.dni}">Ver feedbacks</a>
+                    </li>
+
                     <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                         <a class="nav-link mx-lg-2 active" aria-current="page" th:href="@{/home/admin-inicio-page}">Dashboard</a>
                     </li>
