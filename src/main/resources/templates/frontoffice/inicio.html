@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="es"  xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout::head">
+<head th:replace="~{snippet/inicio::head}">
     <meta charset="UTF-8">
     <title>Auditoria Interna</title>
 </head>
 <body>
-<nav th:replace="layout::menu"></nav>
+<!--<nav th:replace="layout::menu"></nav>-->
+<th:block th:if="${#authorization.expression('hasAuthority(''EMPLEADO'')')}">
+    <nav th:replace="~{snippet/nav-bar-empleado :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''LIDER'')')}">
+    <nav th:replace="~{snippet/nav-bar-lider :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''AUDITOR'')')}">
+    <nav th:replace="~{snippet/nav-bar-auditor :: menu}"></nav>
+</th:block>
+
 <h2 id="bienvenida">Bienvenido, [[${session.user.nombreCompleto}]]</h2>
 <div class="container-clock">
     <h1 id="time">00:00:00</h1>

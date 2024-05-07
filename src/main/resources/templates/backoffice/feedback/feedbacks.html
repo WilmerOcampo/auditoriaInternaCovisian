@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{layout :: head}">
+<head th:replace="~{snippet/head :: head}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Card Design HTML and CSS | CodingNepal</title>
@@ -11,7 +11,7 @@
     <link rel="stylesheet" th:href="@{/css/web/frontoffice/inicio.css}">
 </head>
 <body>
-<nav th:replace="~{layout :: menu}"></nav>
+<nav th:replace="~{snippet/nav-bar-empleado :: menu}"></nav>
 <div class="card-list">
     <a href="#" class="card-item" th:each="memo : ${memorandums}">
         <h1>Feedback</h1>

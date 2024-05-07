@@ -53,13 +53,13 @@ public class LiderController {
     @GetMapping("/evaluaciones/{area}")
     public String listarEvaluacionesPorAreaLider(@PathVariable String area, Model model) {
         model.addAttribute("evaluaciones", iEvaluacionService.evaluacionesPorArea(area));
-        return "backoffice/lider/frmlistaevaluaciones";
+        return "backoffice/lider/evaluaciones";
     }
 
     @GetMapping("/empleados/{area}")
     public String listarEmpleadosPorAreaLider(@PathVariable String area, Model model) {
         model.addAttribute("empleados", iEmpleadoService.findByArea(area));
-        return "backoffice/lider/frmlistaempleados";
+        return "backoffice/lider/empleados";
     }
 
     /* GET y POST en formatos JSON para manipular en mi AJAX (Vista lider) */

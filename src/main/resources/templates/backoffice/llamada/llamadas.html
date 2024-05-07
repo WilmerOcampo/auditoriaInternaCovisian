@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:replace="layout::head">
+<head th:replace="~{snippet/head::head}">
     <meta charset="UTF-8">
     <title>Lista de Llamadas</title>
-    <style>
+<!--    <style>
         body {
             background: linear-gradient(135deg, #007BFF, #B5EAEA, #007BFF);
             font-family: 'Open Sans', sans-serif;
@@ -13,10 +13,11 @@
             align-items: center;
             flex-direction: column;
         }
-    </style>
+    </style>-->
 </head>
 <body>
-<nav th:replace="layout::menu" class="nav"></nav>
+<!--<nav th:replace="~{snippet/nav-bar-auditor :: menu}" class="nav"></nav>-->
+<nav th:replace="~{snippet/nav-bar-auditor::menu}" class="nav"></nav>
 <div class="container">
     <div class="container custom-container">
         <h1 style="color: white;">Lista de Llamadas</h1>
@@ -37,7 +38,7 @@
             </div>
         </form>
         <br />
-        <table id="tablaLlamadas" class="table table-hover" th:if="${llamadas != null}">
+        <table id="tablaLlamadas" class="table table-hover table-striped" th:if="${llamadas != null}">
             <thead>
             <tr>
                 <th>Número de Orden</th>

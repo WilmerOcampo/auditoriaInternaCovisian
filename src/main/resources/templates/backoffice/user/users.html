@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layoutadmin::head">    <meta charset="UTF-8">
+<head th:replace="~{snippet/inicio::head}">    <meta charset="UTF-8">
     <title>Auditoria Interna</title>
 </head>
 <body>
-<nav th:replace="layoutadmin::menu"></nav>
-<div th:replace="layoutadmin::modaluser"></div>
+<nav th:replace="~{snippet/nav-bar-admin::menu}"></nav>
+<div th:replace="~{backoffice/user/modal/modal-user::modaluser}"></div>
 <section class="dashboard">
     <div class="dash-content">
         <div class="container">
@@ -37,7 +37,7 @@
 </section>
 
 
-<div class="modal fade modal-xl" id="modalContraseña" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade modal-md" id="modalContraseña" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -47,7 +47,7 @@
             <div class="modal-body">
                 <form class="was-validated">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" readonly required id="usernameid" name="username">
+                        <input type="text" class="form-control text-uppercase" readonly required id="usernameid" name="username">
                         <label for="contraseñaactualizar">Username</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -57,11 +57,14 @@
                             Porfavor colocar la nueva contraseña.
                         </div>
                     </div>
-                    <button type="submit" id="actionPassword" class="btn btn-primary">Cambiar</button>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" id="actionPassword" class="btn btn-primary mx-1">Cambiar</button>
+                        <button type="button" class="btn btn-secondary mx-1" data-bs-dismiss="modal">Cancelar</button>
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

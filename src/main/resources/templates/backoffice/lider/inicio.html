@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layoutlider::head">
+<head th:replace="~{snippet/head :: head}">
     <title>Auditoria Interna</title>
 </head>
 <body>
-<nav th:replace="layoutlider::menu"></nav>
+<nav th:replace="~{snippet/nav-bar-lider :: menu}"></nav>
 <section class="dashboard">
     <div class="dash-content">
         <div class="overview">

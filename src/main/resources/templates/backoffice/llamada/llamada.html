@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout::head">
+<head th:replace="~{snippet/head::head}">
     <meta charset="UTF-8">
     <title>Llamada</title>
 
-    <!-- Bootstrap CSS -->
+<!--    &lt;!&ndash; Bootstrap CSS &ndash;&gt;
     <link th:href="@{/css/bootstrap/bootstrap.css}" rel="stylesheet"/>
-    <!-- Custom CSS -->
+    &lt;!&ndash; Custom CSS &ndash;&gt;
     <link rel="stylesheet" th:href="@{/css/web/frontoffice/inicio.css}">
-    <!-- Google Fonts -->
+    &lt;!&ndash; Google Fonts &ndash;&gt;
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/84f459dd12.js" crossorigin="anonymous"></script>
+    &lt;!&ndash; Font Awesome &ndash;&gt;
+    <script src="https://kit.fontawesome.com/84f459dd12.js" crossorigin="anonymous"></script>-->
 
 </head>
 <body>
-<nav th:replace="layout::menu" class="nav"></nav>
+<nav th:replace="~{snippet/nav-bar-auditor :: menu}" class="nav"></nav>
 
     <div class="dash-content">
         <div class="overview">
