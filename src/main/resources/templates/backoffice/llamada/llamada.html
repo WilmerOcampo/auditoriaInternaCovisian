@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head><!--th:replace="layout::head"-->
+<head th:replace="layout::head">
     <meta charset="UTF-8">
     <title>Llamada</title>
 
@@ -16,7 +16,14 @@
 </head>
 <body>
 <nav th:replace="layout::menu" class="nav"></nav>
-            <div class="container mt-4">
+
+    <div class="dash-content">
+        <div class="overview">
+            <div class="title">
+                <i class="uil uil-tachometer-fast-alt"></i>
+                <span class="text">Lista de Empleados</span>
+            </div>
+            <!--<div class="container mt-4">-->
             <div class="row">
                 <div class="col-md-12">
                     <h4 class="text-center">Detalles de la Llamada</h4>
@@ -181,6 +188,9 @@
                 </div>
             </form>
         </div>
+
+    </div>
+
 
 <!-- Bootstrap JS -->
 <script th:src="@{/js/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
