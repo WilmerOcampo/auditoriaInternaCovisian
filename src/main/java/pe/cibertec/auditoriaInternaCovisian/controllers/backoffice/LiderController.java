@@ -44,6 +44,9 @@ public class LiderController {
         Map<String, Double> promediosPorArea = iEvaluacionService.obtenerPromediosNotasPorAreas();
         model.addAttribute("promediosPorArea", promediosPorArea);
 
+        List<Evaluacion> evaluaciones = iEvaluacionService.listaEvaluacionNotification(customUserDatail.getArea());
+        session.setAttribute("notification", evaluaciones);
+        session.setAttribute("cantnotification", iEvaluacionService.cantEvaluacionesNoVistasPorLider(customUserDatail.getArea()));
         return "backoffice/lider/inicio";
     }
 

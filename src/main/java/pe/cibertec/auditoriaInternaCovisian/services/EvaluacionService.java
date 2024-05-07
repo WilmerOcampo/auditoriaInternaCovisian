@@ -77,6 +77,11 @@ public class EvaluacionService implements IEvaluacionService {
     }
 
     @Override
+    public List<Evaluacion> listaEvaluacionNotification(String area) {
+        return evaluacionRepository.listaEvaluacionNotification(area);
+    }
+
+    @Override
     public Double promedioNotasPorArea(String area) {
         return evaluacionRepository.promedioNotasPorArea(area);
     }
