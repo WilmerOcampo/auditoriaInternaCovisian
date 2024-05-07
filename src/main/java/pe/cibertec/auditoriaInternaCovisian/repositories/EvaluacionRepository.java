@@ -3,6 +3,7 @@ package pe.cibertec.auditoriaInternaCovisian.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Empleado;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
@@ -57,6 +58,9 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>
 
     @Query(value = "select count(*) from evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area and e.nota >30", nativeQuery = true)
     int cantidadEvaluacionesAprobadas(@Param("area") String area);
+
+    @Query(value = "select e.* from Evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area and e.estado_lider = 0", nativeQuery = true)
+    List<Evaluacion> listaEvaluacionNotification(@Param("area") String area);
 
 }
 

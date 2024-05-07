@@ -8,7 +8,11 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import pe.cibertec.auditoriaInternaCovisian.models.bd.Evaluacion;
 import pe.cibertec.auditoriaInternaCovisian.services.CustomUserDatail;
+import pe.cibertec.auditoriaInternaCovisian.services.IEvaluacionService;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Controller
@@ -16,6 +20,7 @@ import pe.cibertec.auditoriaInternaCovisian.services.CustomUserDatail;
 public class HomeController {
 
     UserDetailsService userDetailsService;
+    IEvaluacionService iEvaluacionService;
 
     @GetMapping("/login")
     public String login() {

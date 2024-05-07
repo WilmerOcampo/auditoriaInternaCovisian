@@ -27,5 +27,6 @@ public interface IEvaluacionService {
     Double promedioNotasPorArea(String area);
     int evaluacionesAuditadasArea(String area);
     int evaluacionesAprobadasArea(String area);
+    List<Evaluacion> listaEvaluacionNotification(String area);
 
 }

@@ -1,6 +1,7 @@
 package pe.cibertec.auditoriaInternaCovisian.controllers.backoffice;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
@@ -79,6 +80,13 @@ public class EvaluacionController {
             datos.put("subarea", evaluacion.getLlamada().getSubarea());
         }
         return datos;
+    }
+
+    @GetMapping("/prueba")
+    @ResponseBody
+    @JsonIgnore
+    public List<Evaluacion> evaluaciones(){
+        return iEvaluacionService.listaEvaluacionNotification("Ventas");
     }
 
 }
