@@ -1,0 +1,19 @@
+.dash-content-user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: calc(100vh - 80px); /* Altura igual al 100% del viewport menos el margen superior */
+    text-align: center;
+    max-width: 40%; /* Definir el ancho máximo */
+    margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.dashboard .dash-content-user{
+    padding-top: 50px;
+    background-color: #fff;
+}
+.dash-content-user .overview {
+    width: 90%; /* Establecer el ancho al 90% */
+    margin: 0 auto; /* Centrar la sección horizontalmente */
+}

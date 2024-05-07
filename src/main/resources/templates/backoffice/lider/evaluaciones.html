@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layoutlider::head">
+<head th:replace="~{snippet/head :: head}">
     <title>Lista</title>
 </head>
 <body>
-<nav th:replace="layoutlider::menu"></nav>
+<nav th:replace="~{snippet/nav-bar-lider :: menu}"></nav>
 <section class="dashboard">
     <div class="dash-content">
         <div class="overview">
@@ -15,7 +15,7 @@
                 <button id="capacitacion-link" class="nav-link mx-lg-2 ml-4">Evaluaciones para Capacitación</button>
 
             </div>
-            <table class="table" id="tablaEvaluaciones" th:if="${evaluaciones != null}">
+            <table class="table table-striped" id="tablaEvaluaciones" th:if="${evaluaciones != null}">
                 <thead>
                 <tr>
                     <th>ID</th>

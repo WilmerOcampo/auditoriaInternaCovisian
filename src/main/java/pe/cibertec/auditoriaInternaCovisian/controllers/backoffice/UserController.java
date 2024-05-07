@@ -106,7 +106,7 @@ public class UserController {
     @GetMapping("/list")
     public String listaUsuarios(Model model) {
         model.addAttribute("usuarios", iUserService.listarUsers());
-        return "backoffice/user/lista";
+        return "backoffice/user/users";
     }
 
     @GetMapping("/prueba")

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layoutlider::head">
+<head th:replace="~{snippet/head :: head}">
     <title>Lista</title>
 </head>
 <body>
-<nav th:replace="layoutlider::menu"></nav>
+<nav th:replace="~{snippet/nav-bar-lider :: menu}"></nav>
 <section class="dashboard">
     <div class="dash-content">
         <div class="overview">
@@ -12,13 +12,12 @@
                 <i class="uil uil-tachometer-fast-alt"></i>
                 <span class="text">Lista de Empleados</span>
             </div>
-            <table class="table table-hover" id="tablaEmpleados" th:if="${empleados != null}">
+            <table class="table table-striped table-hover" id="tablaEmpleados" th:if="${empleados != null}">
                 <thead>
                 <tr>
                     <th>DNI</th>
                     <th>Nombre Empleado</th>
                     <th>Apellido Empleado</th>
-                    <!--th>Ver</th-->
                 </tr>
                 </thead>
                 <tbody>
@@ -26,12 +25,6 @@
                     <td th:text="${empleado.dniEmpleado}"></td>
                     <td th:text="${empleado.nombreEmpleado}"></td>
                     <td th:text="${empleado.apellidoEmpleado}"></td>
-                    <!--td>
-                        <i class="uil uil-eye campo-verde"></i>
-                        <a  th:href="@{'/lider/actualizarCampo?id=' + ${evaluacion.idEvaluacion}}" class="enlace-actualizar">
-                            <i th:class="${evaluacion.estadoLider} ? 'uil uil-eye campo-verde' : 'uil uil-eye campo-amarillo'" ></i>
-                        </a>
-                    </td-->
                 </tr>
                 </tbody>
             </table>
@@ -42,10 +35,10 @@
 <script>
     $(document).ready(function () {
         $('#tablaEmpleados').DataTable({
-        responsive: true,
-             "language": {
+            responsive: true,
+            "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-             }
+            }
         });
     });
 </script>

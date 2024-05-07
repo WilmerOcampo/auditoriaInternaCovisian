@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="layoutadmin::head">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{snippet/inicio :: head}">
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
+    <title>Admin</title>
+<!--    <style>
         .dash-content .boxes{
             display: flex;
             align-items: center;
@@ -21,7 +21,7 @@
             width: calc(100% / 4 - 15px);
             padding: 15px 20px;
             background-color: #4DA3FF;
-            transition: var(--tran-05);
+            transition: var(&#45;&#45;tran-05);
             text-decoration: none;
         }
         .dash-content .boxes .box:hover{
@@ -52,10 +52,17 @@
         .boxes .box.box3{
             background-color: #2d9596;
         }
-    </style>
+    </style>-->
 </head>
 <body>
-<nav th:replace="layoutadmin::menu"></nav>
-<div th:replace="layoutadmin::modaluser"></div>
+<nav th:replace="~{snippet/nav-bar-admin::menu}"></nav>
+<div th:replace="~{backoffice/user/modal/modal-user :: modaluser}"></div>
+
+<h2 id="bienvenida">Bienvenido, ADMIN</h2>
+<div class="container-clock">
+    <h1 id="time">00:00:00</h1>
+    <p id="date">date</p>
+</div>
+
 </body>
 </html>

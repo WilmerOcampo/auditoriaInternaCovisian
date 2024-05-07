@@ -1,6 +1,5 @@
 package pe.cibertec.auditoriaInternaCovisian.controllers.backoffice;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,9 +11,7 @@ import pe.cibertec.auditoriaInternaCovisian.services.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @AllArgsConstructor
 @Controller
@@ -39,7 +36,7 @@ public class EvaluacionController {
         LocalDateTime fh = LocalDateTime.now();
         model.addAttribute("fechaconhora",fh);
 
-        return "backoffice/evaluacion/frmguardarevaluacion";
+        return "backoffice/evaluacion/evaluacion";
     }
 
     @PostMapping("/guardarEvaluacion")
@@ -48,7 +45,7 @@ public class EvaluacionController {
         Llamada llamada = iLlamadasService.llamadaPorOrden(numeroOrden);
         llamada.setEstadoAuditoria(true);
         iLlamadasService.save(llamada);
-        return "backoffice/llamada/frmlistallamadas";
+        return "backoffice/llamada/llamadas";
     }
 
     @GetMapping("/listar")
@@ -57,7 +54,7 @@ public class EvaluacionController {
         Empleado empleado = iEmpleadoService.findByUsername(username);
         List<Evaluacion> evaluaciones = iEvaluacionService.obtenerEvaluacionesPorEmpleado(empleado);
         model.addAttribute("evaluaciones", evaluaciones);
-        return "backoffice/evaluacion/frmlistaevaluaciones";
+        return "backoffice/evaluacion/evaluaciones";
     }
 
     @PostMapping("/firmar")

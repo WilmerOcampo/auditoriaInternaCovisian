@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal Usuario</title>
+</head>
+<body>
+<!--Modal Registrar Usuario-->
+<div th:fragment="modaluser" class="modal fade modal-xxl" id="modalUsuarios" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="dash-content">
+                    <div class="boxes">
+                        <a class="box box1" th:href="@{/user/registroEmpleado}">
+                            <i class="uil uil-bag fs-3"></i>
+                            <span class="text fs-5">Empleado</span>
+                        </a>
+                        <a class="box box2" th:href="@{/user/registroAuditor}">
+                            <i class="uil uil-comparison fs-3"></i>
+                            <span class="text fs-5">Auditor</span>
+                        </a>
+                        <a class="box box3" th:href="@{/user/registroLider}">
+                            <i class="uil uil-presentation-line fs-3"></i>
+                            <span class="text fs-5">Lider</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

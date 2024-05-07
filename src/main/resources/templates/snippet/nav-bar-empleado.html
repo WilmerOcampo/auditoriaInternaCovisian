@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">>
+<head>
+    <meta charset="UTF-8">
+    <title>Nav-Bar</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top" th:fragment="menu">
+    <div class="container-fluid">
+        <a class="navbar-brand me-auto" href="#">Covisian</a>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title"
+                    id="offcanvasNavbarLabel">Covisian</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" th:href="@{/home/inicio-page}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" th:href="@{/evaluacion/listar}">Ver tus auditorias</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" th:href="@{/feedback/}+${session.user.dni}">Ver feedbacks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link mx-lg-2" th:href="@{/capacitacion/}+${session.user.dni}">Ver capacitaciones</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Usuario
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" th:href="@{/user/detail}">Perfil</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a th:href="@{/logout}" class="logout-button">Logout</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+</nav>
+
+
+
+</body>
+</html>

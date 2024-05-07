@@ -23,7 +23,7 @@ public class LlamadaController {
 
     @GetMapping("/listar")
     public String auditarGet(Model model, Principal principal) {
-        return "backoffice/llamada/frmlistallamadas";
+        return "backoffice/llamada/llamadas";
     }
 
     @PostMapping("/listar")
@@ -32,7 +32,7 @@ public class LlamadaController {
             List<Llamada> llamadas = iLlamadasService.listarLlamadasPorDni(dniEmpleado);
             model.addAttribute("llamadas", llamadas);
         }
-        return "backoffice/llamada/frmlistallamadas";
+        return "backoffice/llamada/llamadas";
     }
 
     @GetMapping("/detail/{id}")
