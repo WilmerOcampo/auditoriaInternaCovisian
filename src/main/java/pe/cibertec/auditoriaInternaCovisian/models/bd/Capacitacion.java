@@ -3,22 +3,22 @@ package pe.cibertec.auditoriaInternaCovisian.models.bd;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Data
 @Entity
-@Table(name = "feedbacks")
+@Table(name = "capacitaciones")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Feedback {
+public class Capacitacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_feedback")
-    private Integer idFeedback;
-    private String motivo;
+    @Column(name = "id_capacitacion")
+    private Integer idCapacitacion;
+    private String tema;
+    private String detalle;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dni_empleado")
-    private Empleado empleado;
-
+    @JoinColumn(name = "id_sala")
+    private Sala sala;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dni_lider")
     private Lider lider;

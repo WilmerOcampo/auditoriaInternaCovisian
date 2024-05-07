@@ -23,7 +23,6 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>
     @Query("SELECT e FROM Evaluacion e JOIN FETCH e.llamada WHERE e.idEvaluacion = :idEvaluacion AND e.llamada.numeroOrden = :numeroOrden")
     Evaluacion findEvaluacionAndLlamadaByIdAndNumeroOrden(@Param("idEvaluacion") Long idEvaluacion, @Param("numeroOrden") int numeroOrden);
 
-
     //METODO WILMER
     @Query(value = "SELECT * FROM Evaluaciones WHERE numero_orden = :numeroOrden", nativeQuery = true)
     Evaluacion findByOrden(@Param("numeroOrden") int numeroOrden);
@@ -52,7 +51,6 @@ public interface EvaluacionRepository extends JpaRepository<Evaluacion, Integer>
 
     @Query(value = "SELECT e.id_evaluacion, emp.nombre_empleado, cli.nombre_cliente, e.observaciones_evaluacion, e.nota, l.numero_orden FROM Evaluaciones e JOIN Empleados emp ON e.dni_empleado = emp.dni_empleado JOIN Llamadas l ON e.numero_orden = l.numero_orden JOIN Cliente cli ON l.dni_cliente = cli.dni_cliente WHERE e.nota BETWEEN :from AND :to", nativeQuery = true)
     Optional<List<Object[]>> findEvaluacionByNotaBetweenn(@Param("from") Integer from, @Param("to") Integer to);
-
 
     @Query(value = "select count(*) from evaluaciones e inner join empleados em on e.dni_empleado = em.dni_empleado where em.area =:area", nativeQuery = true)
     int cantidadEvaluaciones(@Param("area") String area);

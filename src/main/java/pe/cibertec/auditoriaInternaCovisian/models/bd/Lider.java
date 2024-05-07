@@ -1,9 +1,7 @@
 package pe.cibertec.auditoriaInternaCovisian.models.bd;
 
-
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Entity

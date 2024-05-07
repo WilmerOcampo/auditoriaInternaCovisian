@@ -36,7 +36,7 @@ public class SecurityConfig {
 		http.csrf(c -> c.disable())
 		.authorizeHttpRequests(request -> request.requestMatchers("/auditar") //Permisos solo para admin (manipular a sus gustos)
 				.hasAuthority("AUDITOR").requestMatchers("/home/inicio-page").hasAnyAuthority("EMPLEADO","AUDITOR")
-				.requestMatchers("/css/******").permitAll()
+				.requestMatchers("/css/**").permitAll()
 				.anyRequest().authenticated())
 		
 		.formLogin(form -> form.loginPage("/home/login").loginProcessingUrl("/login")

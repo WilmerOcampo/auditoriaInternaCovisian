@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:replace="layoutlider::head">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Auditoria Interna</title>
 </head>
 <style>
     .border-blue {
@@ -19,21 +19,23 @@
         max-width: 40%; /* Definir el ancho máximo */
         margin: 0 auto; /* Centrar horizontalmente */
     }
+
     .col-md-4 span {
         text-align: center; /* Centrar el texto horizontalmente */
     }
 </style>
 <body>
-<nav th:replace="layout::menu" ></nav>
+<nav th:replace="layout::menu"></nav>
 <section class="dashboard">
     <div class="dash-content">
         <div class="overview">
             <form class="row g-3" style="align-items: center">
                 <div class="border mb-3 p-3" style="align-items: center">
-                    <h5 class="card-title"><span id="nombreCompleto">Bienvenido!!!, [[${session.user.nombreCompleto}]]</span></h5>
+                    <h5 class="card-title"><span
+                            id="nombreCompleto">Bienvenido!!!, [[${session.user.nombreCompleto}]]</span></h5>
                     <div class="row" style="justify-content: center">
                         <div class="col-md-4">
-                            <div class="mb-3 mt-3" >
+                            <div class="mb-3 mt-3">
                                 <h6>DNI</h6>
                                 <span id="spdni" th:text="${session.user.dni}"></span>
                             </div>
@@ -57,14 +59,17 @@
                     </div>
                     <div class="row mb-3 justify-content-center align-items-center">
                         <div class="col-md-4 text-center justify-content-center align-items-center">
-                            <button id="editarBtn" type="button" class="btn btn-success mx-auto align-items-center justify-content-center">Editar</button>
+                            <button id="editarBtn" type="button"
+                                    class="btn btn-success mx-auto align-items-center justify-content-center">Editar
+                            </button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div class="modal fade modal-xl" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade modal-xl" id="modalUsuario" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="margin: 0">
                 <div class="modal-header">
@@ -101,7 +106,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-floating mb-3">
-                                    <input type="password" value="password" class="form-control"  readonly>
+                                    <input type="password" value="password" class="form-control" readonly>
                                     <label for="username">Contraseña</label>
                                 </div>
                             </div>
@@ -119,7 +124,7 @@
         </div>
     </div>
 
-    <script th:src="@{/js/web/backoffice/lider/inicio.js}" type="text/javascript"></script>
+    <script th:src="@{/js/web/backoffice/lider/lider.js}" type="text/javascript"></script>
     <script>
         $(document).ready(function () {
             $("#editarBtn").click(function () {
@@ -135,15 +140,15 @@
                 var nombre = $('#nombre').val();
                 var apellido = $('#apellido').val();
                 $.ajax({
-                    url : '/user/actualizar',
-                    type : 'POST',
-                    data : {
+                    url: '/user/actualizar',
+                    type: 'POST',
+                    data: {
                         dni: dni,
                         nombre: nombre,
                         apellido: apellido
                     },
                     dataType: 'json',
-                    success: function(response){
+                    success: function (response) {
                         $('#modalUsuario').modal('hide')
                     }
                 });
