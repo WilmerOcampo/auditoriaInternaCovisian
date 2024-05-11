@@ -24,4 +24,10 @@ public class FeedbackController {
         model.addAttribute("memorandums", memorandums);
         return "backoffice/feedback/feedbacks";
     }
+    @GetMapping("/a/{area}")
+    public String feedbacksPorArea(@PathVariable("area") String area, Model model){
+        List<Memorandum> memorandums = feedbackService.findByArea(area);
+        model.addAttribute("memorandums", memorandums);
+        return "backoffice/lider/feedbacks";
+    }
 }

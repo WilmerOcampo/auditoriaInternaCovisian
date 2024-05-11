@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface IFeedbackRepository extends JpaRepository<Feedback, Integer> {
     @Query("SELECT m FROM Memorandum m JOIN m.feedback f JOIN f.empleado emp WHERE emp.dniEmpleado = :dni")
     List<Memorandum> findByEmpleado(@Param("dni") Integer dni);
+    @Query("SELECT m FROM Memorandum m JOIN m.feedback f JOIN f.empleado emp WHERE emp.area = :area")
+    List<Memorandum> findByArea(@Param("area") String area);
 }

@@ -5,7 +5,15 @@
     <title>Capacitaciones</title>
 </head>
 <body>
-<nav th:replace="~{snippet/nav-bar-empleado :: menu}"></nav>
+<th:block th:if="${#authorization.expression('hasAuthority(''EMPLEADO'')')}">
+    <nav th:replace="~{snippet/nav-bar-empleado :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''LIDER'')')}">
+    <nav th:replace="~{snippet/nav-bar-lider :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''AUDITOR'')')}">
+    <nav th:replace="~{snippet/nav-bar-auditor :: menu}"></nav>
+</th:block>
 
 <section class="dashboard">
     <div class="dash-content">
@@ -22,6 +30,7 @@
                     <th scope="col">Tema</th>
                     <th scope="col">Detalle</th>
                     <th scope="col">Empleado</th>
+                    <th scope="col">Sala</th>
                     <th scope="col">Fecha y hora</th>
                 </tr>
                 </thead>
@@ -31,6 +40,7 @@
                     <td th:text="${asistencia.capacitacion.tema}"></td>
                     <td th:text="${asistencia.capacitacion.detalle}"></td>
                     <td th:text="${asistencia.empleado.nombreEmpleado} + ' ' + ${asistencia.empleado.apellidoEmpleado}"></td>
+                    <td th:text="${asistencia.capacitacion.sala.nroSala}"></td>
                     <td th:text="${#dates.format(#dates.create(asistencia.fecha.year, asistencia.fecha.monthValue, asistencia.fecha.dayOfMonth, asistencia.fecha.hour, asistencia.fecha.minute, 0, 0), 'yyyy-MM-dd HH:mm:ss')}"></td>
                 </tr>
                 </tbody>

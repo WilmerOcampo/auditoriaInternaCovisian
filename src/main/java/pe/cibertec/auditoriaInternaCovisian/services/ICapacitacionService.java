@@ -9,4 +9,5 @@ import java.util.List;
 public interface ICapacitacionService {
     void saveTrainingAndAssistance(Capacitacion capacitacion, Asistencia asistencia);
     List<Asistencia> findByEmpleado(Integer dni);
+    List<Asistencia> findByArea(String area);
 }

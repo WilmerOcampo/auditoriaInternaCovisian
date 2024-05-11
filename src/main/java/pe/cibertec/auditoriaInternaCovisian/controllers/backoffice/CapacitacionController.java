@@ -23,4 +23,11 @@ public class CapacitacionController {
         model.addAttribute("asistencias", asistencias);
         return "backoffice/capacitacion/capacitaciones";
     }
+
+    @GetMapping("/a/{area}")
+    public String capacitacionesPorArea(@PathVariable("area") String area, Model model){
+        List<Asistencia> asistencias = capacitacionService.findByArea(area);
+        model.addAttribute("asistencias", asistencias);
+        return "backoffice/capacitacion/capacitaciones";
+    }
 }

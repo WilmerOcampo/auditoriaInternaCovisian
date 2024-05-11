@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{snippet/head::head}">
+    <meta charset="UTF-8">
+    <title>Feedbacks</title>
+</head>
+<body>
+
+<th:block th:if="${#authorization.expression('hasAuthority(''EMPLEADO'')')}">
+    <nav th:replace="~{snippet/nav-bar-empleado :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''LIDER'')')}">
+    <nav th:replace="~{snippet/nav-bar-lider :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''AUDITOR'')')}">
+    <nav th:replace="~{snippet/nav-bar-auditor :: menu}"></nav>
+</th:block>
+
+<section class="dashboard">
+    <div class="dash-content">
+        <div class="overview">
+            <div class="title">
+                <i class="uil uil-tachometer-fast-alt"></i>
+                <span class="text">Feedbacks</span>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4" th:each="memo : ${memorandums}">
+                        <div class="card card-margin p-4">
+                            <div class="card-header no-border justify-content-between">
+                                <h5 th:text="${memo.feedback.motivo}" class="card-title"></h5>
+                                <span th:text="${memo.fecha}" class="widget-49-date-month"></span>
+                            </div>
+                            <hr/>
+                            <div class="card-body pt-0">
+                                <div class="widget-49">
+                                    <div class="widget-49-title-wrapper">
+                                        <div class="widget-49-meeting-info justify-content-between">
+                                            <span th:text="${memo.feedback.empleado.nombreEmpleado} + ' ' + ${memo.feedback.empleado.apellidoEmpleado}" class="widget-49-pro-title"></span>
+                                            <span th:text="${memo.feedback.empleado.area}" class="widget-49-meeting-time"></span>
+                                        </div>
+                                    </div>
+                                    <hr/>
+                                    <h4 th:text="${memo.asunto}" class="text-center"></h4>
+                                    <hr/>
+                                    <p th:text="${memo.cuerpo}"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+</body>
+<link rel="stylesheet" th:href="@{/css/feedback/feedbacks.css}">
+</html>

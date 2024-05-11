@@ -26,4 +26,9 @@ public class FeedbackServiceImpl implements IFeedbackService {
     public List<Memorandum> findByEmpleado(Integer dni) {
         return feedbackRepository.findByEmpleado(dni);
     }
+
+    @Override
+    public List<Memorandum> findByArea(String area) {
+        return feedbackRepository.findByArea(area);
+    }
 }

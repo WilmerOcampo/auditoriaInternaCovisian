@@ -28,4 +28,9 @@ public class CapacitacionServiceImpl implements ICapacitacionService {
     public List<Asistencia> findByEmpleado(Integer dni) {
         return asistenciaRepository.findByEmpleado(dni);
     }
+
+    @Override
+    public List<Asistencia> findByArea(String area) {
+        return asistenciaRepository.findByArea(area);
+    }
 }
