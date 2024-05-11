@@ -10,4 +10,7 @@ import java.util.List;
 public interface IAsistenciaRepository extends JpaRepository<Asistencia, Integer> {
     @Query("SELECT a FROM Asistencia a JOIN a.capacitacion c JOIN a.empleado emp WHERE emp.dniEmpleado = :dni")
     List<Asistencia> findByEmpleado(@Param("dni") Integer dni);
+
+    @Query("SELECT a FROM Asistencia a JOIN a.capacitacion c JOIN a.empleado emp WHERE emp.area = :area")
+    List<Asistencia> findByArea(@Param("area") String area);
 }

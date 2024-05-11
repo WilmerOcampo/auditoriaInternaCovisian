@@ -9,4 +9,5 @@ import java.util.List;
 public interface IFeedbackService {
     void saveFeedbackAndMemorandum(Feedback feedback, Memorandum memorandum);
     List<Memorandum> findByEmpleado(Integer dni);
+    List<Memorandum> findByArea(String area);
 }
