@@ -1,27 +1,53 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{snippet/head :: head}">
+<head th:replace="~{snippet/head::head}">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback</title>
+    <title>Feedbacks</title>
 </head>
 <body>
-<nav th:replace="~{snippet/nav-bar-empleado :: menu}"></nav>
-<div class="card-list">
-    <a href="#" class="card-item" th:each="memo : ${memorandums}">
-        <h1>Feedback</h1>
-        <h3 th:text="${memo.feedback.motivo}"></h3>
-        <hr/>
-        <img src=""
-             th:alt="${memo.feedback.empleado.nombreEmpleado} + ' ' + ${memo.feedback.empleado.apellidoEmpleado}">
-        <span th:text="${memo.feedback.empleado.area}" class="editor"></span>
-        <h3 th:text="${memo.asunto}"></h3>
-        <p th:text="${memo.cuerpo}"></p>
-        <div class="arrow">
-            <i class="fas fa-arrow-right card-icon"></i>
+
+<th:block th:if="${#authorization.expression('hasAuthority(''EMPLEADO'')')}">
+    <nav th:replace="~{snippet/nav-bar-empleado :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''LIDER'')')}">
+    <nav th:replace="~{snippet/nav-bar-lider :: menu}"></nav>
+</th:block>
+<th:block th:if="${#authorization.expression('hasAuthority(''AUDITOR'')')}">
+    <nav th:replace="~{snippet/nav-bar-auditor :: menu}"></nav>
+</th:block>
+
+
+<section class="dashboard">
+    <div class="dash-content">
+        <div class="overview">
+            <div class="title">
+                <i class="uil uil-tachometer-fast-alt"></i>
+                <span class="text">Feedbacks</span>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4" th:each="memo : ${memorandums}">
+                        <div class="card card-margin p-4">
+                            <blockquote class="blockquote blockquote-custom bg-white p-5 rounded">
+                                <h3 th:text="${memo.feedback.motivo}"></h3>
+                                <div class="blockquote-custom-icon bg-info shadow-sm"><i
+                                        class="fa fa-quote-left text-white"></i>
+                                </div>
+                                <span th:text="${memo.feedback.empleado.nombreEmpleado} + ' ' + ${memo.feedback.empleado.apellidoEmpleado}"></span>
+                                <hr/>
+                                <h4 th:text="${memo.asunto}"></h4>
+                                <p th:text="${memo.cuerpo}" class="mb-0 mt-2 font-italic"></p>
+                                <footer th:text="${memo.fecha}" class="blockquote-footer pt-4 mt-4 border-top">
+                                </footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </a>
-</div>
+    </div>
+</section>
 </body>
 </html>
-

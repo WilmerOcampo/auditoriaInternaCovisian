@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pe.cibertec.auditoriaInternaCovisian.models.bd.Feedback;
 import pe.cibertec.auditoriaInternaCovisian.models.bd.Memorandum;
 import pe.cibertec.auditoriaInternaCovisian.services.IFeedbackService;
 
@@ -28,6 +27,6 @@ public class FeedbackController {
     public String feedbacksPorArea(@PathVariable("area") String area, Model model){
         List<Memorandum> memorandums = feedbackService.findByArea(area);
         model.addAttribute("memorandums", memorandums);
-        return "backoffice/lider/feedbacks";
+        return "backoffice/feedback/feedbacks";
     }
 }
