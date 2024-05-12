@@ -24,17 +24,14 @@ public class Evaluacion {
     private boolean estadoLider;
     @Column(name = "estado_firma", columnDefinition = "TINYINT(1) DEFAULT 0")
     private boolean estadoFirma;
-
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "dni_empleado")
     private Empleado empleado;
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dni_auditor")
     private Auditor auditor;
-
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "numero_orden")

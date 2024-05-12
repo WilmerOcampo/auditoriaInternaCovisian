@@ -8,18 +8,13 @@ import lombok.*;
 @Table(name = "Auditores")
 @NoArgsConstructor
 public class Auditor {
-
     @Id
     @Column(name = "dni_auditor")
     private int dniAuditor;
-
-
     @Column(name = "nombre_auditor")
     private String nombreAuditor;
-
     @Column(name = "apellido_auditor")
     private String apellidoAuditor;
-
     @OneToOne
     @JoinColumn(name = "id")
     private User user;
